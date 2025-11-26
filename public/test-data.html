@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Test</title>
+</head>
+<body>
+    <h1>KPI Data Test</h1>
+    <div id="output"></div>
+    <script>
+        fetch('kpi_map.json')
+            .then(r => r.json())
+            .then(data => {
+                const output = document.getElementById('output');
+                output.innerHTML = `
+                    <h2>Data Loaded Successfully!</h2>
+                    <p><strong>Total Nodes:</strong> ${data.total_nodes}</p>
+                    <p><strong>Has Tree:</strong> ${data.tree ? 'Yes' : 'No'}</p>
+                    <p><strong>Tree Children:</strong> ${data.tree.children ? data.tree.children.length : 0}</p>
+                    <p><strong>Nodes Array Length:</strong> ${data.nodes.length}</p>
+                    <h3>First 5 Nodes:</h3>
+                    <ul>
+                        ${data.nodes.slice(0, 5).map(n => `<li>${n.name} (Level ${n.level}, Category: ${n.category})</li>`).join('')}
+                    </ul>
+                    <h3>Tree Structure (First Level):</h3>
+                    <ul>
+                        ${data.tree.children.map(c => `<li>${c.name} - ${c.children ? c.children.length : 0} children</li>`).join('')}
+                    </ul>
+                `;
+            })
+            .catch(err => {
+                document.getElementById('output').innerHTML = `<p style="color: red;">Error: ${err.message}</p>`;
+            });
+    </script>
+</body>
+</html>

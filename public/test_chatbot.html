@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .success { background: #D1FAE5; border: 2px solid #10B981; }
+        .error { background: #FEE2E2; border: 2px solid #EF4444; }
+        .info { background: #DBEAFE; border: 2px solid #3B82F6; }
+        pre {
+            background: #F3F4F6;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #2B5BA6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #1E4A8C;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🤖 AI Chatbot Diagnostic Test</h1>
+    <p>This page tests if the AI chatbot functions are working correctly.</p>
+
+    <div class="info status">
+        <strong>Test Environment:</strong> CareOptions for Kids RCM Dashboard v8.4
+    </div>
+
+    <h2>Test Controls:</h2>
+    <button onclick="testDataLoad()">1. Test Data Loading</button>
+    <button onclick="testFindKPI()">2. Test Find KPI Function</button>
+    <button onclick="testCollectionQuery()">3. Test Collection Query</button>
+    <button onclick="testDSOQuery()">4. Test DSO Query</button>
+    <button onclick="clearResults()">Clear Results</button>
+
+    <div id="results"></div>
+
+    <script>
+        let kpiData = null;
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, content, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.innerHTML = `<h3>${title}</h3>${content}`;
+            resultsDiv.appendChild(div);
+        }
+
+        function clearResults() {
+            resultsDiv.innerHTML = '';
+        }
+
+        async function testDataLoad() {
+            addResult('Test 1: Data Loading', 'Loading kpi_map.json...', 'info');
+            
+            try {
+                const response = await fetch('kpi_map.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                kpiData = await response.json();
+                
+                addResult('✅ Test 1: PASSED', `
+                    <strong>Data loaded successfully!</strong><br>
+                    Version: ${kpiData.version}<br>
+                    Total Nodes: ${kpiData.total_nodes}<br>
+                    Root: ${kpiData.tree.name}<br>
+                    Categories: ${kpiData.tree.children.length}<br>
+                    Nodes Array Length: ${kpiData.nodes.length}
+                `, 'success');
+            } catch (error) {
+                addResult('❌ Test 1: FAILED', `
+                    <strong>Error loading data:</strong><br>
+                    ${error.message}
+                `, 'error');
+            }
+        }
+
+        function testFindKPI() {
+            if (!kpiData || !kpiData.nodes) {
+                addResult('❌ Test 2: FAILED', 'Data not loaded. Run Test 1 first.', 'error');
+                return;
+            }
+
+            const testSearches = [
+                'collection_efficiency',
+                'Collection Efficiency',
+                'dso',
+                'DSO',
+                'denial_rate'
+            ];
+
+            let results = '<strong>Testing KPI search functionality:</strong><br><br>';
+            let foundCount = 0;
+
+            testSearches.forEach(search => {
+                const found = kpiData.nodes.find(n => 
+                    n.id.toLowerCase().includes(search.toLowerCase()) ||
+                    n.name.toLowerCase().includes(search.toLowerCase())
+                );
+                
+                if (found) {
+                    foundCount++;
+                    results += `✅ "${search}" → Found: ${found.name} (${found.id})<br>`;
+                } else {
+                    results += `❌ "${search}" → Not found<br>`;
+                }
+            });
+
+            if (foundCount === testSearches.length) {
+                addResult('✅ Test 2: PASSED', results, 'success');
+            } else {
+                addResult('⚠️ Test 2: PARTIAL', results + `<br>Found ${foundCount}/${testSearches.length}`, 'info');
+            }
+        }
+
+        function testCollectionQuery() {
+            if (!kpiData || !kpiData.nodes) {
+                addResult('❌ Test 3: FAILED', 'Data not loaded. Run Test 1 first.', 'error');
+                return;
+            }
+
+            const collectionEff = kpiData.nodes.find(n => 
+                n.id.toLowerCase().includes('collection_efficiency') ||
+                n.name.toLowerCase().includes('collection efficiency')
+            );
+
+            if (collectionEff) {
+                addResult('✅ Test 3: PASSED', `
+                    <strong>Collection Efficiency KPI Found!</strong><br><br>
+                    <strong>ID:</strong> ${collectionEff.id}<br>
+                    <strong>Name:</strong> ${collectionEff.name}<br>
+                    <strong>Value:</strong> ${collectionEff.value} (Type: ${typeof collectionEff.value})<br>
+                    <strong>Target:</strong> ${collectionEff.target}<br>
+                    <strong>RAG:</strong> ${collectionEff.rag}<br>
+                    <strong>Trend:</strong> ${collectionEff.trend}<br>
+                    <strong>Has trend_data:</strong> ${collectionEff.trend_data ? 'Yes (' + collectionEff.trend_data.length + ' months)' : 'No'}<br>
+                    <strong>Has root_causes:</strong> ${collectionEff.root_causes ? 'Yes (' + collectionEff.root_causes.length + ')' : 'No'}<br>
+                    <strong>Has recommended_actions:</strong> ${collectionEff.recommended_actions ? 'Yes (' + collectionEff.recommended_actions.length + ')' : 'No'}
+                `, 'success');
+            } else {
+                addResult('❌ Test 3: FAILED', 'Collection Efficiency KPI not found in data', 'error');
+            }
+        }
+
+        function testDSOQuery() {
+            if (!kpiData || !kpiData.nodes) {
+                addResult('❌ Test 4: FAILED', 'Data not loaded. Run Test 1 first.', 'error');
+                return;
+            }
+
+            const dso = kpiData.nodes.find(n => 
+                n.id.toLowerCase().includes('dso') ||
+                n.id.toLowerCase().includes('days_sales_outstanding')
+            );
+
+            if (dso) {
+                addResult('✅ Test 4: PASSED', `
+                    <strong>DSO KPI Found!</strong><br><br>
+                    <strong>ID:</strong> ${dso.id}<br>
+                    <strong>Name:</strong> ${dso.name}<br>
+                    <strong>Value:</strong> ${dso.value} (Type: ${typeof dso.value})<br>
+                    <strong>Target:</strong> ${dso.target}<br>
+                    <strong>RAG:</strong> ${dso.rag}<br>
+                    <strong>Has trend_data:</strong> ${dso.trend_data ? 'Yes (' + dso.trend_data.length + ' months)' : 'No'}<br>
+                    <strong>Has root_causes:</strong> ${dso.root_causes ? 'Yes (' + dso.root_causes.length + ')' : 'No'}<br>
+                    <strong>Has dependencies:</strong> ${dso.dependencies ? 'Yes' : 'No'}
+                `, 'success');
+            } else {
+                addResult('❌ Test 4: FAILED', 'DSO KPI not found in data', 'error');
+            }
+        }
+
+        // Auto-run first test on page load
+        window.addEventListener('load', () => {
+            setTimeout(testDataLoad, 500);
+        });
+    </script>
+</body>
+</html>

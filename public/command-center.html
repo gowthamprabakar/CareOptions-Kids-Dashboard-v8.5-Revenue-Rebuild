@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center - RCM Intelligence</title>
+    <link rel="icon" href="https://www.genspark.ai/api/files/s/kug10xIG" type="image/png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', 'Proxima Nova', sans-serif;
+            background: #FAFBFC;
+            color: #111B2E;
+            font-size: 15px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            border-bottom: 2px solid #2B5BA6;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(17, 27, 46, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111B2E;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .nav a {
+            color: #111B2E;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: #FEF2F2;
+            border-color: #2B5BA6;
+            color: #2B5BA6;
+        }
+
+        .nav a.active {
+            background: #2B5BA6;
+            border-color: #2B5BA6;
+            color: #FFFFFF;
+        }
+
+        .company-badge {
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #2B5BA6;
+        }
+
+        /* Container */
+        .container {
+            padding: 30px;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(17, 27, 46, 0.05);
+        }
+
+        .summary-card:hover {
+            border-color: #2B5BA6;
+            box-shadow: 0 4px 12px rgba(43, 91, 166, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .summary-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .summary-card-icon {
+            font-size: 32px;
+        }
+
+        .summary-card-count {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2B5BA6;
+        }
+
+        .summary-card-label {
+            font-size: 14px;
+            color: #6B7280;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-indicator.red { background: #2B5BA6; }
+        .status-indicator.amber { background: #F59E0B; }
+        .status-indicator.green { background: #10B981; }
+
+        /* Controls */
+        .controls {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: 0 1px 3px rgba(17, 27, 46, 0.05);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: #F9FAFB;
+            border: 1px solid #D1D5DB;
+            color: #111B2E;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-input::placeholder {
+            color: #9CA3AF;
+        }
+
+        .search-input:focus {
+            border-color: #2B5BA6;
+            box-shadow: 0 0 0 3px rgba(43, 91, 166, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #FFFFFF;
+            border: 1px solid #D1D5DB;
+            color: #111B2E;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: #FEF2F2;
+            border-color: #2B5BA6;
+            color: #2B5BA6;
+        }
+
+        .filter-btn.active {
+            background: #2B5BA6;
+            border-color: #2B5BA6;
+            color: #FFFFFF;
+        }
+
+        /* KPI Table */
+        .kpi-table-container {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(17, 27, 46, 0.05);
+        }
+
+        .kpi-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .kpi-table thead {
+            background: #F9FAFB;
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        .kpi-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 700;
+            color: #111B2E;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-table th:hover {
+            background: #F3F4F6;
+        }
+
+        .kpi-table th.sortable::after {
+            content: ' ↕';
+            opacity: 0.5;
+            color: #9CA3AF;
+        }
+
+        .kpi-table th.sort-asc::after {
+            content: ' ↑';
+            opacity: 1;
+            color: #2B5BA6;
+        }
+
+        .kpi-table th.sort-desc::after {
+            content: ' ↓';
+            opacity: 1;
+            color: #2B5BA6;
+        }
+
+        .kpi-table tbody tr {
+            border-bottom: 1px solid #E5E7EB;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .kpi-table tbody tr:hover {
+            background: #FEF2F2;
+        }
+
+        .kpi-table td {
+            padding: 14px 16px;
+            color: #111B2E;
+        }
+
+        .kpi-name {
+            font-weight: 600;
+            color: #111B2E;
+        }
+
+        .kpi-category {
+            font-size: 12px;
+            color: #6B7280;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .kpi-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2B5BA6;
+        }
+
+        .kpi-target {
+            font-size: 13px;
+            color: #6B7280;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .rag-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .rag-badge.red {
+            background: #FEF2F2;
+            color: #2B5BA6;
+            border: 2px solid #2B5BA6;
+        }
+
+        .rag-badge.amber {
+            background: #FEF3C7;
+            color: #92400E;
+            border: 2px solid #F59E0B;
+        }
+
+        .rag-badge.green {
+            background: #ECFDF5;
+            color: #047857;
+            border: 2px solid #10B981;
+        }
+
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .trend-indicator.positive { color: #10B981; }
+        .trend-indicator.negative { color: #2B5BA6; }
+        .trend-indicator.neutral { color: #6B7280; }
+
+        .action-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-icon {
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+        }
+
+        .action-icon:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+
+        /* Detail Panel */
+        .detail-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: #FFFFFF;
+            border-left: 2px solid #2B5BA6;
+            box-shadow: -5px 0 30px rgba(17, 27, 46, 0.15);
+            transition: right 0.4s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .detail-panel.open {
+            right: 0;
+        }
+
+        .detail-panel-header {
+            padding: 24px;
+            border-bottom: 2px solid #FEF2F2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: #FFFFFF;
+            z-index: 10;
+        }
+
+        .detail-panel-header h2 {
+            color: #2B5BA6;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .close-detail-btn {
+            background: none;
+            border: none;
+            color: #9CA3AF;
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-detail-btn:hover {
+            color: #2B5BA6;
+        }
+
+        .detail-content {
+            padding: 24px;
+        }
+
+        .detail-section {
+            margin-bottom: 24px;
+        }
+
+        .detail-section h3 {
+            color: #2B5BA6;
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .detail-label {
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: #111B2E;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .ai-insight-box {
+            background: #F9FAFB;
+            border-left: 4px solid #2B5BA6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+
+        .ai-insight-box p {
+            color: #111B2E;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .action-list li {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-left: 3px solid #2B5BA6;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            color: #111B2E;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .action-list li::before {
+            content: '✓ ';
+            color: #2B5BA6;
+            font-weight: 700;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2B5BA6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1E4A8C;
+        }
+
+        /* v6.0 - 5-Layer Decision Intelligence Card Styles */
+        .kpi-layer-section {
+            background: #FFFFFF;
+            border: 1px solid rgba(17, 27, 46, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .kpi-layer-section h4 {
+            color: #111B2E;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .layer-icon {
+            font-size: 18px;
+        }
+
+        .sparkline-container, .forecast-chart-container {
+            height: 60px;
+            margin: 12px 0;
+            position: relative;
+        }
+
+        .trend-text, .forecast-text {
+            color: #6B7280;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .forecast-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .forecast-value-box {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .forecast-value-box .label {
+            font-size: 11px;
+            color: #6B7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .forecast-value-box .value {
+            font-size: 16px;
+            color: #2B5BA6;
+            font-weight: 700;
+        }
+
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .trend-indicator.positive {
+            background: #ECFDF5;
+            color: #059669;
+        }
+
+        .trend-indicator.negative {
+            background: #FEF2F2;
+            color: #2B5BA6;
+        }
+
+        .trend-indicator.neutral {
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .layer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #E5E7EB 50%, transparent 100%);
+            margin: 20px 0;
+        }
+
+        .rca-section {
+            background: #F9FAFB;
+            border-left: 4px solid #2B5BA6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+
+        .rca-section h4 {
+            color: #111B2E;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rca-section p {
+            color: #111B2E;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Layer 1 - KPI Summary Styles */
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .info-label {
+            color: #6B7280;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            color: #111B2E;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .info-value.large {
+            font-size: 24px;
+            color: #2B5BA6;
+        }
+
+        /* Dependency Network Graph Styles */
+        .dependency-graph-container {
+            height: 300px;
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            margin: 12px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dependency-graph-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .dependency-legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            padding: 8px 0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #FFFFFF;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Neo4j-style node and link styling */
+        .dep-node {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dep-node:hover {
+            filter: brightness(1.2);
+        }
+
+        .dep-node-circle {
+            stroke: #FFFFFF;
+            stroke-width: 3px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .dep-node-text {
+            font-size: 11px;
+            font-weight: 600;
+            fill: #111B2E;
+            text-anchor: middle;
+            pointer-events: none;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .dep-link {
+            stroke: #94A3B8;
+            stroke-width: 2px;
+            opacity: 0.6;
+            fill: none;
+        }
+
+        .dep-link-arrow {
+            fill: #94A3B8;
+            opacity: 0.6;
+        }
+
+        .dep-link.highlighted {
+            stroke: #2B5BA6;
+            stroke-width: 3px;
+            opacity: 1;
+        }
+
+        .dep-link-arrow.highlighted {
+            fill: #2B5BA6;
+            opacity: 1;
+        }
+
+        /* People & Accountability Styles */
+        .accountability-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .accountability-section {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .accountability-section h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111B2E;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .person-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .person-card:hover {
+            border-color: #2B5BA6;
+            box-shadow: 0 2px 4px rgba(43, 91, 166, 0.1);
+        }
+
+        .person-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #FFFFFF;
+            flex-shrink: 0;
+        }
+
+        .person-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .person-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111B2E;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .person-department {
+            font-size: 11px;
+            color: #6B7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .person-contribution {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .person-contribution.positive {
+            background: #ECFDF5;
+            color: #059669;
+        }
+
+        .person-contribution.negative {
+            background: #FEF2F2;
+            color: #2B5BA6;
+        }
+
+        /* Contributing Factors Styles */
+        .factors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .factors-section {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .factors-section h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111B2E;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .factor-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px;
+            background: #FFFFFF;
+            border-left: 3px solid #60A5FA;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        .factor-item.external {
+            border-left-color: #F59E0B;
+        }
+
+        .factor-item::before {
+            content: '•';
+            color: #60A5FA;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .factor-item.external::before {
+            color: #F59E0B;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <h1>RCM Intelligence</h1>
+        </div>
+        <div class="nav">
+            <a href="index.html">Executive Advisor</a>
+            <a href="control-center.html">KPI Control Center</a>
+            <a href="command-center.html" class="active">Command Center</a>
+            <a href="people-graph.html">People Graph</a>
+            <a href="automation-hub.html">🤖 Automation Hub</a>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="summary-card-header">
+                    <div class="summary-card-icon">🔴</div>
+                </div>
+                <div class="summary-card-count" id="redCount">0</div>
+                <div class="summary-card-label">Critical (Red)</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-card-header">
+                    <div class="summary-card-icon">🟡</div>
+                </div>
+                <div class="summary-card-count" id="amberCount">0</div>
+                <div class="summary-card-label">Warning (Amber)</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-card-header">
+                    <div class="summary-card-icon">🟢</div>
+                </div>
+                <div class="summary-card-count" id="greenCount">0</div>
+                <div class="summary-card-label">Healthy (Green)</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-card-header">
+                    <div class="summary-card-icon">📊</div>
+                </div>
+                <div class="summary-card-count" id="totalCount">0</div>
+                <div class="summary-card-label">Total KPIs</div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" 
+                       class="search-input" 
+                       id="searchInput" 
+                       placeholder="🔍 Search KPIs..."
+                       oninput="filterTable()">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterByStatus('all')">All</button>
+                <button class="filter-btn" onclick="filterByStatus('red')">🔴 Critical</button>
+                <button class="filter-btn" onclick="filterByStatus('amber')">🟡 Warning</button>
+                <button class="filter-btn" onclick="filterByStatus('green')">🟢 Healthy</button>
+            </div>
+        </div>
+
+        <!-- KPI Table -->
+        <div class="kpi-table-container">
+            <table class="kpi-table">
+                <thead>
+                    <tr>
+                        <th class="sortable" onclick="sortTable('name')">KPI Name</th>
+                        <th class="sortable" onclick="sortTable('value')">Current Value</th>
+                        <th class="sortable" onclick="sortTable('rag')">Status</th>
+                        <th class="sortable" onclick="sortTable('trend')">Trend</th>
+                        <th class="sortable" onclick="sortTable('category')">Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="kpiTableBody">
+                    <!-- Rows will be dynamically populated -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Detail Panel -->
+    <div class="detail-panel" id="detailPanel">
+        <div class="detail-panel-header">
+            <h2 id="detailTitle">KPI Details</h2>
+            <button class="close-detail-btn" onclick="closeDetailPanel()">×</button>
+        </div>
+        <div class="detail-content" id="detailContent">
+            <!-- Content will be dynamically populated -->
+        </div>
+    </div>
+
+    <script>
+        // Initialize KPIStore if not exists
+        window.KPIStore = window.KPIStore || {
+            values: {},
+            baselineValues: {},
+            listeners: [],
+            
+            subscribe(callback) {
+                this.listeners.push(callback);
+            },
+            
+            getValue(kpiId) {
+                return this.values[kpiId] || this.baselineValues[kpiId];
+            },
+            
+            setBaseline(kpiId, value) {
+                this.baselineValues[kpiId] = value;
+                if (!this.values[kpiId]) {
+                    this.values[kpiId] = value;
+                }
+            }
+        };
+
+        const storedData = JSON.parse(localStorage.getItem('KPIStore') || '{}');
+        if (storedData.values) {
+            window.KPIStore.values = storedData.values;
+        }
+        if (storedData.baselineValues) {
+            window.KPIStore.baselineValues = storedData.baselineValues;
+        }
+
+        let kpiData = null;
+        let filteredData = null;
+        let sortColumn = 'name';
+        let sortDirection = 'asc';
+        let currentFilter = 'all';
+
+        async function loadKPIData() {
+            try {
+                console.log('Command Center: Fetching kpi_map.json...');
+                const response = await fetch('kpi_map.json');
+                kpiData = await response.json();
+                console.log('Command Center: Data loaded -', kpiData.total_nodes, 'nodes');
+                console.log('Command Center: Nodes array length:', kpiData.nodes.length);
+                console.log('Command Center: First node sample:', kpiData.nodes[0]);
+                
+                // Initialize baseline values
+                kpiData.nodes.forEach(kpi => {
+                    const numValue = parseFloat(kpi.value.replace(/[^0-9.]/g, ''));
+                    window.KPIStore.setBaseline(kpi.id, numValue);
+                });
+                
+                filteredData = [...kpiData.nodes];
+                console.log('Command Center: Filtered data length:', filteredData.length);
+                initializePage();
+            } catch (error) {
+                console.error('Command Center: Error loading KPI data:', error);
+            }
+        }
+
+        function initializePage() {
+            console.log('Command Center: Initializing page...');
+            updateSummaryCards();
+            populateTable();
+            console.log('Command Center: Page initialized!');
+        }
+
+        function updateSummaryCards() {
+            const red = kpiData.nodes.filter(k => k.rag === 'red').length;
+            const amber = kpiData.nodes.filter(k => k.rag === 'amber').length;
+            const green = kpiData.nodes.filter(k => k.rag === 'green').length;
+            const total = kpiData.nodes.length;
+
+            document.getElementById('redCount').textContent = red;
+            document.getElementById('amberCount').textContent = amber;
+            document.getElementById('greenCount').textContent = green;
+            document.getElementById('totalCount').textContent = total;
+        }
+
+        function formatKPIValue(kpi, value) {
+            const originalValue = kpi.value;
+            if (originalValue.includes('%')) {
+                return value.toFixed(1) + '%';
+            } else if (originalValue.includes('$')) {
+                return '$' + value.toFixed(1) + 'M';
+            } else if (originalValue.includes('days')) {
+                return Math.round(value) + ' days';
+            } else if (originalValue.includes('ms')) {
+                return Math.round(value) + 'ms';
+            } else if (originalValue.includes('bps')) {
+                return Math.round(value) + ' bps';
+            }
+            return value.toString();
+        }
+
+        function populateTable() {
+            const tbody = document.getElementById('kpiTableBody');
+            tbody.innerHTML = '';
+            
+            console.log('Command Center: populateTable called with', filteredData.length, 'KPIs');
+
+            filteredData.forEach(kpi => {
+                const row = document.createElement('tr');
+                row.onclick = () => showDetailPanel(kpi);
+                
+                // Get current value from KPIStore
+                const currentValue = window.KPIStore.getValue(kpi.id);
+                const displayValue = formatKPIValue(kpi, currentValue);
+                
+                let trendClass = 'neutral';
+                let trendIcon = '→';
+                if (kpi.trend.includes('+') || kpi.trend.includes('up')) {
+                    trendClass = kpi.id === 'dso' || kpi.id === 'cycle_time' ? 'negative' : 'positive';
+                    trendIcon = '↑';
+                } else if (kpi.trend.includes('-') || kpi.trend.includes('down')) {
+                    trendClass = kpi.id === 'dso' || kpi.id === 'cycle_time' ? 'positive' : 'negative';
+                    trendIcon = '↓';
+                }
+
+                row.innerHTML = `
+                    <td>
+                        <div class="kpi-name">${kpi.name}</div>
+                        <span class="kpi-category">${kpi.category}</span>
+                    </td>
+                    <td>
+                        <div class="kpi-value">${displayValue}</div>
+                        <span class="kpi-target">Target: ${kpi.target}</span>
+                    </td>
+                    <td>
+                        <span class="rag-badge ${kpi.rag}">${kpi.rag.toUpperCase()}</span>
+                    </td>
+                    <td>
+                        <span class="trend-indicator ${trendClass}">
+                            ${trendIcon} ${kpi.trend}
+                        </span>
+                    </td>
+                    <td>${kpi.category}</td>
+                    <td>
+                        <div class="action-icons">
+                            <span class="action-icon" title="View Details" onclick="event.stopPropagation(); showDetailPanel(${JSON.stringify(kpi).replace(/"/g, '&quot;')})">👁️</span>
+                            <span class="action-icon" title="Go to Executive View" onclick="event.stopPropagation(); goToExecutive('${kpi.id}')">📊</span>
+                            <span class="action-icon" title="Adjust in Control Center" onclick="event.stopPropagation(); goToControl('${kpi.id}')">⚙️</span>
+                        </div>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        function sortTable(column) {
+            if (sortColumn === column) {
+                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortColumn = column;
+                sortDirection = 'asc';
+            }
+
+            document.querySelectorAll('.kpi-table th').forEach(th => {
+                th.classList.remove('sort-asc', 'sort-desc');
+            });
+            
+            const headerMap = {
+                'name': 0,
+                'value': 1,
+                'rag': 2,
+                'trend': 3,
+                'category': 4
+            };
+            
+            const header = document.querySelectorAll('.kpi-table th')[headerMap[column]];
+            if (header) {
+                header.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+            }
+
+            filteredData.sort((a, b) => {
+                let valA, valB;
+
+                switch(column) {
+                    case 'name':
+                        valA = a.name.toLowerCase();
+                        valB = b.name.toLowerCase();
+                        break;
+                    case 'value':
+                        valA = window.KPIStore.getValue(a.id);
+                        valB = window.KPIStore.getValue(b.id);
+                        break;
+                    case 'rag':
+                        const ragOrder = { 'red': 3, 'amber': 2, 'green': 1 };
+                        valA = ragOrder[a.rag] || 0;
+                        valB = ragOrder[b.rag] || 0;
+                        break;
+                    case 'trend':
+                        valA = a.trend.toLowerCase();
+                        valB = b.trend.toLowerCase();
+                        break;
+                    case 'category':
+                        valA = a.category.toLowerCase();
+                        valB = b.category.toLowerCase();
+                        break;
+                    default:
+                        return 0;
+                }
+
+                if (valA < valB) return sortDirection === 'asc' ? -1 : 1;
+                if (valA > valB) return sortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            populateTable();
+        }
+
+        function filterByStatus(status) {
+            currentFilter = status;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            if (status === 'all') {
+                filteredData = [...kpiData.nodes];
+            } else {
+                filteredData = kpiData.nodes.filter(k => k.rag === status);
+            }
+
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm) {
+                filteredData = filteredData.filter(k => 
+                    k.name.toLowerCase().includes(searchTerm) ||
+                    k.category.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            populateTable();
+        }
+
+        function filterTable() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (currentFilter === 'all') {
+                filteredData = [...kpiData.nodes];
+            } else {
+                filteredData = kpiData.nodes.filter(k => k.rag === currentFilter);
+            }
+
+            if (searchTerm) {
+                filteredData = filteredData.filter(k => 
+                    k.name.toLowerCase().includes(searchTerm) ||
+                    k.category.toLowerCase().includes(searchTerm) ||
+                    k.value.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            populateTable();
+        }
+
+        // v6.0 Helper Functions for 5-Layer Decision Intelligence Card
+
+        // Helper: Determine trend class (positive/negative/neutral)
+        function getTrendClass(trendValue) {
+            if (!trendValue) return 'neutral';
+            const numericValue = parseFloat(trendValue.toString().replace(/[^0-9.-]/g, ''));
+            if (isNaN(numericValue)) return 'neutral';
+            
+            const kpiId = localStorage.getItem('selectedKPI');
+            const inverseTrendKPIs = ['dso', 'cycle_time', 'api_error_rate', 'critical_defect', 'repurchase_rate'];
+            
+            if (inverseTrendKPIs.includes(kpiId)) {
+                return numericValue < -0.1 ? 'positive' : numericValue > 0.1 ? 'negative' : 'neutral';
+            }
+            
+            return numericValue > 0.1 ? 'positive' : numericValue < -0.1 ? 'negative' : 'neutral';
+        }
+
+        // Helper: Get trend arrow indicator
+        function getTrendArrow(trendValue) {
+            const trendClass = getTrendClass(trendValue);
+            if (trendClass === 'positive') return '↑';
+            if (trendClass === 'negative') return '↓';
+            return '→';
+        }
+
+        // Draw Trend Sparkline Chart
+        function drawTrendSparkline(kpiId) {
+            const canvas = document.getElementById(`trend-sparkline-${kpiId}`);
+            if (!canvas) return;
+
+            const historicalData = getHistoricalData(kpiId);
+            if (!historicalData || historicalData.length === 0) return;
+
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: historicalData.map(d => d.month),
+                    datasets: [{
+                        data: historicalData.map(d => d.value),
+                        borderColor: '#2B5BA6',
+                        backgroundColor: 'rgba(43, 91, 166, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: '#2B5BA6',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `Value: ${context.parsed.y.toFixed(1)}`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            grid: { display: false },
+                            ticks: { font: { size: 10 }, color: '#6B7280' }
+                        },
+                        y: {
+                            display: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: { font: { size: 10 }, color: '#6B7280' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Draw Forecast Chart
+        function drawForecastChart(kpiId, forecast7, forecast30) {
+            const canvas = document.getElementById(`forecast-chart-${kpiId}`);
+            if (!canvas) return;
+
+            const historicalData = getHistoricalData(kpiId);
+            if (!historicalData || historicalData.length === 0) return;
+
+            const lastValue = historicalData[historicalData.length - 1].value;
+            const forecast7Val = parseFloat(forecast7?.toString().replace(/[^0-9.]/g, '')) || lastValue;
+            const forecast30Val = parseFloat(forecast30?.toString().replace(/[^0-9.]/g, '')) || lastValue;
+
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Current', '7 Days', '30 Days'],
+                    datasets: [{
+                        label: 'Forecast',
+                        data: [lastValue, forecast7Val, forecast30Val],
+                        borderColor: '#111B2E',
+                        backgroundColor: 'rgba(17, 27, 46, 0.1)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#2B5BA6',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: {
+                            display: true,
+                            grid: { display: false },
+                            ticks: { font: { size: 11 }, color: '#6B7280' }
+                        },
+                        y: {
+                            display: true,
+                            grid: { color: 'rgba(0,0,0,0.05)' },
+                            ticks: { font: { size: 11 }, color: '#6B7280' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Get historical data for a KPI from demo_dataset
+        function getHistoricalData(kpiId) {
+            const dataset = {
+                'ncr': [
+                    { month: '2025-05', value: 96.8 },
+                    { month: '2025-06', value: 96.5 },
+                    { month: '2025-07', value: 96.4 },
+                    { month: '2025-08', value: 96.2 },
+                    { month: '2025-09', value: 96.1 },
+                    { month: '2025-10', value: 96.2 }
+                ],
+                'dso': [
+                    { month: '2025-05', value: 34 },
+                    { month: '2025-06', value: 35 },
+                    { month: '2025-07', value: 36 },
+                    { month: '2025-08', value: 37 },
+                    { month: '2025-09', value: 38 },
+                    { month: '2025-10', value: 38 }
+                ],
+                'monthly_revenue': [
+                    { month: '2025-05', value: 43.5 },
+                    { month: '2025-06', value: 44.0 },
+                    { month: '2025-07', value: 44.6 },
+                    { month: '2025-08', value: 45.0 },
+                    { month: '2025-09', value: 45.1 },
+                    { month: '2025-10', value: 45.2 }
+                ],
+                'cycle_time': [
+                    { month: '2025-05', value: 20 },
+                    { month: '2025-06', value: 20 },
+                    { month: '2025-07', value: 20 },
+                    { month: '2025-08', value: 21 },
+                    { month: '2025-09', value: 21 },
+                    { month: '2025-10', value: 21 }
+                ],
+                'touchless_pct': [
+                    { month: '2025-05', value: 58 },
+                    { month: '2025-06', value: 60 },
+                    { month: '2025-07', value: 61 },
+                    { month: '2025-08', value: 62 },
+                    { month: '2025-09', value: 63 },
+                    { month: '2025-10', value: 63 }
+                ],
+                'nps': [
+                    { month: '2025-05', value: 80 },
+                    { month: '2025-06', value: 79 },
+                    { month: '2025-07', value: 79 },
+                    { month: '2025-08', value: 78 },
+                    { month: '2025-09', value: 78 },
+                    { month: '2025-10', value: 78 }
+                ],
+                'csat': [
+                    { month: '2025-05', value: 90 },
+                    { month: '2025-06', value: 91 },
+                    { month: '2025-07', value: 91 },
+                    { month: '2025-08', value: 92 },
+                    { month: '2025-09', value: 92 },
+                    { month: '2025-10', value: 92 }
+                ],
+                'op_margin': [
+                    { month: '2025-05', value: 12.1 },
+                    { month: '2025-06', value: 12.2 },
+                    { month: '2025-07', value: 12.3 },
+                    { month: '2025-08', value: 12.4 },
+                    { month: '2025-09', value: 12.5 },
+                    { month: '2025-10', value: 12.5 }
+                ],
+                'uptime': [
+                    { month: '2025-05', value: 99.5 },
+                    { month: '2025-06', value: 99.4 },
+                    { month: '2025-07', value: 99.3 },
+                    { month: '2025-08', value: 99.2 },
+                    { month: '2025-09', value: 99.2 },
+                    { month: '2025-10', value: 99.2 }
+                ],
+                'automation_rate': [
+                    { month: '2025-05', value: 70 },
+                    { month: '2025-06', value: 69 },
+                    { month: '2025-07', value: 69 },
+                    { month: '2025-08', value: 68 },
+                    { month: '2025-09', value: 68 },
+                    { month: '2025-10', value: 68 }
+                ],
+                'data_quality_index': [
+                    { month: '2025-05', value: 90 },
+                    { month: '2025-06', value: 89 },
+                    { month: '2025-07', value: 88 },
+                    { month: '2025-08', value: 87 },
+                    { month: '2025-09', value: 87 },
+                    { month: '2025-10', value: 87 }
+                ]
+            };
+            return dataset[kpiId] || [];
+        }
+
+        // Generate People & Accountability section
+        function generatePeopleAccountability(kpiId) {
+            const peopleData = {
+                'ncr': {
+                    positive: [
+                        { name: 'Sarah Martinez', department: 'Revenue Cycle', initials: 'SM', color: '#10B981' },
+                        { name: 'David Chen', department: 'Collections', initials: 'DC', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Robert Wilson', department: 'Claims Processing', initials: 'RW', color: '#EF4444' }
+                    ]
+                },
+                'dso': {
+                    positive: [
+                        { name: 'Jennifer Taylor', department: 'Payment Processing', initials: 'JT', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Michael Johnson', department: 'Accounts Receivable', initials: 'MJ', color: '#EF4444' },
+                        { name: 'Lisa Anderson', department: 'Billing Operations', initials: 'LA', color: '#EF4444' }
+                    ]
+                },
+                'op_margin': {
+                    positive: [
+                        { name: 'Amanda Roberts', department: 'Finance', initials: 'AR', color: '#10B981' },
+                        { name: 'Christopher Lee', department: 'Cost Management', initials: 'CL', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Daniel Brown', department: 'Operations', initials: 'DB', color: '#EF4444' }
+                    ]
+                },
+                'monthly_revenue': {
+                    positive: [
+                        { name: 'Emily Davis', department: 'Sales', initials: 'ED', color: '#10B981' },
+                        { name: 'James Wilson', department: 'Business Development', initials: 'JW', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Patricia Moore', department: 'Marketing', initials: 'PM', color: '#EF4444' }
+                    ]
+                },
+                'cycle_time': {
+                    positive: [
+                        { name: 'Thomas Garcia', department: 'Process Improvement', initials: 'TG', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Maria Rodriguez', department: 'Underwriting', initials: 'MR', color: '#EF4444' },
+                        { name: 'Kevin Martinez', department: 'Document Verification', initials: 'KM', color: '#EF4444' }
+                    ]
+                },
+                'touchless_pct': {
+                    positive: [
+                        { name: 'Susan Thompson', department: 'Automation Team', initials: 'ST', color: '#10B981' },
+                        { name: 'Brian White', department: 'IT Development', initials: 'BW', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Nancy Harris', department: 'Manual Processing', initials: 'NH', color: '#EF4444' }
+                    ]
+                },
+                'nps': {
+                    positive: [
+                        { name: 'Jessica Clark', department: 'Customer Success', initials: 'JC', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Mark Lewis', department: 'Customer Support', initials: 'ML', color: '#EF4444' }
+                    ]
+                },
+                'csat': {
+                    positive: [
+                        { name: 'Laura Walker', department: 'Customer Experience', initials: 'LW', color: '#10B981' },
+                        { name: 'Steven Hall', department: 'Service Quality', initials: 'SH', color: '#10B981' }
+                    ],
+                    negative: []
+                },
+                'uptime': {
+                    positive: [
+                        { name: 'Richard Allen', department: 'IT Operations', initials: 'RA', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Karen Young', department: 'Infrastructure', initials: 'KY', color: '#EF4444' }
+                    ]
+                },
+                'automation_rate': {
+                    positive: [
+                        { name: 'Paul King', department: 'AI/ML Engineering', initials: 'PK', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Dorothy Wright', department: 'Legacy Systems', initials: 'DW', color: '#EF4444' }
+                    ]
+                },
+                'data_quality_index': {
+                    positive: [
+                        { name: 'Ryan Scott', department: 'Data Governance', initials: 'RS', color: '#10B981' }
+                    ],
+                    negative: [
+                        { name: 'Michelle Green', department: 'Data Entry', initials: 'MG', color: '#EF4444' }
+                    ]
+                }
+            };
+
+            const data = peopleData[kpiId] || { positive: [], negative: [] };
+
+            let html = '<div class="accountability-grid">';
+            
+            // Positive Contributors
+            html += '<div class="accountability-section">';
+            html += '<h5><span style="color: #10B981;">✓</span> Positive Contributors</h5>';
+            if (data.positive.length > 0) {
+                data.positive.forEach(person => {
+                    html += `
+                        <div class="person-card">
+                            <div class="person-avatar" style="background: ${person.color};">
+                                ${person.initials}
+                            </div>
+                            <div class="person-info">
+                                <div class="person-name">${person.name}</div>
+                                <div class="person-department">${person.department}</div>
+                            </div>
+                            <div class="person-contribution positive">+</div>
+                        </div>
+                    `;
+                });
+            } else {
+                html += '<div style="color: #9CA3AF; font-size: 12px; padding: 8px;">No data available</div>';
+            }
+            html += '</div>';
+
+            // Negative Contributors
+            html += '<div class="accountability-section">';
+            html += '<h5><span style="color: #EF4444;">⚠</span> Needs Improvement</h5>';
+            if (data.negative.length > 0) {
+                data.negative.forEach(person => {
+                    html += `
+                        <div class="person-card">
+                            <div class="person-avatar" style="background: ${person.color};">
+                                ${person.initials}
+                            </div>
+                            <div class="person-info">
+                                <div class="person-name">${person.name}</div>
+                                <div class="person-department">${person.department}</div>
+                            </div>
+                            <div class="person-contribution negative">−</div>
+                        </div>
+                    `;
+                });
+            } else {
+                html += '<div style="color: #9CA3AF; font-size: 12px; padding: 8px;">No data available</div>';
+            }
+            html += '</div>';
+
+            html += '</div>';
+            return html;
+        }
+
+        // Generate Contributing Factors section
+        function generateContributingFactors(kpiId) {
+            const factorsData = {
+                'ncr': {
+                    internal: [
+                        'Automated claim scrubbing system deployment',
+                        'Training program for denial management team',
+                        'Integration of real-time validation rules',
+                        'Enhanced QA processes in billing workflow'
+                    ],
+                    external: [
+                        'Insurance carrier policy changes',
+                        'Regulatory updates affecting claim processing',
+                        'Market-wide increase in claim scrutiny',
+                        'Third-party payer system upgrades'
+                    ]
+                },
+                'dso': {
+                    internal: [
+                        'Payment automation system efficiency',
+                        'Invoice accuracy and timeliness',
+                        'Collection team performance',
+                        'Billing process optimization'
+                    ],
+                    external: [
+                        'Economic conditions affecting payment timing',
+                        'Customer payment behavior trends',
+                        'Banking system processing delays',
+                        'Industry standard payment terms'
+                    ]
+                },
+                'op_margin': {
+                    internal: [
+                        'Cost control initiatives effectiveness',
+                        'Operational efficiency improvements',
+                        'Technology investment ROI',
+                        'Workforce productivity optimization'
+                    ],
+                    external: [
+                        'Market interest rate fluctuations',
+                        'Competitive pricing pressures',
+                        'Industry-wide margin compression',
+                        'Regulatory compliance costs'
+                    ]
+                },
+                'monthly_revenue': {
+                    internal: [
+                        'Sales team performance and targets',
+                        'Marketing campaign effectiveness',
+                        'Product mix and pricing strategy',
+                        'Customer retention programs'
+                    ],
+                    external: [
+                        'Housing market conditions',
+                        'Interest rate environment',
+                        'Economic growth indicators',
+                        'Competitor market share changes'
+                    ]
+                },
+                'cycle_time': {
+                    internal: [
+                        'Process automation coverage',
+                        'Staff capacity and workload balance',
+                        'System performance and uptime',
+                        'Document management efficiency'
+                    ],
+                    external: [
+                        'Third-party verification turnaround times',
+                        'Borrower document submission delays',
+                        'Appraisal processing timelines',
+                        'Title company response times'
+                    ]
+                },
+                'touchless_pct': {
+                    internal: [
+                        'AI/ML model accuracy improvements',
+                        'Automation workflow coverage expansion',
+                        'Exception handling optimization',
+                        'Quality control automation deployment'
+                    ],
+                    external: [
+                        'Document standardization in industry',
+                        'Data quality from external sources',
+                        'Regulatory requirements for manual review',
+                        'Technology vendor capabilities'
+                    ]
+                },
+                'nps': {
+                    internal: [
+                        'Customer communication quality',
+                        'Digital experience enhancements',
+                        'Process transparency improvements',
+                        'Support team responsiveness'
+                    ],
+                    external: [
+                        'Market expectation changes',
+                        'Competitor service benchmarks',
+                        'Economic stress on customers',
+                        'Industry reputation trends'
+                    ]
+                },
+                'csat': {
+                    internal: [
+                        'Service delivery excellence',
+                        'Employee training and engagement',
+                        'Technology platform usability',
+                        'Proactive communication initiatives'
+                    ],
+                    external: [
+                        'Customer expectations evolution',
+                        'Industry service standards',
+                        'Market sentiment and confidence',
+                        'External review platform impact'
+                    ]
+                },
+                'uptime': {
+                    internal: [
+                        'Infrastructure redundancy implementation',
+                        'Maintenance window optimization',
+                        'Monitoring and alerting effectiveness',
+                        'Incident response procedures'
+                    ],
+                    external: [
+                        'Cloud provider SLA performance',
+                        'Network connectivity issues',
+                        'DDoS attack frequency',
+                        'Third-party service dependencies'
+                    ]
+                },
+                'automation_rate': {
+                    internal: [
+                        'AI model deployment velocity',
+                        'Workflow automation coverage',
+                        'Change management effectiveness',
+                        'Technology stack modernization'
+                    ],
+                    external: [
+                        'AI/ML technology maturity',
+                        'Vendor solution availability',
+                        'Industry automation benchmarks',
+                        'Regulatory approval processes'
+                    ]
+                },
+                'data_quality_index': {
+                    internal: [
+                        'Data governance framework maturity',
+                        'Master data management practices',
+                        'Data validation rule coverage',
+                        'Data stewardship accountability'
+                    ],
+                    external: [
+                        'Source system data quality',
+                        'Third-party data accuracy',
+                        'Industry data standards adoption',
+                        'Integration complexity with partners'
+                    ]
+                }
+            };
+
+            const data = factorsData[kpiId] || { internal: [], external: [] };
+
+            let html = '<div class="factors-grid">';
+            
+            // Internal Factors
+            html += '<div class="factors-section">';
+            html += '<h5><span style="color: #60A5FA;">🏢</span> Internal Factors</h5>';
+            if (data.internal.length > 0) {
+                data.internal.forEach(factor => {
+                    html += `<div class="factor-item">${factor}</div>`;
+                });
+            } else {
+                html += '<div style="color: #9CA3AF; font-size: 12px; padding: 8px;">No data available</div>';
+            }
+            html += '</div>';
+
+            // External Factors
+            html += '<div class="factors-section">';
+            html += '<h5><span style="color: #F59E0B;">🌍</span> External Factors</h5>';
+            if (data.external.length > 0) {
+                data.external.forEach(factor => {
+                    html += `<div class="factor-item external">${factor}</div>`;
+                });
+            } else {
+                html += '<div style="color: #9CA3AF; font-size: 12px; padding: 8px;">No data available</div>';
+            }
+            html += '</div>';
+
+            html += '</div>';
+            return html;
+        }
+
+        // Draw Dependency Network Graph using D3.js
+        function drawDependencyGraph(kpiId) {
+            const container = document.getElementById(`dependency-graph-${kpiId}`);
+            if (!container) return;
+
+            // Clear previous graph
+            container.innerHTML = '';
+
+            // Find the current KPI data
+            const currentKPI = kpiData.nodes.find(k => k.id === kpiId);
+            if (!currentKPI) return;
+
+            // Build graph data structure
+            const nodes = [{ id: kpiId, name: currentKPI.name, type: 'current', level: 0 }];
+            const links = [];
+
+            // Get KPI dependencies from hierarchy
+            const causes = getDependencyCauses(kpiId);
+            const effects = getDependencyEffects(kpiId);
+
+            // Add cause nodes (upstream dependencies)
+            causes.forEach((causeId, index) => {
+                const causeKPI = kpiData.nodes.find(k => k.id === causeId);
+                if (causeKPI) {
+                    nodes.push({
+                        id: causeId,
+                        name: causeKPI.name,
+                        type: 'cause',
+                        level: -1,
+                        index: index
+                    });
+                    links.push({ source: causeId, target: kpiId, type: 'cause' });
+                }
+            });
+
+            // Add effect nodes (downstream dependencies)
+            effects.forEach((effectId, index) => {
+                const effectKPI = kpiData.nodes.find(k => k.id === effectId);
+                if (effectKPI) {
+                    nodes.push({
+                        id: effectId,
+                        name: effectKPI.name,
+                        type: 'effect',
+                        level: 1,
+                        index: index
+                    });
+                    links.push({ source: kpiId, target: effectId, type: 'effect' });
+                }
+            });
+
+            // If no dependencies, show message
+            if (nodes.length === 1) {
+                container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #9CA3AF; font-size: 14px;">No direct dependencies found</div>';
+                return;
+            }
+
+            // Create SVG
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            const svg = d3.select(container)
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            // Define arrow markers
+            svg.append('defs').append('marker')
+                .attr('id', `arrow-${kpiId}`)
+                .attr('viewBox', '0 0 10 10')
+                .attr('refX', 25)
+                .attr('refY', 5)
+                .attr('markerWidth', 6)
+                .attr('markerHeight', 6)
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('d', 'M 0 0 L 10 5 L 0 10 z')
+                .attr('class', 'dep-link-arrow');
+
+            // Calculate positions (force-directed layout simulation)
+            const simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(40));
+
+            // Create links
+            const link = svg.append('g')
+                .selectAll('path')
+                .data(links)
+                .join('path')
+                .attr('class', 'dep-link')
+                .attr('marker-end', `url(#arrow-${kpiId})`);
+
+            // Create node groups
+            const node = svg.append('g')
+                .selectAll('g')
+                .data(nodes)
+                .join('g')
+                .attr('class', 'dep-node')
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+
+            // Add circles to nodes
+            node.append('circle')
+                .attr('class', 'dep-node-circle')
+                .attr('r', d => d.type === 'current' ? 25 : 20)
+                .attr('fill', d => {
+                    if (d.type === 'current') return '#10B981';
+                    if (d.type === 'cause') return '#60A5FA';
+                    return '#F59E0B';
+                });
+
+            // Add text labels
+            node.append('text')
+                .attr('class', 'dep-node-text')
+                .attr('dy', d => d.type === 'current' ? 40 : 35)
+                .text(d => {
+                    // Truncate long names
+                    const maxLength = 20;
+                    return d.name.length > maxLength ? d.name.substring(0, maxLength) + '...' : d.name;
+                })
+                .style('font-size', d => d.type === 'current' ? '12px' : '11px')
+                .style('font-weight', d => d.type === 'current' ? 'bold' : '600');
+
+            // Update positions on simulation tick
+            simulation.on('tick', () => {
+                link.attr('d', d => {
+                    const dx = d.target.x - d.source.x;
+                    const dy = d.target.y - d.source.y;
+                    const dr = Math.sqrt(dx * dx + dy * dy);
+                    return `M${d.source.x},${d.source.y}A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+                });
+
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            });
+
+            // Drag functions
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+
+            // Add hover effects
+            node.on('mouseover', function(event, d) {
+                d3.select(this).select('circle').transition().duration(200).attr('r', d.type === 'current' ? 30 : 25);
+                
+                // Highlight connected links
+                link.classed('highlighted', l => l.source.id === d.id || l.target.id === d.id);
+                svg.selectAll('.dep-link-arrow').classed('highlighted', l => l.source.id === d.id || l.target.id === d.id);
+            })
+            .on('mouseout', function(event, d) {
+                d3.select(this).select('circle').transition().duration(200).attr('r', d.type === 'current' ? 25 : 20);
+                
+                // Remove highlight
+                link.classed('highlighted', false);
+                svg.selectAll('.dep-link-arrow').classed('highlighted', false);
+            });
+        }
+
+        // Helper: Get cause dependencies for a KPI
+        function getDependencyCauses(kpiId) {
+            const causes = [];
+            // Map common dependencies (based on business logic)
+            const dependencyMap = {
+                'ncr': ['dso', 'touchless_pct', 'automation_rate'],
+                'dso': ['touchless_pct', 'automation_rate', 'cycle_time'],
+                'op_margin': ['ncr', 'dso', 'monthly_revenue'],
+                'monthly_revenue': ['nps', 'csat', 'cycle_time'],
+                'cycle_time': ['touchless_pct', 'automation_rate', 'uptime'],
+                'touchless_pct': ['automation_rate', 'data_quality_index', 'uptime'],
+                'nps': ['cycle_time', 'csat', 'uptime'],
+                'csat': ['cycle_time', 'touchless_pct', 'uptime']
+            };
+            return dependencyMap[kpiId] || [];
+        }
+
+        // Helper: Get effect dependencies for a KPI
+        function getDependencyEffects(kpiId) {
+            const effects = [];
+            // Reverse lookup - find KPIs that depend on this KPI
+            const dependencyMap = {
+                'dso': ['ncr', 'op_margin'],
+                'touchless_pct': ['ncr', 'dso', 'cycle_time', 'nps'],
+                'automation_rate': ['ncr', 'dso', 'touchless_pct', 'cycle_time'],
+                'cycle_time': ['monthly_revenue', 'nps', 'csat'],
+                'nps': ['monthly_revenue'],
+                'csat': ['monthly_revenue', 'nps'],
+                'uptime': ['cycle_time', 'touchless_pct', 'nps', 'csat'],
+                'data_quality_index': ['touchless_pct', 'automation_rate']
+            };
+            return dependencyMap[kpiId] || [];
+        }
+
+        function showDetailPanel(kpi) {
+            const panel = document.getElementById('detailPanel');
+            const title = document.getElementById('detailTitle');
+            const content = document.getElementById('detailContent');
+
+            title.textContent = kpi.name;
+
+            const currentValue = window.KPIStore.getValue(kpi.id);
+            const displayValue = formatKPIValue(kpi, currentValue);
+
+            // Build complete 10-layer intelligence card
+            let html = `
+                <!-- Layer 1: KPI Summary -->
+                <div class="info-row">
+                    <div class="info-label">Current Value</div>
+                    <div class="info-value large" id="panel-current-value">${displayValue}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Target</div>
+                    <div class="info-value">${kpi.target}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Status</div>
+                    <div><span class="rag-badge ${kpi.rag}">${kpi.rag.toUpperCase()}</span></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Category</div>
+                    <div class="info-value">${kpi.category}</div>
+                </div>
+
+                <div class="layer-divider"></div>
+
+                <!-- Layer 2: Context & Description -->
+                <div class="kpi-layer-section">
+                    <h4><span class="layer-icon">📋</span> Context & Business Impact</h4>
+                    <p style="color: #6B7280; line-height: 1.6;">${kpi.context || kpi.description}</p>
+                </div>
+
+                <div class="layer-divider"></div>
+
+                <!-- Layer 3: Current State Analysis -->
+                <div class="kpi-layer-section">
+                    <h4><span class="layer-icon">📊</span> Current State Analysis</h4>
+                    <p style="color: #6B7280; line-height: 1.6;">${kpi.current_state}</p>
+                    ${kpi.financial_impact ? `
+                        <div class="financial-impact-box" style="margin-top: 12px; padding: 12px; background: #FEF3C7; border-left: 4px solid #F59E0B; border-radius: 4px;">
+                            <div style="font-weight: 600; color: #92400E;">${kpi.financial_impact}</div>
+                        </div>
+                    ` : ''}
+                </div>
+
+                <div class="layer-divider"></div>
+
+                <!-- Layer 4: ROOT CAUSE ANALYSIS (NEW!) -->
+                ${kpi.root_causes && kpi.root_causes.length > 0 ? `
+                    <div class="kpi-layer-section">
+                        <h4><span class="layer-icon">🎯</span> Root Cause Analysis</h4>
+                        ${kpi.root_causes.map((rc, i) => `
+                            <div style="background: ${rc.impact === 'High' ? '#FEE2E2' : rc.impact === 'Medium' ? '#FEF3C7' : '#ECFDF5'}; padding: 12px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid ${rc.impact === 'High' ? '#EF4444' : rc.impact === 'Medium' ? '#F59E0B' : '#10B981'};">
+                                <div style="font-weight: 600; color: #111; margin-bottom: 6px;">
+                                    Root Cause #${i + 1}: ${rc.cause}
+                                </div>
+                                <div style="display: flex; gap: 16px; font-size: 12px; color: #6B7280;">
+                                    <span><strong>Impact:</strong> ${rc.impact}</span>
+                                    <span><strong>Confidence:</strong> ${rc.confidence}</span>
+                                    <span><strong>Data Points:</strong> ${rc.data_points.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="layer-divider"></div>
+                ` : ''}
+
+                <!-- Layer 5: PREDICTIVE INSIGHTS (NEW!) -->
+                ${kpi.predictive_insights ? `
+                    <div class="kpi-layer-section">
+                        <h4><span class="layer-icon">🔮</span> Predictive Insights (AI-Powered)</h4>
+                        <div style="background: #F3F4F6; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-size: 13px;">
+                                <div>
+                                    <div style="color: #6B7280;">Pattern</div>
+                                    <div style="font-weight: 600; color: #111;">${kpi.predictive_insights.pattern}</div>
+                                </div>
+                                <div>
+                                    <div style="color: #6B7280;">Confidence</div>
+                                    <div style="font-weight: 600; color: #111;">${kpi.predictive_insights.confidence}%</div>
+                                </div>
+                                <div>
+                                    <div style="color: #6B7280;">Timeframe</div>
+                                    <div style="font-weight: 600; color: #111;">${kpi.predictive_insights.timeframe}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <strong style="display: block; margin-bottom: 8px; color: #374151;">Forecast Scenarios:</strong>
+                            ${kpi.predictive_insights.scenarios.map(s => `
+                                <div style="padding: 10px; border-left: 3px solid ${s.name.includes('Best') ? '#10B981' : s.name.includes('Worst') ? '#EF4444' : '#3B82F6'}; margin-bottom: 8px; background: #F9FAFB;">
+                                    <div style="font-weight: 600; color: #111; margin-bottom: 4px;">
+                                        ${s.name} <span style="color: #6B7280; font-weight: normal;">(${s.probability} probability)</span>
+                                    </div>
+                                    <div style="font-size: 13px; color: #6B7280;">${s.outcome}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${kpi.predictive_insights.leading_indicators && kpi.predictive_insights.leading_indicators.length > 0 ? `
+                            <div style="margin-top: 12px;">
+                                <strong style="display: block; margin-bottom: 8px; color: #374151;">Leading Indicators:</strong>
+                                <ul style="margin: 0; padding-left: 20px; color: #6B7280; font-size: 13px;">
+                                    ${kpi.predictive_insights.leading_indicators.map(ind => `<li style="margin-bottom: 4px;">${ind}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        <div style="margin-top: 16px;">
+                            <strong style="display: block; margin-bottom: 12px; color: #374151;">Predictive Forecast Chart:</strong>
+                            <div style="height: 200px; background: #F9FAFB; border-radius: 8px; padding: 16px; border: 1px solid #E5E7EB;">
+                                <canvas id="forecast-chart-${kpi.id}" style="width: 100%; height: 100%;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layer-divider"></div>
+                ` : ''}
+
+                <!-- Layer 6: TREND ANALYSIS (NEW!) -->
+                ${kpi.trend_analysis ? `
+                    <div class="kpi-layer-section">
+                        <h4><span class="layer-icon">📈</span> Trend Analysis</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px;">
+                            <div style="background: #F3F4F6; padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 11px; color: #6B7280;">Trend</div>
+                                <div style="font-weight: 600; color: #111;">${kpi.trend_analysis.current_trend}</div>
+                            </div>
+                            <div style="background: #F3F4F6; padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 11px; color: #6B7280;">Strength</div>
+                                <div style="font-weight: 600; color: #111;">${kpi.trend_analysis.trend_strength}</div>
+                            </div>
+                            <div style="background: #F3F4F6; padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 11px; color: #6B7280;">Volatility</div>
+                                <div style="font-weight: 600; color: #111;">${kpi.trend_analysis.volatility}</div>
+                            </div>
+                        </div>
+                        ${kpi.trend_data && kpi.trend_data.length > 0 ? `
+                            <div style="height: 120px; background: #F9FAFB; border-radius: 8px; padding: 12px;">
+                                <canvas id="trend-sparkline-${kpi.id}" style="width: 100%; height: 100%;"></canvas>
+                            </div>
+                        ` : ''}
+                        ${kpi.trend_analysis.key_insights && kpi.trend_analysis.key_insights.length > 0 ? `
+                            <div style="margin-top: 12px;">
+                                <strong style="display: block; margin-bottom: 8px; color: #374151;">Key Insights:</strong>
+                                <ul style="margin: 0; padding-left: 20px; color: #6B7280; font-size: 13px;">
+                                    ${kpi.trend_analysis.key_insights.map(insight => `<li style="margin-bottom: 4px;">${insight}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="layer-divider"></div>
+                ` : ''}
+
+                <!-- Layer 7: DEPENDENCIES -->
+                ${kpi.dependencies ? `
+                    <div class="kpi-layer-section">
+                        <h4><span class="layer-icon">🔗</span> Dependencies</h4>
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px;">
+                            ${kpi.dependencies.upstream && kpi.dependencies.upstream.length > 0 ? `
+                                <div>
+                                    <strong style="color: #3B82F6;">↑ Upstream (What affects this):</strong>
+                                    <div style="margin-top: 6px; padding: 8px; background: #EFF6FF; border-radius: 6px; font-size: 13px;">
+                                        ${kpi.dependencies.upstream.join(', ')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            ${kpi.dependencies.downstream && kpi.dependencies.downstream.length > 0 ? `
+                                <div>
+                                    <strong style="color: #EF4444;">↓ Downstream (What this affects):</strong>
+                                    <div style="margin-top: 6px; padding: 8px; background: #FEE2E2; border-radius: 6px; font-size: 13px;">
+                                        ${kpi.dependencies.downstream.join(', ')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                            ${kpi.dependencies.peer && kpi.dependencies.peer.length > 0 ? `
+                                <div>
+                                    <strong style="color: #10B981;">↔ Peer Metrics (Related):</strong>
+                                    <div style="margin-top: 6px; padding: 8px; background: #ECFDF5; border-radius: 6px; font-size: 13px;">
+                                        ${kpi.dependencies.peer.join(', ')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <strong style="display: block; margin-bottom: 12px; color: #374151;">Neo4j-Style Dependency Network Graph:</strong>
+                            <div class="dependency-graph-container" id="dependency-graph-${kpi.id}" style="height: 300px; background: #FAFBFC; border-radius: 8px; border: 1px solid #E5E7EB; position: relative;">
+                                <!-- D3.js dependency graph will be rendered here -->
+                            </div>
+                            <div class="dependency-legend" style="display: flex; gap: 20px; justify-content: center; margin-top: 12px; font-size: 12px;">
+                                <span class="legend-item" style="display: flex; align-items: center; gap: 6px;">
+                                    <span class="legend-dot" style="width: 12px; height: 12px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+                                    Current KPI
+                                </span>
+                                <span class="legend-item" style="display: flex; align-items: center; gap: 6px;">
+                                    <span class="legend-dot" style="width: 12px; height: 12px; border-radius: 50%; background: #60A5FA; display: inline-block;"></span>
+                                    Upstream (Causes)
+                                </span>
+                                <span class="legend-item" style="display: flex; align-items: center; gap: 6px;">
+                                    <span class="legend-dot" style="width: 12px; height: 12px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
+                                    Downstream (Effects)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layer-divider"></div>
+                ` : ''}
+
+                <!-- Layer 8: PEOPLE & ACCOUNTABILITY (NEW!) -->
+                ${kpi.people_accountable && kpi.people_accountable.length > 0 ? `
+                    <div class="kpi-layer-section">
+                        <h4><span class="layer-icon">👥</span> People & Accountability</h4>
+                        ${kpi.people_accountable.map(person => `
+                            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #F9FAFB; border-radius: 8px; margin-bottom: 8px;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: ${person.color}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
+                                    ${person.initials}
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: #111;">${person.name}</div>
+                                    <div style="font-size: 12px; color: #6B7280;">${person.title} · ${person.department}</div>
+                                    <div style="font-size: 11px; color: #9CA3AF;">${person.email}</div>
+                                </div>
+                                <div style="background: ${person.role === 'Primary Owner' ? '#2B5BA6' : '#3B82F6'}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">
+                                    ${person.role}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="layer-divider"></div>
+                ` : ''}
+
+                <!-- Layer 9: RECOMMENDED ACTIONS (ENHANCED!) -->
+                ${kpi.recommended_actions && kpi.recommended_actions.length > 0 ? `
+                    <div class="kpi-layer-section">
+                        <h4><span class="layer-icon">⚡</span> Recommended Actions</h4>
+                        ${kpi.recommended_actions.map((action, i) => {
+                            const priorityColor = action.priority === 'Critical' ? '#EF4444' : action.priority === 'High' ? '#F59E0B' : action.priority === 'Medium' ? '#3B82F6' : '#10B981';
+                            return `
+                                <div style="border: 2px solid ${priorityColor}; border-radius: 8px; padding: 12px; margin-bottom: 12px; background: #FAFBFC;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                        <span style="font-weight: 700; color: #111;">Action #${i + 1}</span>
+                                        <span style="background: ${priorityColor}; color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600;">
+                                            ${action.priority} PRIORITY
+                                        </span>
+                                    </div>
+                                    <div style="font-weight: 600; color: #374151; margin-bottom: 8px;">${action.action}</div>
+                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 12px; margin-bottom: 8px;">
+                                        <div><span style="color: #6B7280;">Timeline:</span> <strong>${action.timeline}</strong></div>
+                                        <div><span style="color: #6B7280;">Owner:</span> <strong>${action.owner}</strong></div>
+                                    </div>
+                                    <div style="font-size: 13px; color: #6B7280; margin-bottom: 6px;">
+                                        <strong style="color: #374151;">Expected Impact:</strong> ${action.expected_impact}
+                                    </div>
+                                    <div style="font-size: 12px; color: #6B7280;">
+                                        <strong>Resources:</strong> ${action.resources_needed}
+                                    </div>
+                                    ${action.success_metrics && action.success_metrics.length > 0 ? `
+                                        <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #E5E7EB;">
+                                            <strong style="font-size: 12px; color: #374151;">Success Metrics:</strong>
+                                            <ul style="margin: 4px 0 0 0; padding-left: 20px; font-size: 12px; color: #6B7280;">
+                                                ${action.success_metrics.map(m => `<li>${m}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="layer-divider"></div>
+                ` : ''}
+
+                <!-- Quick Actions Navigation -->
+                <div class="detail-section">
+                    <h3>🔗 Quick Actions</h3>
+                    <div style="display: flex; gap: 12px; margin-top: 12px;">
+                        <button class="filter-btn" onclick="goToExecutive('${kpi.id}')" style="flex: 1;">
+                            View in Executive Dashboard
+                        </button>
+                        <button class="filter-btn" onclick="goToControl('${kpi.id}')" style="flex: 1;">
+                            Adjust in Control Center
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            content.innerHTML = html;
+
+            // Draw visualizations after DOM update
+            setTimeout(() => {
+                // Draw sparkline if trend data exists
+                if (kpi.trend_data && kpi.trend_data.length > 0) {
+                    drawTrendSparklineNew(kpi.id, kpi.trend_data);
+                }
+                
+                // Draw predictive forecast chart if predictive insights exist
+                if (kpi.predictive_insights && kpi.predictive_insights.scenarios) {
+                    drawPredictiveForecastChart(kpi.id, kpi.predictive_insights, kpi.trend_data);
+                }
+                
+                // Draw Neo4j-style dependency graph if dependencies exist
+                if (kpi.dependencies && (kpi.dependencies.upstream || kpi.dependencies.downstream)) {
+                    drawDependencyGraphCommand(kpi.id, kpi.dependencies);
+                }
+            }, 100);
+
+            panel.classList.add('open');
+
+            const store = JSON.parse(localStorage.getItem('KPIStore') || '{}');
+            store.selectedKPI = kpi.id;
+            localStorage.setItem('KPIStore', JSON.stringify(store));
+        }
+
+        function closeDetailPanel() {
+            document.getElementById('detailPanel').classList.remove('open');
+        }
+
+        // Helper function to draw trend sparkline for new data structure
+        function drawTrendSparklineNew(kpiId, trendData) {
+            const canvas = document.getElementById(`trend-sparkline-${kpiId}`);
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            if (window[`chart_${kpiId}`]) {
+                window[`chart_${kpiId}`].destroy();
+            }
+
+            window[`chart_${kpiId}`] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: trendData.map(d => d.month),
+                    datasets: [{
+                        data: trendData.map(d => d.value),
+                        borderColor: '#2B5BA6',
+                        backgroundColor: 'rgba(43, 91, 166, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#2B5BA6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {display: false},
+                        tooltip: {
+                            callbacks: {
+                                title: (items) => trendData[items[0].dataIndex].month,
+                                label: (item) => `Value: ${item.parsed.y.toFixed(1)}`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {color: '#E5E7EB'},
+                            ticks: {font: {size: 10}, color: '#6B7280'}
+                        },
+                        x: {
+                            grid: {display: false},
+                            ticks: {font: {size: 9}, color: '#6B7280', maxRotation: 45}
+                        }
+                    }
+                }
+            });
+        }
+
+        // Helper function to draw predictive forecast chart with 3 scenarios
+        function drawPredictiveForecastChart(kpiId, predictiveInsights, trendData) {
+            const canvas = document.getElementById(`forecast-chart-${kpiId}`);
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            if (window[`forecast_chart_${kpiId}`]) {
+                window[`forecast_chart_${kpiId}`].destroy();
+            }
+
+            // Extract current value from latest trend data or use a baseline
+            const currentValue = trendData && trendData.length > 0 ? 
+                trendData[trendData.length - 1].value : 100;
+
+            // Extract scenario values from predictive insights
+            const bestCaseMatch = predictiveInsights.scenarios.find(s => s.name.includes('Best'));
+            const mostLikelyMatch = predictiveInsights.scenarios.find(s => s.name.includes('Most Likely'));
+            const worstCaseMatch = predictiveInsights.scenarios.find(s => s.name.includes('Worst'));
+
+            // Extract numeric values from outcome text
+            const extractValue = (outcome) => {
+                const match = outcome.match(/(\d+\.?\d*)%/);
+                if (match) return parseFloat(match[1]);
+                const numMatch = outcome.match(/(\d+\.?\d*)/);
+                return numMatch ? parseFloat(numMatch[1]) : currentValue;
+            };
+
+            const bestValue = bestCaseMatch ? extractValue(bestCaseMatch.outcome) : currentValue * 1.05;
+            const likelyValue = mostLikelyMatch ? extractValue(mostLikelyMatch.outcome) : currentValue;
+            const worstValue = worstCaseMatch ? extractValue(worstCaseMatch.outcome) : currentValue * 0.95;
+
+            const bestProb = bestCaseMatch ? bestCaseMatch.probability : '25%';
+            const likelyProb = mostLikelyMatch ? mostLikelyMatch.probability : '55%';
+            const worstProb = worstCaseMatch ? worstCaseMatch.probability : '20%';
+
+            window[`forecast_chart_${kpiId}`] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Current', predictiveInsights.timeframe || 'Forecast'],
+                    datasets: [
+                        {
+                            label: `Best Case (${bestProb})`,
+                            data: [currentValue, bestValue],
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#10B981'
+                        },
+                        {
+                            label: `Most Likely (${likelyProb})`,
+                            data: [currentValue, likelyValue],
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#3B82F6'
+                        },
+                        {
+                            label: `Worst Case (${worstProb})`,
+                            data: [currentValue, worstValue],
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#EF4444'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {size: 11},
+                                padding: 12,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    const label = context.dataset.label || '';
+                                    const value = context.parsed.y.toFixed(1);
+                                    return `${label}: ${value}`;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: `Pattern: ${predictiveInsights.pattern} (${predictiveInsights.confidence}% confidence)`,
+                            font: {size: 12, weight: '600'},
+                            color: '#374151',
+                            padding: {bottom: 16}
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {color: 'rgba(0,0,0,0.05)'},
+                            ticks: {
+                                font: {size: 11},
+                                color: '#6B7280',
+                                callback: (value) => value.toFixed(1)
+                            }
+                        },
+                        x: {
+                            grid: {display: false},
+                            ticks: {font: {size: 11}, color: '#6B7280'}
+                        }
+                    }
+                }
+            });
+        }
+
+        // Draw Neo4j-style Dependency Network Graph with D3.js for Command Center
+        function drawDependencyGraphCommand(kpiId, dependencies) {
+            const container = document.getElementById(`dependency-graph-${kpiId}`);
+            if (!container) return;
+
+            // Clear previous graph
+            container.innerHTML = '';
+
+            // Find the current KPI data
+            const currentKPI = kpiData.nodes.find(k => k.id === kpiId);
+            if (!currentKPI) return;
+
+            // Build graph data structure
+            const nodes = [{ id: kpiId, name: currentKPI.name, type: 'current', level: 0 }];
+            const links = [];
+
+            // Use dependencies from the new data structure
+            const upstreamNames = dependencies.upstream || [];
+            const downstreamNames = dependencies.downstream || [];
+
+            // Helper function to find KPI by name with fuzzy matching
+            function findKPIByName(depName) {
+                // Try exact match first
+                let found = kpiData.nodes.find(k => k.name === depName || k.name.replace(/\n/g, ' ') === depName);
+                if (found) return found;
+                
+                // Try case-insensitive match
+                const lowerDepName = depName.toLowerCase();
+                found = kpiData.nodes.find(k => 
+                    k.name.toLowerCase() === lowerDepName || 
+                    k.name.toLowerCase().replace(/\n/g, ' ') === lowerDepName
+                );
+                if (found) return found;
+                
+                // Try partial match
+                found = kpiData.nodes.find(k => 
+                    k.name.toLowerCase().includes(lowerDepName) ||
+                    lowerDepName.includes(k.name.toLowerCase())
+                );
+                return found;
+            }
+
+            // Add upstream nodes (causes) - with fuzzy matching and generic fallback
+            upstreamNames.forEach((upstreamName, index) => {
+                const upstreamKPI = findKPIByName(upstreamName);
+                if (upstreamKPI) {
+                    if (!nodes.find(n => n.id === upstreamKPI.id)) {
+                        nodes.push({
+                            id: upstreamKPI.id,
+                            name: upstreamKPI.name,
+                            type: 'cause',
+                            level: -1,
+                            index: index
+                        });
+                        links.push({ source: upstreamKPI.id, target: kpiId, type: 'cause' });
+                    }
+                } else {
+                    // Add as generic node if no matching KPI found
+                    const genericId = `upstream-${index}-${kpiId}`;
+                    nodes.push({
+                        id: genericId,
+                        name: upstreamName,
+                        type: 'cause',
+                        level: -1,
+                        index: index,
+                        isGeneric: true
+                    });
+                    links.push({ source: genericId, target: kpiId, type: 'cause' });
+                }
+            });
+
+            // Add downstream nodes (effects) - with fuzzy matching and generic fallback
+            downstreamNames.forEach((downstreamName, index) => {
+                const downstreamKPI = findKPIByName(downstreamName);
+                if (downstreamKPI) {
+                    if (!nodes.find(n => n.id === downstreamKPI.id)) {
+                        nodes.push({
+                            id: downstreamKPI.id,
+                            name: downstreamKPI.name,
+                            type: 'effect',
+                            level: 1,
+                            index: index
+                        });
+                        links.push({ source: kpiId, target: downstreamKPI.id, type: 'effect' });
+                    }
+                } else {
+                    // Add as generic node if no matching KPI found
+                    const genericId = `downstream-${index}-${kpiId}`;
+                    nodes.push({
+                        id: genericId,
+                        name: downstreamName,
+                        type: 'effect',
+                        level: 1,
+                        index: index,
+                        isGeneric: true
+                    });
+                    links.push({ source: kpiId, target: genericId, type: 'effect' });
+                }
+            });
+
+            // If no dependencies at all, show message
+            if (nodes.length === 1) {
+                container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #9CA3AF; font-size: 14px;">No dependencies data available</div>';
+                return;
+            }
+
+            // Create SVG with D3.js force-directed layout
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            const svg = d3.select(container)
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            // Define arrow markers
+            svg.append('defs').append('marker')
+                .attr('id', `arrow-${kpiId}`)
+                .attr('viewBox', '0 0 10 10')
+                .attr('refX', 25)
+                .attr('refY', 5)
+                .attr('markerWidth', 6)
+                .attr('markerHeight', 6)
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('d', 'M 0 0 L 10 5 L 0 10 z')
+                .style('fill', '#9CA3AF');
+
+            // Calculate positions (force-directed layout simulation)
+            const simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(40));
+
+            // Create links
+            const link = svg.append('g')
+                .selectAll('path')
+                .data(links)
+                .join('path')
+                .style('stroke', '#9CA3AF')
+                .style('stroke-width', 2)
+                .style('fill', 'none')
+                .attr('marker-end', `url(#arrow-${kpiId})`);
+
+            // Create node groups
+            const node = svg.append('g')
+                .selectAll('g')
+                .data(nodes)
+                .join('g')
+                .style('cursor', 'pointer')
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+
+            // Add circles to nodes
+            node.append('circle')
+                .attr('r', d => d.type === 'current' ? 25 : (d.isGeneric ? 18 : 20))
+                .attr('fill', d => {
+                    if (d.type === 'current') return '#10B981';
+                    if (d.isGeneric && d.type === 'cause') return '#94A3B8'; // Gray for generic upstream
+                    if (d.isGeneric && d.type === 'effect') return '#CBD5E1'; // Light gray for generic downstream
+                    if (d.type === 'cause') return '#60A5FA';
+                    return '#F59E0B';
+                })
+                .style('stroke', d => d.isGeneric ? '#64748B' : '#fff')
+                .style('stroke-width', 3)
+                .style('stroke-dasharray', d => d.isGeneric ? '4,2' : 'none');
+
+            // Add text labels
+            node.append('text')
+                .attr('dy', d => d.type === 'current' ? 40 : 35)
+                .attr('text-anchor', 'middle')
+                .text(d => {
+                    const maxLength = 20;
+                    return d.name.length > maxLength ? d.name.substring(0, maxLength) + '...' : d.name;
+                })
+                .style('font-size', d => d.type === 'current' ? '12px' : '11px')
+                .style('font-weight', d => d.type === 'current' ? 'bold' : '600')
+                .style('fill', '#374151');
+
+            // Update positions on simulation tick
+            simulation.on('tick', () => {
+                link.attr('d', d => {
+                    const dx = d.target.x - d.source.x;
+                    const dy = d.target.y - d.source.y;
+                    const dr = Math.sqrt(dx * dx + dy * dy);
+                    return `M${d.source.x},${d.source.y}A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
+                });
+
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            });
+
+            // Drag functions
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+
+        function goToExecutive(kpiId) {
+            const store = JSON.parse(localStorage.getItem('KPIStore') || '{}');
+            store.selectedKPI = kpiId;
+            localStorage.setItem('KPIStore', JSON.stringify(store));
+            window.location.href = 'index.html';
+        }
+
+        function goToControl(kpiId) {
+            const store = JSON.parse(localStorage.getItem('KPIStore') || '{}');
+            store.selectedKPI = kpiId;
+            localStorage.setItem('KPIStore', JSON.stringify(store));
+            window.location.href = 'control-center.html';
+        }
+
+        window.addEventListener('load', loadKPIData);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDetailPanel();
+            }
+        });
+
+        // Listen for KPI updates from other pages
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'KPIStore') {
+                const newStore = JSON.parse(e.newValue || '{}');
+                if (newStore.values) {
+                    Object.keys(newStore.values).forEach(kpiId => {
+                        const newValue = newStore.values[kpiId];
+                        if (newValue !== window.KPIStore.values[kpiId]) {
+                            window.KPIStore.values[kpiId] = newValue;
+                            populateTable();
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

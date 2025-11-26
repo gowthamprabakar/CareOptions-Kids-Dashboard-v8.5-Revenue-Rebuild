@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Tree Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #status { padding: 10px; border: 2px solid #ccc; margin-bottom: 20px; }
+        svg { border: 1px solid #ddd; }
+        circle { fill: lightblue; stroke: steelblue; stroke-width: 2px; }
+        text { font-size: 12px; }
+        .link { fill: none; stroke: #ccc; stroke-width: 1.5px; }
+    </style>
+</head>
+<body>
+    <h1>Simple Tree Test</h1>
+    <div id="status">Loading...</div>
+    <div id="tree"></div>
+    
+    <script>
+        const status = document.getElementById('status');
+        
+        console.log('Starting data fetch...');
+        status.innerHTML = 'Fetching kpi_map.json...';
+        
+        fetch('kpi_map.json')
+            .then(r => {
+                console.log('Fetch response:', r.status);
+                status.innerHTML += '<br>Fetch successful, parsing JSON...';
+                return r.json();
+            })
+            .then(data => {
+                console.log('Data loaded:', data);
+                status.innerHTML += `<br>Data loaded: ${data.total_nodes} nodes`;
+                status.innerHTML += `<br>Tree exists: ${!!data.tree}`;
+                status.innerHTML += `<br>Tree name: ${data.tree.name}`;
+                status.innerHTML += `<br>Tree children: ${data.tree.children ? data.tree.children.length : 0}`;
+                
+                // Create D3 hierarchy
+                const root = d3.hierarchy(data.tree);
+                console.log('D3 hierarchy created:', root.descendants().length, 'nodes');
+                status.innerHTML += `<br>D3 hierarchy: ${root.descendants().length} nodes`;
+                
+                // Only expand first 2 levels
+                root.descendants().forEach(d => {
+                    if (d.depth > 2) {
+                        d._children = d.children;
+                        d.children = null;
+                    }
+                });
+                
+                const expanded = root.descendants().filter(d => d.children).length;
+                status.innerHTML += `<br>Expanded nodes: ${expanded}`;
+                
+                // Create tree layout
+                const width = 960;
+                const height = 600;
+                
+                const treeLayout = d3.tree().size([height - 100, width - 200]);
+                treeLayout(root);
+                
+                // Create SVG
+                const svg = d3.select('#tree')
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height);
+                
+                const g = svg.append('g')
+                    .attr('transform', 'translate(100, 50)');
+                
+                status.innerHTML += `<br>SVG created: ${width}x${height}`;
+                
+                // Draw links
+                const links = root.links();
+                g.selectAll('.link')
+                    .data(links)
+                    .enter()
+                    .append('path')
+                    .attr('class', 'link')
+                    .attr('d', d3.linkHorizontal()
+                        .x(d => d.y)
+                        .y(d => d.x));
+                
+                status.innerHTML += `<br>Links rendered: ${links.length}`;
+                
+                // Draw nodes
+                const nodes = root.descendants();
+                const nodeGroup = g.selectAll('.node')
+                    .data(nodes)
+                    .enter()
+                    .append('g')
+                    .attr('class', 'node')
+                    .attr('transform', d => `translate(${d.y}, ${d.x})`);
+                
+                nodeGroup.append('circle')
+                    .attr('r', 5);
+                
+                nodeGroup.append('text')
+                    .attr('dy', 3)
+                    .attr('x', d => d.children || d._children ? -8 : 8)
+                    .style('text-anchor', d => d.children || d._children ? 'end' : 'start')
+                    .text(d => d.data.name.substring(0, 30));
+                
+                status.innerHTML += `<br>Nodes rendered: ${nodes.length}`;
+                status.innerHTML += `<br><strong style="color: green;">✓ SUCCESS!</strong>`;
+                
+                console.log('Rendering complete!');
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                status.innerHTML += `<br><strong style="color: red;">ERROR: ${err.message}</strong>`;
+            });
+    </script>
+</body>
+</html>

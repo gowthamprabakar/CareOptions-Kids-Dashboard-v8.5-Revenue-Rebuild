@@ -1,0 +1,357 @@
+{
+  "version": "1.0-healthcare-rcm-org",
+  "generated_at": "2025-11-14T11:00:00.000000",
+  "total_people": 28,
+  "description": "Healthcare RCM Organizational Hierarchy with KPI Ownership",
+  "hierarchy": {
+    "id": "person_001",
+    "name": "Robert Chen",
+    "title": "Chief Executive Officer",
+    "department": "Executive Leadership",
+    "email": "rchen@hospital.com",
+    "phone": "+1 (555) 100-0001",
+    "profile_image": "https://i.pravatar.cc/150?img=12",
+    "level": 0,
+    "kpi_ownership": ["rcm_root"],
+    "children": [
+      {
+        "id": "person_002",
+        "name": "Sarah Martinez",
+        "title": "VP Revenue Cycle Management",
+        "department": "RCM Operations",
+        "email": "smartinez@hospital.com",
+        "phone": "+1 (555) 100-0002",
+        "profile_image": "https://i.pravatar.cc/150?img=5",
+        "level": 1,
+        "kpi_ownership": ["revenue_performance", "collection_efficiency", "ar_risk"],
+        "children": [
+          {
+            "id": "person_003",
+            "name": "Michael Thompson",
+            "title": "Director of Revenue Operations",
+            "department": "Revenue Operations",
+            "email": "mthompson@hospital.com",
+            "phone": "+1 (555) 100-0003",
+            "profile_image": "https://i.pravatar.cc/150?img=33",
+            "level": 2,
+            "kpi_ownership": ["expected_revenue", "billed_revenue", "revenue_index", "unbilled_revenue"],
+            "children": [
+              {
+                "id": "person_004",
+                "name": "Jessica Williams",
+                "title": "Revenue Analyst",
+                "department": "Revenue Operations",
+                "email": "jwilliams@hospital.com",
+                "phone": "+1 (555) 100-0004",
+                "profile_image": "https://i.pravatar.cc/150?img=10",
+                "level": 3,
+                "kpi_ownership": ["expected_rev_daily", "expected_rev_weekly", "expected_rev_monthly"],
+                "children": []
+              },
+              {
+                "id": "person_005",
+                "name": "David Rodriguez",
+                "title": "Billing Specialist",
+                "department": "Revenue Operations",
+                "email": "drodriguez@hospital.com",
+                "phone": "+1 (555) 100-0005",
+                "profile_image": "https://i.pravatar.cc/150?img=51",
+                "level": 3,
+                "kpi_ownership": ["billed_rev_daily", "billed_rev_weekly", "billed_rev_monthly"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "person_006",
+            "name": "Emily Davis",
+            "title": "Director of Collections",
+            "department": "Collections",
+            "email": "edavis@hospital.com",
+            "phone": "+1 (555) 100-0006",
+            "profile_image": "https://i.pravatar.cc/150?img=9",
+            "level": 2,
+            "kpi_ownership": ["expected_collection_rate", "collection_rate_payments", "collection_rate_cash_main", "collection_efficiency"],
+            "children": [
+              {
+                "id": "person_007",
+                "name": "James Wilson",
+                "title": "Collections Manager",
+                "department": "Collections",
+                "email": "jwilson@hospital.com",
+                "phone": "+1 (555) 100-0007",
+                "profile_image": "https://i.pravatar.cc/150?img=52",
+                "level": 3,
+                "kpi_ownership": ["collection_rate_cash", "cash_collection_rate", "collection_trend"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "person_008",
+            "name": "Maria Garcia",
+            "title": "Director of AR Management",
+            "department": "Accounts Receivable",
+            "email": "mgarcia@hospital.com",
+            "phone": "+1 (555) 100-0008",
+            "profile_image": "https://i.pravatar.cc/150?img=16",
+            "level": 2,
+            "kpi_ownership": ["total_ar", "aged_ar", "dso", "bad_debt", "ar_risk"],
+            "children": [
+              {
+                "id": "person_009",
+                "name": "Christopher Lee",
+                "title": "AR Manager",
+                "department": "Accounts Receivable",
+                "email": "clee@hospital.com",
+                "phone": "+1 (555) 100-0009",
+                "profile_image": "https://i.pravatar.cc/150?img=60",
+                "level": 3,
+                "kpi_ownership": ["actual_ar", "calculated_ar", "current_ar", "rolling_ar"],
+                "children": []
+              },
+              {
+                "id": "person_010",
+                "name": "Amanda Taylor",
+                "title": "AR Specialist",
+                "department": "Accounts Receivable",
+                "email": "ataylor@hospital.com",
+                "phone": "+1 (555) 100-0010",
+                "profile_image": "https://i.pravatar.cc/150?img=20",
+                "level": 3,
+                "kpi_ownership": ["aged_ar_percent", "ar_0_60", "ar_60_plus"],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "person_011",
+        "name": "John Anderson",
+        "title": "CFO",
+        "department": "Finance",
+        "email": "janderson@hospital.com",
+        "phone": "+1 (555) 100-0011",
+        "profile_image": "https://i.pravatar.cc/150?img=13",
+        "level": 1,
+        "kpi_ownership": ["cash_flow_health", "payment_performance"],
+        "children": [
+          {
+            "id": "person_012",
+            "name": "Lisa Johnson",
+            "title": "Director of Cash Management",
+            "department": "Finance",
+            "email": "ljohnson@hospital.com",
+            "phone": "+1 (555) 100-0012",
+            "profile_image": "https://i.pravatar.cc/150?img=23",
+            "level": 2,
+            "kpi_ownership": ["cash_deposits", "cash_deposit_daily", "cash_deposit_rolling", "deposit_variance"],
+            "children": [
+              {
+                "id": "person_013",
+                "name": "Kevin Brown",
+                "title": "Cash Manager",
+                "department": "Finance",
+                "email": "kbrown@hospital.com",
+                "phone": "+1 (555) 100-0013",
+                "profile_image": "https://i.pravatar.cc/150?img=70",
+                "level": 3,
+                "kpi_ownership": ["payment_deposit_var", "var_payment_deposit", "pay_deposit_var"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "person_014",
+            "name": "Patricia Miller",
+            "title": "Director of Payment Operations",
+            "department": "Finance",
+            "email": "pmiller@hospital.com",
+            "phone": "+1 (555) 100-0014",
+            "profile_image": "https://i.pravatar.cc/150?img=26",
+            "level": 2,
+            "kpi_ownership": ["payments_posted", "payment_daily", "payment_rolling", "expected_payment"],
+            "children": [
+              {
+                "id": "person_015",
+                "name": "Richard Moore",
+                "title": "Payment Operations Manager",
+                "department": "Finance",
+                "email": "rmoore@hospital.com",
+                "phone": "+1 (555) 100-0015",
+                "profile_image": "https://i.pravatar.cc/150?img=58",
+                "level": 3,
+                "kpi_ownership": ["ontime_payments", "ontime_amount", "ontime_percent"],
+                "children": []
+              },
+              {
+                "id": "person_016",
+                "name": "Nancy White",
+                "title": "Payment Analyst",
+                "department": "Finance",
+                "email": "nwhite@hospital.com",
+                "phone": "+1 (555) 100-0016",
+                "profile_image": "https://i.pravatar.cc/150?img=24",
+                "level": 3,
+                "kpi_ownership": ["overdue_payments", "overdue_amount", "overdue_percent", "payment_variance"],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "person_017",
+        "name": "Thomas Jackson",
+        "title": "VP Compliance & Quality",
+        "department": "Compliance",
+        "email": "tjackson@hospital.com",
+        "phone": "+1 (555) 100-0017",
+        "profile_image": "https://i.pravatar.cc/150?img=15",
+        "level": 1,
+        "kpi_ownership": ["denials_writeoffs"],
+        "children": [
+          {
+            "id": "person_018",
+            "name": "Sandra Harris",
+            "title": "Director of Denials Management",
+            "department": "Compliance",
+            "email": "sharris@hospital.com",
+            "phone": "+1 (555) 100-0018",
+            "profile_image": "https://i.pravatar.cc/150?img=32",
+            "level": 2,
+            "kpi_ownership": ["denials", "denial_amount", "denial_percent"],
+            "children": [
+              {
+                "id": "person_019",
+                "name": "Daniel Martin",
+                "title": "Denials Manager",
+                "department": "Compliance",
+                "email": "dmartin@hospital.com",
+                "phone": "+1 (555) 100-0019",
+                "profile_image": "https://i.pravatar.cc/150?img=68",
+                "level": 3,
+                "kpi_ownership": ["denials_state", "denials_payer"],
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "person_020",
+            "name": "Karen Thompson",
+            "title": "Director of Revenue Integrity",
+            "department": "Compliance",
+            "email": "kthompson@hospital.com",
+            "phone": "+1 (555) 100-0020",
+            "profile_image": "https://i.pravatar.cc/150?img=25",
+            "level": 2,
+            "kpi_ownership": ["writeoffs", "writeoff_amount", "writeoff_rate"],
+            "children": [
+              {
+                "id": "person_021",
+                "name": "Steven Lewis",
+                "title": "Revenue Integrity Analyst",
+                "department": "Compliance",
+                "email": "slewis@hospital.com",
+                "phone": "+1 (555) 100-0021",
+                "profile_image": "https://i.pravatar.cc/150?img=61",
+                "level": 3,
+                "kpi_ownership": ["writeoffs_state", "writeoffs_payer"],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "person_022",
+        "name": "Jennifer Clark",
+        "title": "VP Analytics & Forecasting",
+        "department": "Analytics",
+        "email": "jclark@hospital.com",
+        "phone": "+1 (555) 100-0022",
+        "profile_image": "https://i.pravatar.cc/150?img=47",
+        "level": 1,
+        "kpi_ownership": ["forecast_accuracy"],
+        "children": [
+          {
+            "id": "person_023",
+            "name": "Brian Robinson",
+            "title": "Director of Financial Analytics",
+            "department": "Analytics",
+            "email": "brobinson@hospital.com",
+            "phone": "+1 (555) 100-0023",
+            "profile_image": "https://i.pravatar.cc/150?img=56",
+            "level": 2,
+            "kpi_ownership": ["wow_forecast", "mom_forecast", "qoq_forecast", "triple_variance"],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "person_024",
+        "name": "Michelle Young",
+        "title": "VP Payer Relations",
+        "department": "Payer Relations",
+        "email": "myoung@hospital.com",
+        "phone": "+1 (555) 100-0024",
+        "profile_image": "https://i.pravatar.cc/150?img=45",
+        "level": 1,
+        "kpi_ownership": ["payer_performance"],
+        "children": [
+          {
+            "id": "person_025",
+            "name": "Anthony King",
+            "title": "Director of Payer Analytics",
+            "department": "Payer Relations",
+            "email": "aking@hospital.com",
+            "phone": "+1 (555) 100-0025",
+            "profile_image": "https://i.pravatar.cc/150?img=65",
+            "level": 2,
+            "kpi_ownership": ["payer_revenue_index", "payer_exp_payment", "payer_cash_deposit"],
+            "children": [
+              {
+                "id": "person_026",
+                "name": "Rebecca Scott",
+                "title": "Payer Analytics Specialist",
+                "department": "Payer Relations",
+                "email": "rscott@hospital.com",
+                "phone": "+1 (555) 100-0026",
+                "profile_image": "https://i.pravatar.cc/150?img=28",
+                "level": 3,
+                "kpi_ownership": ["top_payer_metrics", "top_payer_rev_index", "top_payer_exp", "top_payer_payment"],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "person_027",
+        "name": "William Green",
+        "title": "VP Regional Operations",
+        "department": "Regional Operations",
+        "email": "wgreen@hospital.com",
+        "phone": "+1 (555) 100-0027",
+        "profile_image": "https://i.pravatar.cc/150?img=14",
+        "level": 1,
+        "kpi_ownership": ["state_performance"],
+        "children": [
+          {
+            "id": "person_028",
+            "name": "Elizabeth Adams",
+            "title": "Director of State Operations",
+            "department": "Regional Operations",
+            "email": "eadams@hospital.com",
+            "phone": "+1 (555) 100-0028",
+            "profile_image": "https://i.pravatar.cc/150?img=31",
+            "level": 2,
+            "kpi_ownership": ["state_revenue_index", "state_payment", "state_cash", "state_ar", "state_writeoffs", "state_variance"],
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

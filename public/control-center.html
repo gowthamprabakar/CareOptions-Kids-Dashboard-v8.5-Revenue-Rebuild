@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPI Control Center - RCM Intelligence</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
+    <link rel="icon" href="https://www.genspark.ai/api/files/s/kug10xIG" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', 'Proxima Nova', sans-serif;
+            background: #FAFBFC;
+            color: #111B2E;
+            font-size: 15px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            border-bottom: 2px solid #2B5BA6;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(17, 27, 46, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111B2E;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .nav a {
+            color: #111B2E;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: #FEF2F2;
+            border-color: #2B5BA6;
+            color: #2B5BA6;
+        }
+
+        .nav a.active {
+            background: #2B5BA6;
+            border-color: #2B5BA6;
+            color: #FFFFFF;
+        }
+
+        .company-badge {
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #2B5BA6;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 65px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: #FFFFFF;
+            border-right: 1px solid #E5E7EB;
+            padding: 20px;
+            overflow-y: auto;
+            position: sticky;
+            top: 65px;
+            align-self: flex-start;
+            max-height: calc(100vh - 65px);
+        }
+
+        .sidebar h2 {
+            font-size: 16px;
+            color: #111B2E;
+            margin-bottom: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .kpi-item {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .kpi-item:hover {
+            background: #FEF2F2;
+            border-color: #2B5BA6;
+            box-shadow: 0 2px 8px rgba(43, 91, 166, 0.15);
+        }
+
+        .kpi-item.active {
+            background: #FEF2F2;
+            border-color: #2B5BA6;
+            box-shadow: 0 2px 8px rgba(43, 91, 166, 0.2);
+        }
+
+        .kpi-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .kpi-item-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111B2E;
+        }
+
+        .kpi-item-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2B5BA6;
+        }
+
+        .kpi-item-status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .kpi-item-status.red { background: #2B5BA6; }
+        .kpi-item-status.amber { background: #F59E0B; }
+        .kpi-item-status.green { background: #10B981; }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .control-section {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(17, 27, 46, 0.05);
+        }
+
+        .control-section h3 {
+            font-size: 18px;
+            color: #2B5BA6;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .slider-card {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .slider-card:hover {
+            border-color: #2B5BA6;
+            box-shadow: 0 2px 8px rgba(43, 91, 166, 0.1);
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .slider-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111B2E;
+        }
+
+        .slider-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2B5BA6;
+        }
+
+        .slider-container {
+            margin: 16px 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #E5E7EB;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2B5BA6;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(43, 91, 166, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 2px 12px rgba(43, 91, 166, 0.6);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2B5BA6;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(43, 91, 166, 0.4);
+        }
+
+        .slider-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #6B7280;
+            margin-top: 8px;
+        }
+
+        .impact-box {
+            background: #F9FAFB;
+            border-left: 3px solid #2B5BA6;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+
+        .impact-label {
+            font-size: 11px;
+            color: #6B7280;
+            margin-bottom: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .impact-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: #111B2E;
+            line-height: 1.5;
+        }
+
+        /* Simulation Panel */
+        .simulation-panel {
+            background: #FEF3C7;
+            border: 2px solid #F59E0B;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 30px;
+        }
+
+        .simulation-panel h3 {
+            color: #92400E;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .simulation-result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .result-card {
+            background: #FFFFFF;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            border: 1px solid #FCD34D;
+        }
+
+        .result-label {
+            color: #92400E;
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .result-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #92400E;
+        }
+
+        .result-change {
+            font-size: 14px;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        .result-change.positive { color: #10B981; }
+        .result-change.negative { color: #2B5BA6; }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: #2B5BA6;
+            border: none;
+            color: #FFFFFF;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #1E4A8C;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(43, 91, 166, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: #FFFFFF;
+            color: #2B5BA6;
+            border: 2px solid #2B5BA6;
+        }
+
+        .action-btn.secondary:hover {
+            background: #FEF2F2;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            height: 300px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2B5BA6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1E4A8C;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <h1>RCM Intelligence</h1>
+        </div>
+        <div class="nav">
+            <a href="index.html">Executive Advisor</a>
+            <a href="control-center.html" class="active">KPI Control Center</a>
+            <a href="command-center.html">Command Center</a>
+            <a href="people-graph.html">People Graph</a>
+            <a href="automation-hub.html">🤖 Automation Hub</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>📊 Key Metrics (35 KPIs)</h2>
+            <div class="kpi-list" id="kpiList">
+                <!-- KPI items will be dynamically populated -->
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Financial Health Section -->
+            <div class="control-section" id="financial-section">
+                <h3>💰 Financial Health Controls (45 KPIs)</h3>
+                <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">
+                    Collection rates (7), Cash flow (8), AR management (12), Bad debt (3), Revenue performance (15)
+                </p>
+                <div id="financial-sliders"></div>
+            </div>
+
+            <!-- Operational Efficiency Section -->
+            <div class="control-section" id="operational-section">
+                <h3>⚙️ Operational Efficiency Controls (34 KPIs)</h3>
+                <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">
+                    Payment operations (14), Variance analysis (4), Denials (5), Writeoffs (5), Forecasting (5), Combined (1)
+                </p>
+                <div id="operational-sliders"></div>
+            </div>
+
+            <!-- Payer Performance Section -->
+            <div class="control-section" id="payer-section">
+                <h3>🏥 Payer Performance Controls (9 KPIs)</h3>
+                <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">
+                    Payer revenue index, expected payments, cash deposits, top payer metrics
+                </p>
+                <div id="payer-sliders"></div>
+            </div>
+
+            <!-- State Performance Section -->
+            <div class="control-section" id="state-section">
+                <h3>🗺️ State Performance Controls (9 KPIs)</h3>
+                <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">
+                    State-level revenue, payments, cash, AR, writeoffs, and variance tracking
+                </p>
+                <div id="state-sliders"></div>
+            </div>
+
+            <!-- Geographic Revenue Section -->
+            <div class="control-section" id="geography-section">
+                <h3>📊 Geographic Revenue Distribution (2 KPIs)</h3>
+                <p style="color: #6B7280; font-size: 13px; margin-bottom: 12px;">
+                    Expected revenue by state and payer distribution
+                </p>
+                <div id="geography-sliders"></div>
+            </div>
+
+            <!-- Simulation Panel -->
+            <div class="simulation-panel">
+                <h3>🎯 Real-Time Impact Simulation</h3>
+                <p style="color: #92400E; margin-bottom: 12px; font-size: 14px;">
+                    Adjust the sliders above to see projected impacts on key business metrics
+                </p>
+                <div class="simulation-result" id="simulationResults">
+                    <div class="result-card">
+                        <div class="result-label">Projected Revenue</div>
+                        <div class="result-value" id="projectedRevenue">$45.2M</div>
+                        <div class="result-change positive" id="revenueChange">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Projected DSO</div>
+                        <div class="result-value" id="projectedDSO">38 days</div>
+                        <div class="result-change positive" id="dsoChange">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Projected NCR</div>
+                        <div class="result-value" id="projectedNCR">96.2%</div>
+                        <div class="result-change positive" id="ncrChange">--</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Financial Impact</div>
+                        <div class="result-value" id="totalImpact">$0</div>
+                        <div class="result-change positive" id="impactChange">per month</div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="applyChanges()">Apply Changes</button>
+                    <button class="action-btn secondary" onclick="resetSliders()">Reset to Current</button>
+                </div>
+
+                <!-- Trend Chart -->
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize KPIStore if not exists
+        window.KPIStore = window.KPIStore || {
+            values: {},
+            baselineValues: {},
+            listeners: [],
+            
+            subscribe(callback) {
+                this.listeners.push(callback);
+            },
+            
+            notify(kpiId, newValue) {
+                this.values[kpiId] = newValue;
+                this.listeners.forEach(fn => fn(kpiId, newValue));
+                
+                localStorage.setItem('KPIStore', JSON.stringify({
+                    values: this.values,
+                    baselineValues: this.baselineValues,
+                    selectedKPI: JSON.parse(localStorage.getItem('KPIStore') || '{}').selectedKPI
+                }));
+                
+                this.recalculateDependencies(kpiId, newValue);
+            },
+            
+            recalculateDependencies(changedKpiId, newValue) {
+                const baseline = this.baselineValues[changedKpiId] || newValue;
+                const delta = newValue - baseline;
+                
+                // Healthcare RCM dependency relationships - ENHANCED with 50+ connections
+                const relationships = {
+                    // Collection Efficiency impacts (Group 1)
+                    'expected_collection_rate': {
+                        'collection_efficiency': { factor: 0.6 },
+                        'expected_revenue': { factor: 0.4 },
+                        'revenue_performance': { factor: 0.3 }
+                    },
+                    'collection_rate_payments': {
+                        'cash_collection_rate': { factor: 0.5 },
+                        'payment_performance': { factor: 0.4 }
+                    },
+                    'collection_efficiency': {
+                        'cash_flow_health': { factor: 0.5 },
+                        'revenue_performance': { factor: 0.3 }
+                    },
+                    
+                    // DSO impacts cash flow and AR (Group 2)
+                    'days_sales_outstanding': {
+                        'cash_collection_rate': { factor: -0.3 },
+                        'total_ar': { factor: 0.4 },
+                        'cash_flow_health': { factor: -0.3 },
+                        'ar_risk': { factor: 0.3 }
+                    },
+                    'dso': {
+                        'aged_ar_percent': { factor: 0.3 },
+                        'bad_debt_percent': { factor: 0.2 }
+                    },
+                    
+                    // Payment Operations (Group 3)
+                    'payments_posted': {
+                        'cash_deposits': { factor: 0.8 },
+                        'payment_performance': { factor: 0.6 },
+                        'days_sales_outstanding': { factor: -0.2 }
+                    },
+                    'payment_performance': {
+                        'cash_flow_health': { factor: 0.5 },
+                        'expected_payment': { factor: 0.4 }
+                    },
+                    'ontime_percent': {
+                        'cash_deposits': { factor: 0.4 },
+                        'overdue_amount': { factor: -0.6 }
+                    },
+                    
+                    // Denials & Writeoffs impacts (Group 4)
+                    'denials': {
+                        'denial_percent': { factor: 0.7 },
+                        'expected_collection_rate': { factor: -0.4 },
+                        'writeoffs': { factor: 0.3 },
+                        'revenue_performance': { factor: -0.3 }
+                    },
+                    'denial_percent': {
+                        'collection_efficiency': { factor: -0.5 },
+                        'writeoff_rate': { factor: 0.4 },
+                        'aged_ar_percent': { factor: 0.3 }
+                    },
+                    'writeoffs': {
+                        'writeoff_rate': { factor: 0.7 },
+                        'revenue_performance': { factor: -0.4 },
+                        'bad_debt_amount': { factor: 0.3 }
+                    },
+                    'writeoff_rate': {
+                        'collection_efficiency': { factor: -0.5 },
+                        'expected_revenue': { factor: -0.3 }
+                    },
+                    
+                    // AR Management (Group 5)
+                    'total_ar': {
+                        'ar_risk': { factor: 0.6 },
+                        'days_sales_outstanding': { factor: 0.4 },
+                        'cash_flow_health': { factor: -0.3 }
+                    },
+                    'aged_ar_percent': {
+                        'ar_60_plus': { factor: 0.7 },
+                        'bad_debt_percent': { factor: 0.4 },
+                        'writeoff_rate': { factor: 0.3 }
+                    },
+                    'ar_risk': {
+                        'bad_debt_amount': { factor: 0.5 },
+                        'collection_efficiency': { factor: -0.3 }
+                    },
+                    
+                    // Cash Flow impacts (Group 6)
+                    'cash_deposits': {
+                        'cash_flow_health': { factor: 0.7 },
+                        'cash_collection_rate': { factor: 0.5 },
+                        'deposit_variance': { factor: -0.3 }
+                    },
+                    'cash_collection_rate': {
+                        'cash_flow_health': { factor: 0.6 },
+                        'expected_revenue': { factor: 0.4 },
+                        'total_ar': { factor: -0.3 }
+                    },
+                    
+                    // Revenue Performance (Group 7)
+                    'expected_revenue': {
+                        'revenue_performance': { factor: 0.7 },
+                        'billed_revenue': { factor: 0.6 },
+                        'revenue_index': { factor: 0.4 }
+                    },
+                    'billed_revenue': {
+                        'payments_posted': { factor: 0.5 },
+                        'revenue_performance': { factor: 0.4 }
+                    },
+                    'revenue_index': {
+                        'revenue_performance': { factor: 0.6 },
+                        'collection_efficiency': { factor: 0.3 }
+                    },
+                    'unbilled_amount': {
+                        'unbilled_rate': { factor: 0.8 },
+                        'billed_revenue': { factor: -0.4 }
+                    },
+                    
+                    // Variance & Forecasting (Group 8)
+                    'payment_variance': {
+                        'forecast_accuracy': { factor: -0.4 },
+                        'triple_variance': { factor: 0.5 }
+                    },
+                    'forecast_accuracy': {
+                        'wow_forecast': { factor: 0.3 },
+                        'mom_forecast': { factor: 0.3 },
+                        'qoq_forecast': { factor: 0.3 }
+                    },
+                    
+                    // Payer Performance (Group 9)
+                    'payer_revenue_index': {
+                        'payer_performance': { factor: 0.7 },
+                        'revenue_index': { factor: 0.4 }
+                    },
+                    'payer_exp_payment': {
+                        'expected_payment': { factor: 0.5 },
+                        'payer_performance': { factor: 0.4 }
+                    },
+                    
+                    // State Performance (Group 10)
+                    'state_revenue_index': {
+                        'state_performance': { factor: 0.7 },
+                        'revenue_index': { factor: 0.3 }
+                    },
+                    'state_payment': {
+                        'payments_posted': { factor: 0.4 },
+                        'state_performance': { factor: 0.3 }
+                    }
+                };
+                
+                // Track which KPIs were affected for impact display
+                const affectedKPIs = [];
+                
+                if (relationships[changedKpiId]) {
+                    Object.keys(relationships[changedKpiId]).forEach(dependentId => {
+                        const impact = relationships[changedKpiId][dependentId];
+                        const dependentBaseline = this.baselineValues[dependentId];
+                        if (dependentBaseline !== undefined) {
+                            const newDependentValue = dependentBaseline + (delta * impact.factor);
+                            this.values[dependentId] = newDependentValue;
+                            affectedKPIs.push({
+                                id: dependentId,
+                                change: delta * impact.factor,
+                                factor: impact.factor
+                            });
+                        }
+                    });
+                }
+                
+                // Update impact display
+                updateImpactDisplay(changedKpiId, affectedKPIs);
+            },
+            
+            getValue(kpiId) {
+                return this.values[kpiId] || this.baselineValues[kpiId];
+            },
+            
+            setBaseline(kpiId, value) {
+                this.baselineValues[kpiId] = value;
+                if (!this.values[kpiId]) {
+                    this.values[kpiId] = value;
+                }
+            }
+        };
+
+        const storedData = JSON.parse(localStorage.getItem('KPIStore') || '{}');
+        if (storedData.values) {
+            window.KPIStore.values = storedData.values;
+        }
+        if (storedData.baselineValues) {
+            window.KPIStore.baselineValues = storedData.baselineValues;
+        }
+
+        let kpiData = null;
+        let sliderValues = {};
+        let baselineValues = {};
+        let trendChart = null;
+
+        async function loadKPIData() {
+            try {
+                const response = await fetch('kpi_map.json');
+                kpiData = await response.json();
+                
+                sliderValues = window.KPIStore.values;
+                
+                initializePage();
+            } catch (error) {
+                console.error('Error loading KPI data:', error);
+            }
+        }
+
+        function initializePage() {
+            populateSidebar();
+            populateSliders();
+            initializeChart();
+            calculateSimulation();
+        }
+
+        function populateSidebar() {
+            const kpiList = document.getElementById('kpiList');
+            kpiList.innerHTML = '';
+
+            // Healthcare RCM Key Metrics - MAXIMUM MONITORING (35 KPIs)
+            const priorityKPIs = [
+                // Revenue Cycle Core (7)
+                'expected_collection_rate',
+                'collection_rate_payments',
+                'collection_rate_cash',
+                'collection_efficiency',
+                'cash_collection_rate',
+                'revenue_index',
+                'revenue_performance',
+                
+                // Cash Flow & AR (8)
+                'days_sales_outstanding',
+                'cash_deposits',
+                'cash_flow_health',
+                'cash_deposit_daily',
+                'total_ar',
+                'ar_risk',
+                'aged_ar_percent',
+                'ar_60_plus',
+                
+                // Revenue Performance (5)
+                'expected_revenue',
+                'billed_revenue',
+                'unbilled_amount',
+                'unbilled_rate',
+                'revenue_index_mom',
+                
+                // Payment Operations (6)
+                'payment_performance',
+                'payments_posted',
+                'payment_variance',
+                'ontime_percent',
+                'overdue_amount',
+                'expected_payment',
+                
+                // Denials & Writeoffs (4)
+                'denials',
+                'denial_percent',
+                'writeoffs',
+                'writeoff_rate',
+                
+                // Forecasting (2)
+                'forecast_accuracy',
+                'triple_variance',
+                
+                // Payer Performance (2)
+                'payer_performance',
+                'payer_revenue_index',
+                
+                // State Performance (1)
+                'state_performance'
+            ];
+            
+            priorityKPIs.forEach(kpiId => {
+                const kpi = kpiData.nodes.find(n => n.id === kpiId);
+                if (!kpi) return;
+
+                // Initialize baseline if not set
+                const baselineValue = parseFloat(kpi.value.replace(/[^0-9.-]/g, ''));
+                if (!window.KPIStore.baselineValues[kpiId]) {
+                    window.KPIStore.setBaseline(kpiId, baselineValue);
+                }
+
+                const currentValue = window.KPIStore.getValue(kpiId);
+                const displayValue = formatKPIValue(kpi, currentValue);
+                
+                // Calculate change from baseline
+                const baseline = window.KPIStore.baselineValues[kpiId];
+                const change = currentValue - baseline;
+                const changePercent = baseline !== 0 ? ((change / Math.abs(baseline)) * 100).toFixed(1) : 0;
+                
+                let changeClass = 'neutral';
+                let changeIcon = '→';
+                if (Math.abs(change) > 0.01) {
+                    // For DSO and rates, lower is better
+                    const lowerIsBetter = kpiId.includes('dso') || kpiId.includes('denial') || kpiId.includes('writeoff') || kpiId.includes('unbilled');
+                    if (lowerIsBetter) {
+                        changeClass = change < 0 ? 'positive' : 'negative';
+                        changeIcon = change < 0 ? '↓' : '↑';
+                    } else {
+                        changeClass = change > 0 ? 'positive' : 'negative';
+                        changeIcon = change > 0 ? '↑' : '↓';
+                    }
+                }
+
+                const item = document.createElement('div');
+                item.className = 'kpi-item';
+                item.onclick = () => scrollToKPI(kpiId);
+                
+                item.innerHTML = `
+                    <div class="kpi-item-header">
+                        <div>
+                            <span class="kpi-item-status ${kpi.rag}"></span>
+                            <span class="kpi-item-name">${kpi.name}</span>
+                        </div>
+                    </div>
+                    <div class="kpi-item-value" id="sidebar-value-${kpiId}">${displayValue}</div>
+                    <div style="font-size: 12px; color: #6B7280; margin-top: 4px;">
+                        Target: ${kpi.target}
+                    </div>
+                    ${Math.abs(change) > 0.01 ? `
+                        <div style="font-size: 11px; margin-top: 4px;" class="${changeClass}">
+                            ${changeIcon} ${Math.abs(changePercent)}% from baseline
+                        </div>
+                    ` : ''}
+                `;
+                
+                kpiList.appendChild(item);
+            });
+            
+            // Subscribe to KPI changes to update sidebar
+            window.KPIStore.subscribe((kpiId, newValue) => {
+                const sidebarValue = document.getElementById(`sidebar-value-${kpiId}`);
+                if (sidebarValue) {
+                    const kpi = kpiData.nodes.find(n => n.id === kpiId);
+                    if (kpi) {
+                        sidebarValue.textContent = formatKPIValue(kpi, newValue);
+                        sidebarValue.style.transform = 'scale(1.1)';
+                        sidebarValue.style.color = '#2B5BA6';
+                        setTimeout(() => {
+                            sidebarValue.style.transform = 'scale(1)';
+                            sidebarValue.style.color = '';
+                        }, 300);
+                    }
+                }
+            });
+        }
+
+        function formatKPIValue(kpi, value) {
+            // If value is undefined or null, use the original KPI value
+            if (value === undefined || value === null) {
+                return kpi.value;
+            }
+            
+            const originalValue = kpi.value;
+            if (originalValue.includes('%')) {
+                return value.toFixed(1) + '%';
+            } else if (originalValue.includes('$')) {
+                return '$' + value.toFixed(1) + 'M';
+            } else if (originalValue.includes('days')) {
+                return Math.round(value) + ' days';
+            } else if (originalValue.includes('ms')) {
+                return Math.round(value) + 'ms';
+            }
+            return value.toString();
+        }
+
+        function scrollToKPI(kpiId) {
+            const slider = document.getElementById(`slider-${kpiId}`);
+            if (slider) {
+                slider.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                slider.style.borderColor = '#2B5BA6';
+                setTimeout(() => {
+                    slider.style.borderColor = '#E5E7EB';
+                }, 2000);
+            }
+        }
+
+        function populateSliders() {
+            // Healthcare RCM KPI categories - MAXIMUM EXPANSION (85 KPIs)
+            const categories = {
+                'financial': [
+                    // Collection Rates (7)
+                    'expected_collection_rate',
+                    'collection_rate_payments',
+                    'collection_rate_cash',
+                    'collection_rate_cash_main',
+                    'cash_collection_rate',
+                    'collection_efficiency',
+                    'collection_trend',
+                    
+                    // Cash Flow (8)
+                    'cash_deposits',
+                    'cash_flow_health',
+                    'cash_deposit_daily',
+                    'cash_deposit_rolling',
+                    'deposit_variance',
+                    'payment_deposit_var',
+                    'var_payment_deposit',
+                    'pay_deposit_var',
+                    
+                    // AR Management (12)
+                    'total_ar',
+                    'ar_risk',
+                    'actual_ar',
+                    'calculated_ar',
+                    'current_ar',
+                    'rolling_ar',
+                    'aged_ar',
+                    'aged_ar_percent',
+                    'ar_0_60',
+                    'ar_60_plus',
+                    'days_sales_outstanding',
+                    'dso',
+                    
+                    // Bad Debt (3)
+                    'bad_debt',
+                    'bad_debt_amount',
+                    'bad_debt_percent',
+                    
+                    // Revenue Performance (15)
+                    'revenue_performance',
+                    'expected_revenue',
+                    'expected_rev_daily',
+                    'expected_rev_weekly',
+                    'expected_rev_monthly',
+                    'billed_revenue',
+                    'billed_rev_daily',
+                    'billed_rev_weekly',
+                    'billed_rev_monthly',
+                    'unbilled_revenue',
+                    'unbilled_amount',
+                    'unbilled_rate',
+                    'revenue_index',
+                    'revenue_index_daily',
+                    'revenue_index_wow',
+                    'revenue_index_mom'
+                ],
+                'operational': [
+                    // Payment Operations (14)
+                    'payment_performance',
+                    'payments_posted',
+                    'payment_daily',
+                    'payment_rolling',
+                    'expected_payment',
+                    'expected_payment_daily',
+                    'expected_payment_rolling',
+                    'ontime_payments',
+                    'ontime_amount',
+                    'ontime_percent',
+                    'overdue_payments',
+                    'overdue_amount',
+                    'overdue_percent',
+                    'payment_variance',
+                    
+                    // Variance Analysis (4)
+                    'var_exp_ontime',
+                    'var_exp_actual',
+                    'exp_ontime_var',
+                    'exp_payment_var',
+                    
+                    // Denials Management (5)
+                    'denials',
+                    'denial_amount',
+                    'denial_percent',
+                    'denials_state',
+                    'denials_payer',
+                    
+                    // Writeoffs (5)
+                    'writeoffs',
+                    'writeoff_amount',
+                    'writeoff_rate',
+                    'writeoffs_state',
+                    'writeoffs_payer',
+                    
+                    // Combined Denials & Writeoffs (1)
+                    'denials_writeoffs',
+                    
+                    // Forecasting Accuracy (5)
+                    'forecast_accuracy',
+                    'wow_forecast',
+                    'mom_forecast',
+                    'qoq_forecast',
+                    'triple_variance'
+                ],
+                'payer': [
+                    // Payer Performance (9)
+                    'payer_performance',
+                    'payer_revenue_index',
+                    'payer_exp_payment',
+                    'payer_cash_deposit',
+                    'top_payer_metrics',
+                    'top_payer_rev_index',
+                    'top_payer_exp',
+                    'top_payer_payment',
+                    'top_payer_cash'
+                ],
+                'state': [
+                    // State Performance (9)
+                    'state_performance',
+                    'state_revenue_index',
+                    'state_payment',
+                    'state_cash',
+                    'state_ar',
+                    'state_actual_ar',
+                    'state_calculated_ar',
+                    'state_writeoffs',
+                    'state_variance'
+                ],
+                'geography': [
+                    // Geographic Revenue Distribution (2)
+                    'expected_rev_state',
+                    'expected_rev_payer'
+                ]
+            };
+
+            Object.keys(categories).forEach(category => {
+                const container = document.getElementById(`${category}-sliders`);
+                container.innerHTML = '';
+
+                categories[category].forEach(kpiId => {
+                    const kpi = kpiData.nodes.find(n => n.id === kpiId);
+                    if (!kpi) return;
+
+                    const currentValue = parseFloat(kpi.value.replace(/[^0-9.]/g, ''));
+                    const targetValue = parseFloat(kpi.target.replace(/[^0-9.<]/g, ''));
+                    
+                    baselineValues[kpiId] = currentValue;
+                    window.KPIStore.setBaseline(kpiId, currentValue);
+                    
+                    if (!sliderValues[kpiId]) {
+                        sliderValues[kpiId] = currentValue;
+                    }
+
+                    let min, max, step, unit = '';
+                    
+                    // Determine slider range based on KPI type
+                    if (kpi.value.includes('%')) {
+                        // Percentage-based KPIs
+                        min = Math.max(0, currentValue - 10);
+                        max = Math.min(100, currentValue + 10);
+                        step = 0.1;
+                        unit = '%';
+                    } else if (kpi.value.includes('days')) {
+                        // Days-based KPIs (DSO, etc.)
+                        min = Math.max(0, currentValue - 20);
+                        max = currentValue + 20;
+                        step = 1;
+                        unit = ' days';
+                    } else if (kpi.value.includes('$')) {
+                        // Dollar-based KPIs (Revenue, AR, etc.)
+                        min = Math.max(0, currentValue * 0.8);
+                        max = currentValue * 1.2;
+                        step = 0.1;
+                        unit = 'M';
+                    } else {
+                        // Default numeric range
+                        min = Math.max(0, currentValue - 10);
+                        max = currentValue + 10;
+                        step = 0.1;
+                        unit = '';
+                    }
+
+                    const sliderCard = document.createElement('div');
+                    sliderCard.className = 'slider-card';
+                    sliderCard.id = `slider-${kpiId}`;
+                    
+                    sliderCard.innerHTML = `
+                        <div class="slider-header">
+                            <div class="slider-title">${kpi.name}</div>
+                            <div class="slider-value" id="value-${kpiId}">${sliderValues[kpiId]}${unit}</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" 
+                                   class="slider" 
+                                   id="input-${kpiId}"
+                                   min="${min}" 
+                                   max="${max}" 
+                                   step="${step}" 
+                                   value="${sliderValues[kpiId]}"
+                                   oninput="updateSlider('${kpiId}', this.value, '${unit}')">
+                            <div class="slider-info">
+                                <span>Min: ${min}${unit}</span>
+                                <span>Current: ${currentValue}${unit}</span>
+                                <span>Target: ${kpi.target}</span>
+                                <span>Max: ${max}${unit}</span>
+                            </div>
+                        </div>
+                        <div class="impact-box">
+                            <div class="impact-label">Impact on Other KPIs</div>
+                            <div class="impact-value" id="impact-${kpiId}">Move slider to see cascading effects</div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(sliderCard);
+                });
+            });
+        }
+
+        function updateSlider(kpiId, value, unit) {
+            sliderValues[kpiId] = parseFloat(value);
+            document.getElementById(`value-${kpiId}`).textContent = value + unit;
+            
+            // Update KPIStore which will notify all listeners
+            window.KPIStore.notify(kpiId, parseFloat(value));
+            
+            calculateSimulation();
+        }
+
+        function updateImpactDisplay(changedKpiId, affectedKPIs) {
+            const impactBox = document.getElementById(`impact-${changedKpiId}`);
+            if (!impactBox || affectedKPIs.length === 0) {
+                if (impactBox) {
+                    impactBox.innerHTML = 'No cascading effects';
+                }
+                return;
+            }
+            
+            let impactHTML = '<div style="font-size: 12px;">';
+            affectedKPIs.forEach(affected => {
+                const kpi = kpiData.nodes.find(n => n.id === affected.id);
+                if (kpi) {
+                    const changeIcon = affected.change > 0 ? '↑' : '↓';
+                    const changeColor = affected.change > 0 ? '#10B981' : '#EF4444';
+                    // Check if lower is better for this KPI
+                    const lowerIsBetter = affected.id.includes('dso') || affected.id.includes('denial') || 
+                                        affected.id.includes('writeoff') || affected.id.includes('aged');
+                    let impactColor = changeColor;
+                    if (lowerIsBetter && affected.change < 0) impactColor = '#10B981';
+                    if (lowerIsBetter && affected.change > 0) impactColor = '#EF4444';
+                    
+                    impactHTML += `
+                        <div style="padding: 4px 0; color: ${impactColor};">
+                            ${changeIcon} <strong>${kpi.name}</strong>: ${affected.change > 0 ? '+' : ''}${affected.change.toFixed(2)}
+                        </div>
+                    `;
+                }
+            });
+            impactHTML += '</div>';
+            
+            impactBox.innerHTML = impactHTML;
+        }
+
+        function calculateSimulation() {
+            const baseRevenue = 45.2;
+            const baseDSO = 38;
+            const baseNCR = 96.2;
+
+            const automationDelta = (window.KPIStore.getValue('automation_rate') || 68) - 68;
+            const touchlessDelta = (window.KPIStore.getValue('touchless_pct') || 63) - 63;
+            const ncrDelta = (window.KPIStore.getValue('ncr') || 96.2) - 96.2;
+            const dsoDelta = (window.KPIStore.getValue('dso') || 38) - 38;
+
+            const revenueImpact = (automationDelta * 0.1) + (touchlessDelta * 0.05) + (ncrDelta * 0.2);
+            const projectedRevenue = baseRevenue + revenueImpact;
+
+            const dsoImpact = dsoDelta - (automationDelta * 0.3) - (touchlessDelta * 0.15);
+            const projectedDSO = baseDSO + dsoImpact;
+
+            const ncrImpact = ncrDelta + (automationDelta * 0.1);
+            const projectedNCR = baseNCR + ncrImpact;
+
+            const monthlyImpact = (revenueImpact * 1000000) + (Math.abs(dsoImpact) * 100000) + (ncrImpact * 50000);
+
+            document.getElementById('projectedRevenue').textContent = `$${projectedRevenue.toFixed(1)}M`;
+            document.getElementById('projectedDSO').textContent = `${Math.round(projectedDSO)} days`;
+            document.getElementById('projectedNCR').textContent = `${projectedNCR.toFixed(1)}%`;
+            document.getElementById('totalImpact').textContent = `$${(monthlyImpact / 1000000).toFixed(2)}M`;
+
+            updateChangeIndicator('revenueChange', revenueImpact, 'M');
+            updateChangeIndicator('dsoChange', -dsoImpact, ' days saved');
+            updateChangeIndicator('ncrChange', ncrImpact, '%');
+
+            updateChart();
+        }
+
+        function updateChangeIndicator(elementId, value, unit) {
+            const element = document.getElementById(elementId);
+            if (Math.abs(value) < 0.01) {
+                element.textContent = 'No change';
+                element.className = 'result-change';
+            } else {
+                const sign = value > 0 ? '+' : '';
+                element.textContent = `${sign}${value.toFixed(2)}${unit}`;
+                element.className = value > 0 ? 'result-change positive' : 'result-change negative';
+            }
+        }
+
+        function initializeChart() {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            
+            trendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov (Projected)'],
+                    datasets: [
+                        {
+                            label: 'NCR (%)',
+                            data: [96.8, 96.5, 96.4, 96.2, 96.1, 96.2, 96.2],
+                            borderColor: '#2B5BA6',
+                            backgroundColor: 'rgba(43, 91, 166, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Touchless (%)',
+                            data: [58, 60, 61, 62, 63, 63, 63],
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Automation (%)',
+                            data: [65, 66, 67, 68, 68, 68, 68],
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            tension: 0.4,
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#111B2E',
+                                font: {
+                                    family: 'Inter',
+                                    weight: 600
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 50,
+                            max: 100,
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    family: 'Inter'
+                                }
+                            },
+                            grid: {
+                                color: '#E5E7EB'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#6B7280',
+                                font: {
+                                    family: 'Inter'
+                                }
+                            },
+                            grid: {
+                                color: '#E5E7EB'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChart() {
+            if (!trendChart) return;
+
+            const automationValue = window.KPIStore.getValue('automation_rate') || 68;
+            const touchlessValue = window.KPIStore.getValue('touchless_pct') || 63;
+            const ncrValue = window.KPIStore.getValue('ncr') || 96.2;
+
+            trendChart.data.datasets[0].data[6] = ncrValue;
+            trendChart.data.datasets[1].data[6] = touchlessValue;
+            trendChart.data.datasets[2].data[6] = automationValue;
+            
+            trendChart.update();
+        }
+
+        function applyChanges() {
+            alert('✅ Changes Applied!\n\nThese projections would be implemented across the platform.\n\nIn production, this would trigger:\n• Workflow automation updates\n• Resource allocation adjustments\n• AI model retraining\n• Team notifications\n\nNavigate to Executive Intelligence to see the updated KPI tree!');
+        }
+
+        function resetSliders() {
+            Object.keys(baselineValues).forEach(kpiId => {
+                sliderValues[kpiId] = baselineValues[kpiId];
+                window.KPIStore.notify(kpiId, baselineValues[kpiId]);
+                
+                const input = document.getElementById(`input-${kpiId}`);
+                if (input) {
+                    input.value = baselineValues[kpiId];
+                    const unit = input.parentElement.querySelector('.slider-info span:nth-child(2)').textContent.includes('%') ? '%' : ' days';
+                    updateSlider(kpiId, baselineValues[kpiId], unit);
+                }
+            });
+        }
+
+        window.addEventListener('load', loadKPIData);
+
+        // Listen for changes from other pages
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'KPIStore') {
+                const newStore = JSON.parse(e.newValue || '{}');
+                if (newStore.values) {
+                    Object.keys(newStore.values).forEach(kpiId => {
+                        const newValue = newStore.values[kpiId];
+                        if (newValue !== window.KPIStore.values[kpiId]) {
+                            window.KPIStore.values[kpiId] = newValue;
+                            sliderValues[kpiId] = newValue;
+                            
+                            const input = document.getElementById(`input-${kpiId}`);
+                            if (input) {
+                                input.value = newValue;
+                            }
+                            
+                            const valueDisplay = document.getElementById(`value-${kpiId}`);
+                            if (valueDisplay) {
+                                const kpi = kpiData.nodes.find(n => n.id === kpiId);
+                                if (kpi) {
+                                    valueDisplay.textContent = formatKPIValue(kpi, newValue);
+                                }
+                            }
+                            
+                            calculateSimulation();
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

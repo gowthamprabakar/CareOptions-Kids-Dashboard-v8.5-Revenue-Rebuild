@@ -1,0 +1,684 @@
+{
+  "name": "Movement Mortgage\nAI COE Cockpit",
+  "level": 0,
+  "value": "100%",
+  "status": "neutral",
+  "children": [
+    {
+      "name": "L1: Strategic Metrics\nEnterprise Performance",
+      "level": 1,
+      "value": "87%",
+      "status": "warning",
+      "children": [
+        {
+          "name": "Cost per Loan\n$11,600 (Target: $8,000)",
+          "level": 2,
+          "value": "$11,600",
+          "status": "bad",
+          "children": [
+            {
+              "name": "Underwriting Cost\n$3,200 per loan",
+              "level": 3,
+              "value": "$3,200",
+              "status": "bad",
+              "children": [
+                {
+                  "name": "Manual Review Time\n6.2 hrs avg",
+                  "level": 4,
+                  "value": "6.2 hrs",
+                  "status": "bad",
+                  "children": [
+                    {
+                      "name": "Document Validation\n2.8 hrs",
+                      "level": 5,
+                      "value": "2.8 hrs",
+                      "status": "bad",
+                      "children": [
+                        {
+                          "name": "Income Verification\n45 min",
+                          "level": 6,
+                          "value": "45m",
+                          "status": "bad"
+                        },
+                        {
+                          "name": "Asset Verification\n38 min",
+                          "level": 6,
+                          "value": "38m",
+                          "status": "bad"
+                        },
+                        {
+                          "name": "Employment Check\n32 min",
+                          "level": 6,
+                          "value": "32m",
+                          "status": "warning"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Credit Analysis\n1.2 hrs",
+                      "level": 5,
+                      "value": "1.2 hrs",
+                      "status": "warning",
+                      "children": [
+                        {
+                          "name": "Credit Report Pull\n15 min",
+                          "level": 6,
+                          "value": "15m",
+                          "status": "good"
+                        },
+                        {
+                          "name": "DTI Calculation\n25 min",
+                          "level": 6,
+                          "value": "25m",
+                          "status": "warning"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Underwriter Touches\n4.3 per file",
+                  "level": 4,
+                  "value": "4.3",
+                  "status": "bad",
+                  "children": [
+                    {
+                      "name": "Initial Review\n1.8 hrs",
+                      "level": 5,
+                      "value": "1.8 hrs",
+                      "status": "bad"
+                    },
+                    {
+                      "name": "Conditions Review\n1.4 hrs",
+                      "level": 5,
+                      "value": "1.4 hrs",
+                      "status": "warning"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Processing Cost\n$2,400 per loan",
+              "level": 3,
+              "value": "$2,400",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Document Collection\n48 hrs avg",
+                  "level": 4,
+                  "value": "48 hrs",
+                  "status": "bad",
+                  "children": [
+                    {
+                      "name": "Borrower Follow-up\n12 calls avg",
+                      "level": 5,
+                      "value": "12 calls",
+                      "status": "bad"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Critical Defect Rate\n1.58% (Target: <1.0%)",
+          "level": 2,
+          "value": "1.58%",
+          "status": "bad",
+          "children": [
+            {
+              "name": "Documentation Defects\n0.68% rate",
+              "level": 3,
+              "value": "0.68%",
+              "status": "bad",
+              "children": [
+                {
+                  "name": "Missing Documents\n0.42%",
+                  "level": 4,
+                  "value": "0.42%",
+                  "status": "bad"
+                },
+                {
+                  "name": "Incomplete Docs\n0.26%",
+                  "level": 4,
+                  "value": "0.26%",
+                  "status": "bad"
+                }
+              ]
+            },
+            {
+              "name": "Compliance Defects\n0.52% rate",
+              "level": 3,
+              "value": "0.52%",
+              "status": "bad",
+              "children": [
+                {
+                  "name": "Disclosure Errors\n0.31%",
+                  "level": 4,
+                  "value": "0.31%",
+                  "status": "bad"
+                },
+                {
+                  "name": "TRID Violations\n0.21%",
+                  "level": 4,
+                  "value": "0.21%",
+                  "status": "bad"
+                }
+              ]
+            },
+            {
+              "name": "Underwriting Defects\n0.38% rate",
+              "level": 3,
+              "value": "0.38%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Income Calculation\n0.23%",
+                  "level": 4,
+                  "value": "0.23%",
+                  "status": "warning"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Net Profitability\nGain-on-Sale: 1.82%",
+          "level": 2,
+          "value": "1.82%",
+          "status": "good",
+          "children": [
+            {
+              "name": "Margin Management\n258 bps avg",
+              "level": 3,
+              "value": "258 bps",
+              "status": "good",
+              "children": [
+                {
+                  "name": "Rate Sheet Efficiency\n94%",
+                  "level": 4,
+                  "value": "94%",
+                  "status": "good"
+                },
+                {
+                  "name": "Lock Desk Performance\n88%",
+                  "level": 4,
+                  "value": "88%",
+                  "status": "good"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Overall Cycle Time\n12.4 days (Target: 8)",
+          "level": 2,
+          "value": "12.4d",
+          "status": "bad",
+          "children": [
+            {
+              "name": "Time to Underwriting\n3.2 days",
+              "level": 3,
+              "value": "3.2d",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Initial Processing\n2.1 days",
+                  "level": 4,
+                  "value": "2.1d",
+                  "status": "warning",
+                  "children": [
+                    {
+                      "name": "App Submission to Review\n18 hrs",
+                      "level": 5,
+                      "value": "18h",
+                      "status": "warning"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Time in Underwriting\n4.8 days",
+              "level": 3,
+              "value": "4.8d",
+              "status": "bad",
+              "children": [
+                {
+                  "name": "Initial Decision\n2.4 days",
+                  "level": 4,
+                  "value": "2.4d",
+                  "status": "bad",
+                  "children": [
+                    {
+                      "name": "Queue Time\n1.2 days",
+                      "level": 5,
+                      "value": "1.2d",
+                      "status": "bad"
+                    },
+                    {
+                      "name": "Review Time\n1.2 days",
+                      "level": 5,
+                      "value": "1.2d",
+                      "status": "warning"
+                    }
+                  ]
+                },
+                {
+                  "name": "Conditions Clear\n2.4 days",
+                  "level": 4,
+                  "value": "2.4d",
+                  "status": "bad"
+                }
+              ]
+            },
+            {
+              "name": "Time to Close\n4.4 days",
+              "level": 3,
+              "value": "4.4d",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Clear to Close to Docs\n2.8 days",
+                  "level": 4,
+                  "value": "2.8d",
+                  "status": "warning"
+                },
+                {
+                  "name": "Docs to Funding\n1.6 days",
+                  "level": 4,
+                  "value": "1.6d",
+                  "status": "good"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "L2: Operational Efficiency\nProcess Performance",
+      "level": 1,
+      "value": "78%",
+      "status": "warning",
+      "children": [
+        {
+          "name": "Pull-Through Rate\n72.8% (Target: 75.3%)",
+          "level": 2,
+          "value": "72.8%",
+          "status": "warning",
+          "children": [
+            {
+              "name": "App to Submitted\n88.4%",
+              "level": 3,
+              "value": "88.4%",
+              "status": "good",
+              "children": [
+                {
+                  "name": "Initial Qualification\n94.2%",
+                  "level": 4,
+                  "value": "94.2%",
+                  "status": "good"
+                }
+              ]
+            },
+            {
+              "name": "Submitted to Approved\n82.3%",
+              "level": 3,
+              "value": "82.3%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Appraisal Completion\n89.6%",
+                  "level": 4,
+                  "value": "89.6%",
+                  "status": "good"
+                },
+                {
+                  "name": "UW Approval Rate\n91.8%",
+                  "level": 4,
+                  "value": "91.8%",
+                  "status": "good"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "IDP Automation\n69% (Target: 87%)",
+          "level": 2,
+          "value": "69%",
+          "status": "bad",
+          "children": [
+            {
+              "name": "Document Classification\n84%",
+              "level": 3,
+              "value": "84%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Auto-Classification Rate\n84%",
+                  "level": 4,
+                  "value": "84%",
+                  "status": "warning"
+                }
+              ]
+            },
+            {
+              "name": "Data Extraction\n72%",
+              "level": 3,
+              "value": "72%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Extraction Accuracy\n87%",
+                  "level": 4,
+                  "value": "87%",
+                  "status": "good",
+                  "children": [
+                    {
+                      "name": "W2 Extraction\n92%",
+                      "level": 5,
+                      "value": "92%",
+                      "status": "good"
+                    },
+                    {
+                      "name": "Paystub Extraction\n89%",
+                      "level": 5,
+                      "value": "89%",
+                      "status": "good"
+                    },
+                    {
+                      "name": "Bank Statement Extract\n78%",
+                      "level": 5,
+                      "value": "78%",
+                      "status": "warning"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Validation Automation\n54%",
+              "level": 3,
+              "value": "54%",
+              "status": "bad",
+              "children": [
+                {
+                  "name": "Income Validation\n62%",
+                  "level": 4,
+                  "value": "62%",
+                  "status": "bad"
+                },
+                {
+                  "name": "Asset Validation\n48%",
+                  "level": 4,
+                  "value": "48%",
+                  "status": "bad"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lead Conversion\n3.8% (Target: 8-12%)",
+          "level": 2,
+          "value": "3.8%",
+          "status": "bad",
+          "children": [
+            {
+              "name": "Lead to Application\n18.2%",
+              "level": 3,
+              "value": "18.2%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Lead Response Time\n8.2 hrs avg",
+                  "level": 4,
+                  "value": "8.2h",
+                  "status": "bad",
+                  "children": [
+                    {
+                      "name": "First Contact Time\n6.4 hrs",
+                      "level": 5,
+                      "value": "6.4h",
+                      "status": "bad"
+                    }
+                  ]
+                },
+                {
+                  "name": "Lead Quality Score\n6.2/10",
+                  "level": 4,
+                  "value": "6.2/10",
+                  "status": "warning"
+                }
+              ]
+            },
+            {
+              "name": "Application to Submit\n21.4%",
+              "level": 3,
+              "value": "21.4%",
+              "status": "bad",
+              "children": [
+                {
+                  "name": "LO Follow-up Rate\n68%",
+                  "level": 4,
+                  "value": "68%",
+                  "status": "bad"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "VOI/E Automation\n76% (Target: 95%)",
+          "level": 2,
+          "value": "76%",
+          "status": "warning",
+          "children": [
+            {
+              "name": "Instant VOE\n82%",
+              "level": 3,
+              "value": "82%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Truv Success Rate\n82%",
+                  "level": 4,
+                  "value": "82%",
+                  "status": "warning"
+                }
+              ]
+            },
+            {
+              "name": "Instant VOI\n71%",
+              "level": 3,
+              "value": "71%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Direct Source Coverage\n71%",
+                  "level": 4,
+                  "value": "71%",
+                  "status": "warning"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "L3: Quality & Compliance\nRisk Management",
+      "level": 1,
+      "value": "84%",
+      "status": "warning",
+      "children": [
+        {
+          "name": "QC Score\n94.2% (Target: 99.0%)",
+          "level": 2,
+          "value": "94.2%",
+          "status": "warning",
+          "children": [
+            {
+              "name": "Pre-Funding QC\n96.8%",
+              "level": 3,
+              "value": "96.8%",
+              "status": "good",
+              "children": [
+                {
+                  "name": "QC Coverage\n10% sample",
+                  "level": 4,
+                  "value": "10%",
+                  "status": "bad"
+                }
+              ]
+            },
+            {
+              "name": "Post-Closing QC\n91.4%",
+              "level": 3,
+              "value": "91.4%",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Post-Close Defects\n8.6%",
+                  "level": 4,
+                  "value": "8.6%",
+                  "status": "bad"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Fraud Detection\n98.2% caught",
+          "level": 2,
+          "value": "98.2%",
+          "status": "good",
+          "children": [
+            {
+              "name": "Income Fraud Detection\n97.8%",
+              "level": 3,
+              "value": "97.8%",
+              "status": "good"
+            },
+            {
+              "name": "Identity Fraud Detection\n99.1%",
+              "level": 3,
+              "value": "99.1%",
+              "status": "good"
+            }
+          ]
+        },
+        {
+          "name": "Appraisal Turn Time\n8.2 days (Target: 7)",
+          "level": 2,
+          "value": "8.2d",
+          "status": "warning",
+          "children": [
+            {
+              "name": "Order to Assignment\n1.8 days",
+              "level": 3,
+              "value": "1.8d",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "AMC Assignment Time\n1.4 days",
+                  "level": 4,
+                  "value": "1.4d",
+                  "status": "warning"
+                }
+              ]
+            },
+            {
+              "name": "Assignment to Complete\n6.4 days",
+              "level": 3,
+              "value": "6.4d",
+              "status": "warning",
+              "children": [
+                {
+                  "name": "Inspection Time\n3.2 days",
+                  "level": 4,
+                  "value": "3.2d",
+                  "status": "good"
+                },
+                {
+                  "name": "Report Writing\n3.2 days",
+                  "level": 4,
+                  "value": "3.2d",
+                  "status": "warning"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "L4: Technology Stack\nPlatform Performance",
+      "level": 1,
+      "value": "91%",
+      "status": "good",
+      "children": [
+        {
+          "name": "Blue Sage LOS\n96% uptime",
+          "level": 2,
+          "value": "96%",
+          "status": "good",
+          "children": [
+            {
+              "name": "API Performance\n180ms avg",
+              "level": 3,
+              "value": "180ms",
+              "status": "good",
+              "children": [
+                {
+                  "name": "LoanFile API\n165ms",
+                  "level": 4,
+                  "value": "165ms",
+                  "status": "good"
+                },
+                {
+                  "name": "Document API\n195ms",
+                  "level": 4,
+                  "value": "195ms",
+                  "status": "good"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Salesforce FSC\n99.2% uptime",
+          "level": 2,
+          "value": "99.2%",
+          "status": "good",
+          "children": [
+            {
+              "name": "Lead Management\n94% efficiency",
+              "level": 3,
+              "value": "94%",
+              "status": "good"
+            }
+          ]
+        },
+        {
+          "name": "Polly PPE\n97% uptime",
+          "level": 2,
+          "value": "97%",
+          "status": "good",
+          "children": [
+            {
+              "name": "Pricing Accuracy\n99.4%",
+              "level": 3,
+              "value": "99.4%",
+              "status": "good"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

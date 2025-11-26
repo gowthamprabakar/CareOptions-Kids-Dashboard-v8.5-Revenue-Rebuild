@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Hub - RCM Intelligence</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <link rel="icon" href="https://www.genspark.ai/api/files/s/kug10xIG" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', 'Proxima Nova', sans-serif;
+            background: #F9FAFB;
+            color: #111B2E;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            border-bottom: 2px solid #2B5BA6;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 8px rgba(17, 27, 46, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 65px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111B2E;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .nav a {
+            color: #111B2E;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: #FEF2F2;
+            border-color: #2B5BA6;
+            color: #2B5BA6;
+        }
+
+        .nav a.active {
+            background: #2B5BA6;
+            border-color: #2B5BA6;
+            color: #FFFFFF;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            position: fixed;
+            top: 65px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 340px;
+            background: #FFFFFF;
+            border-right: 2px solid #E5E7EB;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #F9FAFB;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2B5BA6, #5BA5D6);
+            border-radius: 4px;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 2px solid #E5E7EB;
+            background: linear-gradient(135deg, #2B5BA6 0%, #5BA5D6 100%);
+            color: #FFFFFF;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-header p {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .workflow-list {
+            padding: 20px;
+        }
+
+        .workflow-item {
+            background: #FFFFFF;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .workflow-item:hover {
+            border-color: #2B5BA6;
+            box-shadow: 0 4px 12px rgba(43, 91, 166, 0.15);
+            transform: translateX(4px);
+        }
+
+        .workflow-item.active {
+            border-color: #2B5BA6;
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            box-shadow: 0 4px 12px rgba(43, 91, 166, 0.2);
+        }
+
+        .workflow-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .workflow-icon {
+            font-size: 28px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F0F5FF;
+            border-radius: 10px;
+        }
+
+        .workflow-item.active .workflow-icon {
+            background: #FFFFFF;
+        }
+
+        .workflow-title {
+            flex: 1;
+        }
+
+        .workflow-title h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111B2E;
+            margin-bottom: 4px;
+        }
+
+        .workflow-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #10B981;
+            color: #FFFFFF;
+        }
+
+        .workflow-description {
+            font-size: 13px;
+            color: #6B7280;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .workflow-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #6B7280;
+            font-weight: 600;
+        }
+
+        .meta-item span {
+            color: #2B5BA6;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #F9FAFB;
+        }
+
+        .content-header {
+            padding: 24px;
+            background: #FFFFFF;
+            border-bottom: 2px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .content-header-left h2 {
+            font-size: 22px;
+            color: #111B2E;
+            margin-bottom: 6px;
+        }
+
+        .content-header-left p {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .content-header-right {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2B5BA6, #5BA5D6);
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(43, 91, 166, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(43, 91, 166, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #FFFFFF;
+            color: #2B5BA6;
+            border: 2px solid #2B5BA6;
+        }
+
+        .btn-secondary:hover {
+            background: #F0F5FF;
+        }
+
+        /* Canvas Container */
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            overflow: auto;
+            background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+        }
+
+        .canvas-container::-webkit-scrollbar {
+            width: 14px;
+            height: 14px;
+        }
+
+        .canvas-container::-webkit-scrollbar-track {
+            background: #E5E7EB;
+            border-radius: 8px;
+            margin: 4px;
+        }
+
+        .canvas-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2B5BA6, #5BA5D6);
+            border-radius: 8px;
+            border: 2px solid #F9FAFB;
+        }
+
+        .canvas-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1E4A8C, #4A94C5);
+        }
+
+        .canvas-container::-webkit-scrollbar-corner {
+            background: #F9FAFB;
+        }
+
+        /* Zoom Controls */
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            background: #FFFFFF;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .zoom-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: #FFFFFF;
+            color: #2B5BA6;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .zoom-btn:hover {
+            background: #F0F5FF;
+        }
+
+        .zoom-level {
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #6B7280;
+        }
+
+        /* Current Step Notification */
+        .step-notification {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #2B5BA6, #5BA5D6);
+            color: #FFFFFF;
+            padding: 20px 28px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(43, 91, 166, 0.4);
+            z-index: 20;
+            display: none;
+            animation: pulse 2s ease-in-out infinite;
+            max-width: 600px;
+        }
+
+        .step-notification.visible {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 8px 24px rgba(43, 91, 166, 0.4);
+            }
+            50% {
+                box-shadow: 0 12px 32px rgba(43, 91, 166, 0.6);
+            }
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .notification-icon {
+            font-size: 32px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .notification-text h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .notification-text p {
+            font-size: 13px;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+
+        #workflow-canvas {
+            width: 100%;
+            min-height: 600px;
+        }
+
+        /* D3 Workflow Nodes */
+        .node-rect {
+            fill: #FFFFFF;
+            stroke: #D1D5DB;
+            stroke-width: 2;
+            rx: 12;
+        }
+
+        .node-rect.executing {
+            stroke: #2B5BA6;
+            stroke-width: 4;
+            fill: #EFF6FF;
+            filter: drop-shadow(0 8px 20px rgba(43, 91, 166, 0.5));
+            animation: nodePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes nodePulse {
+            0%, 100% {
+                stroke-width: 4;
+            }
+            50% {
+                stroke-width: 6;
+            }
+        }
+
+        .node-rect.completed {
+            stroke: #10B981;
+            stroke-width: 3;
+            fill: #ECFDF5;
+        }
+
+        .node-icon {
+            font-size: 28px;
+        }
+
+        .node-title {
+            font-size: 14px;
+            font-weight: 700;
+            fill: #111B2E;
+        }
+
+        .node-description {
+            font-size: 11px;
+            fill: #6B7280;
+        }
+
+        .node-status {
+            font-size: 24px;
+        }
+
+        .workflow-edge {
+            fill: none;
+            stroke: #9CA3AF;
+            stroke-width: 3;
+            marker-end: url(#arrowhead);
+        }
+
+        .workflow-edge.active {
+            stroke: #2B5BA6;
+            stroke-width: 4;
+            stroke-dasharray: 8, 4;
+            animation: dashFlow 1s linear infinite;
+        }
+
+        @keyframes dashFlow {
+            to {
+                stroke-dashoffset: -12;
+            }
+        }
+
+        /* Execution Panel */
+        .execution-panel {
+            background: #FFFFFF;
+            border-top: 2px solid #E5E7EB;
+            padding: 24px;
+            max-height: 250px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .execution-panel.visible {
+            display: block;
+        }
+
+        .execution-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .execution-panel::-webkit-scrollbar-track {
+            background: #F9FAFB;
+        }
+
+        .execution-panel::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #2B5BA6, #5BA5D6);
+            border-radius: 4px;
+        }
+
+        .execution-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .execution-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #E5E7EB;
+            border-top-color: #2B5BA6;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .status-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #111B2E;
+        }
+
+        .progress-container {
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .progress-label {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #E5E7EB;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2B5BA6, #5BA5D6);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .execution-time {
+            font-size: 14px;
+            color: #6B7280;
+            font-weight: 600;
+        }
+
+        .execution-logs {
+            background: #F9FAFB;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 12px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            padding: 6px 0;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .log-entry.success {
+            color: #059669;
+        }
+
+        .log-timestamp {
+            color: #9CA3AF;
+            margin-right: 8px;
+        }
+
+        /* Results Panel */
+        .results-panel {
+            background: #FFFFFF;
+            border: 3px solid #10B981;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px;
+            display: none;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .results-panel.visible {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .results-icon {
+            font-size: 48px;
+        }
+
+        .results-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 6px;
+        }
+
+        .results-subtitle {
+            font-size: 14px;
+            color: #6B7280;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #F0F5FF 0%, #E0E7FF 100%);
+            border: 2px solid #2B5BA6;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .result-label {
+            font-size: 13px;
+            color: #6B7280;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111B2E;
+            margin-bottom: 4px;
+        }
+
+        .result-impact {
+            font-size: 12px;
+            color: #10B981;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>RCM Intelligence Platform</h1>
+        <div class="nav">
+            <a href="index.html">Executive Advisor</a>
+            <a href="control-center.html">KPI Control Center</a>
+            <a href="command-center.html">Command Center</a>
+            <a href="people-graph.html">People Graph</a>
+            <a href="automation-hub.html" class="active">🤖 Automation Hub</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>🤖 Automation Hub</h2>
+                <p>AI-powered workflow automation for RCM optimization</p>
+            </div>
+            <div class="workflow-list">
+                <!-- Workflow 1: Collection Efficiency -->
+                <div class="workflow-item active" data-workflow="collection-efficiency">
+                    <div class="workflow-header">
+                        <div class="workflow-icon">💰</div>
+                        <div class="workflow-title">
+                            <h3>Collection Efficiency</h3>
+                            <span class="workflow-badge">95%</span>
+                        </div>
+                    </div>
+                    <div class="workflow-description">
+                        Automated payment reminders for accounts 30+ days overdue
+                    </div>
+                    <div class="workflow-meta">
+                        <div class="meta-item">⏱️ <span>7 steps</span></div>
+                        <div class="meta-item">💵 <span>$150K-$250K</span></div>
+                        <div class="meta-item">⚡ <span>4.5 hrs saved</span></div>
+                    </div>
+                </div>
+
+                <!-- Workflow 2: DSO Aging -->
+                <div class="workflow-item" data-workflow="dso-aging">
+                    <div class="workflow-header">
+                        <div class="workflow-icon">📊</div>
+                        <div class="workflow-title">
+                            <h3>DSO Aging Report</h3>
+                            <span class="workflow-badge">98%</span>
+                        </div>
+                    </div>
+                    <div class="workflow-description">
+                        Weekly AR aging analysis with automated distribution
+                    </div>
+                    <div class="workflow-meta">
+                        <div class="meta-item">⏱️ <span>8 steps</span></div>
+                        <div class="meta-item">💵 <span>$800K-$1.2M</span></div>
+                        <div class="meta-item">⚡ <span>4 hrs saved</span></div>
+                    </div>
+                </div>
+
+                <!-- Workflow 3: Denial Analysis -->
+                <div class="workflow-item" data-workflow="denial-analysis">
+                    <div class="workflow-header">
+                        <div class="workflow-icon">🚨</div>
+                        <div class="workflow-title">
+                            <h3>Denial Pattern Analysis</h3>
+                            <span class="workflow-badge">90%</span>
+                        </div>
+                    </div>
+                    <div class="workflow-description">
+                        Real-time denial monitoring and pattern detection
+                    </div>
+                    <div class="workflow-meta">
+                        <div class="meta-item">⏱️ <span>8 steps</span></div>
+                        <div class="meta-item">💵 <span>$450K-$600K</span></div>
+                        <div class="meta-item">⚡ <span>Daily</span></div>
+                    </div>
+                </div>
+
+                <!-- Workflow 4: Duplicate Detection -->
+                <div class="workflow-item" data-workflow="duplicate-detection">
+                    <div class="workflow-header">
+                        <div class="workflow-icon">🔍</div>
+                        <div class="workflow-title">
+                            <h3>Duplicate Payment Detection</h3>
+                            <span class="workflow-badge">93%</span>
+                        </div>
+                    </div>
+                    <div class="workflow-description">
+                        Daily duplicate payment detection and refund processing
+                    </div>
+                    <div class="workflow-meta">
+                        <div class="meta-item">⏱️ <span>10 steps</span></div>
+                        <div class="meta-item">💵 <span>$120K-$180K</span></div>
+                        <div class="meta-item">⚡ <span>Daily</span></div>
+                    </div>
+                </div>
+
+                <!-- Workflow 5: Eligibility Verification -->
+                <div class="workflow-item" data-workflow="eligibility-verification">
+                    <div class="workflow-header">
+                        <div class="workflow-icon">✅</div>
+                        <div class="workflow-title">
+                            <h3>Eligibility Verification</h3>
+                            <span class="workflow-badge">96%</span>
+                        </div>
+                    </div>
+                    <div class="workflow-description">
+                        Automated pre-service insurance eligibility checks
+                    </div>
+                    <div class="workflow-meta">
+                        <div class="meta-item">⏱️ <span>8 steps</span></div>
+                        <div class="meta-item">💵 <span>$300K-$450K</span></div>
+                        <div class="meta-item">⚡ <span>Morning</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            <div class="content-header">
+                <div class="content-header-left">
+                    <h2 id="workflow-name">Collection Efficiency Automation</h2>
+                    <p id="workflow-subtitle">Automated payment reminders for accounts 30+ days overdue</p>
+                </div>
+                <div class="content-header-right">
+                    <button class="btn btn-secondary" onclick="resetWorkflow()">
+                        ↻ Reset Workflow
+                    </button>
+                    <button class="btn btn-primary" id="launch-btn" onclick="launchWorkflow()">
+                        🚀 Launch Automation
+                    </button>
+                </div>
+            </div>
+
+            <div class="canvas-container" id="canvas-container">
+                <!-- Zoom Controls -->
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+                    <div class="zoom-level" id="zoom-level">100%</div>
+                    <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                    <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">⟲</button>
+                    <button class="zoom-btn" onclick="fitToScreen()" title="Fit to Screen" style="font-size: 14px;">⛶</button>
+                </div>
+
+                <!-- Current Step Notification -->
+                <div class="step-notification" id="step-notification">
+                    <div class="notification-content">
+                        <div class="notification-icon">⚙️</div>
+                        <div class="notification-text">
+                            <h4 id="notification-title">Processing Step...</h4>
+                            <p id="notification-description">Action in progress</p>
+                        </div>
+                    </div>
+                </div>
+
+                <svg id="workflow-canvas"></svg>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel" id="results-panel">
+                <div class="results-header">
+                    <span class="results-icon">✅</span>
+                    <div>
+                        <div class="results-title">Automation Complete!</div>
+                        <div class="results-subtitle" id="completion-time"></div>
+                    </div>
+                </div>
+                <div class="results-grid" id="results-grid">
+                    <!-- Results populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Execution Panel -->
+            <div class="execution-panel" id="execution-panel">
+                <div class="execution-header">
+                    <div class="execution-status">
+                        <div class="status-spinner"></div>
+                        <span class="status-text" id="status-text">Executing Workflow...</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            Progress: <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="execution-time" id="execution-time">Time: 0s</div>
+                </div>
+                <div class="execution-logs" id="execution-logs">
+                    <div class="log-entry">
+                        <span class="log-timestamp">[00:00]</span>
+                        Initializing workflow execution...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Workflow Definitions
+        const workflows = {
+            'collection-efficiency': {
+                name: 'Collection Efficiency Automation',
+                subtitle: 'Automated payment reminders for accounts 30+ days overdue',
+                steps: [
+                    { 
+                        id: 1, 
+                        icon: '🔍', 
+                        title: 'Query AR Database', 
+                        description: 'Extract overdue accounts', 
+                        duration: 2500,
+                        action: 'Querying PostgreSQL AR database for accounts 30+ days overdue...',
+                        detail: 'Found 847 accounts totaling $2.4M in outstanding receivables'
+                    },
+                    { 
+                        id: 2, 
+                        icon: '🎯', 
+                        title: 'Filter by Preferences', 
+                        description: 'Segment by contact method', 
+                        duration: 2000,
+                        action: 'Analyzing patient communication preferences...',
+                        detail: 'Email: 628 (74%), SMS: 219 (26%), Portal: 145 (17%)'
+                    },
+                    { 
+                        id: 3, 
+                        icon: '✍️', 
+                        title: 'Generate Messages', 
+                        description: 'AI personalization', 
+                        duration: 3500,
+                        action: 'Using GPT-4 to generate personalized payment reminders...',
+                        detail: 'Created 847 unique messages with patient details and payment options'
+                    },
+                    { 
+                        id: 4, 
+                        icon: '📧', 
+                        title: 'Multi-Channel Send', 
+                        description: 'Email/SMS/Portal dispatch', 
+                        duration: 4000,
+                        action: 'Sending via SendGrid, Twilio, and Patient Portal APIs...',
+                        detail: 'Sent: 628 emails, 219 SMS, 145 portal notifications'
+                    },
+                    { 
+                        id: 5, 
+                        icon: '📝', 
+                        title: 'Log Communication', 
+                        description: 'Update CRM records', 
+                        duration: 2000,
+                        action: 'Writing communication records to Salesforce CRM...',
+                        detail: 'Logged 847 records with timestamp, method, and delivery status'
+                    },
+                    { 
+                        id: 6, 
+                        icon: '📅', 
+                        title: 'Schedule Follow-up', 
+                        description: '7-day reminder queue', 
+                        duration: 2000,
+                        action: 'Creating follow-up tasks in task management system...',
+                        detail: 'Scheduled 847 follow-up reminders for 7 days if no payment received'
+                    },
+                    { 
+                        id: 7, 
+                        icon: '📊', 
+                        title: 'Generate Report', 
+                        description: 'Executive summary', 
+                        duration: 1500,
+                        action: 'Compiling execution report and distributing to stakeholders...',
+                        detail: 'Report emailed to 12 team members (Collections, Finance, Leadership)'
+                    }
+                ],
+                results: {
+                    'Accounts Processed': { value: '847', impact: '$2.4M total AR' },
+                    'Messages Sent': { value: '847', impact: '97.2% delivery rate' },
+                    'Time Saved': { value: '4.5 hours', impact: 'vs manual process' },
+                    'Estimated Recovery': { value: '$28,000', impact: '30-day projection' },
+                    'ROI': { value: '400%', impact: 'Annual return' }
+                }
+            },
+            'dso-aging': {
+                name: 'DSO Aging Report Generator',
+                subtitle: 'Weekly AR aging analysis with automated distribution',
+                steps: [
+                    { id: 1, icon: '🔗', title: 'Connect AR Database', description: 'Real-time connection', duration: 2000, action: 'Establishing secure connection to AR database...', detail: 'Connected to PostgreSQL production database' },
+                    { id: 2, icon: '📊', title: 'Calculate Aging', description: '0-30, 31-60, 61-90, 90+', duration: 3000, action: 'Calculating aging buckets for all AR...', detail: '0-30: $1.2M, 31-60: $580K, 61-90: $340K, 90+: $280K' },
+                    { id: 3, icon: '🏥', title: 'Segment by Payer', description: 'Commercial/Medicaid/Medicare', duration: 2500, action: 'Segmenting AR by payer type...', detail: 'Commercial: 62%, Medicaid: 25%, Medicare: 13%' },
+                    { id: 4, icon: '📈', title: 'Generate Charts', description: 'Trend visualization', duration: 3000, action: 'Creating trend charts using Chart.js...', detail: 'Generated aging trend, payer mix, and DSO progression charts' },
+                    { id: 5, icon: '🎯', title: 'Calculate DSO', description: 'Key metrics', duration: 2000, action: 'Computing DSO metrics and benchmarks...', detail: 'Current DSO: 52.8 days, Target: 35 days, Industry avg: 45 days' },
+                    { id: 6, icon: '📝', title: 'Format Report', description: 'PDF generation', duration: 2500, action: 'Formatting executive report with insights...', detail: 'Created 12-page report with executive summary and action items' },
+                    { id: 7, icon: '📧', title: 'Distribute Report', description: 'Email stakeholders', duration: 2000, action: 'Emailing report to 12 stakeholders...', detail: 'Sent to CFO, Revenue Cycle Director, and department managers' },
+                    { id: 8, icon: '🔄', title: 'Update Dashboard', description: 'Real-time refresh', duration: 1500, action: 'Updating executive dashboard with latest data...', detail: 'Refreshed 15 KPI widgets on Command Center dashboard' }
+                ],
+                results: {
+                    'Total AR': { value: '$2.4M', impact: '847 accounts' },
+                    'Current DSO': { value: '52.8 days', impact: 'Target: 35 days' },
+                    'High Priority AR': { value: '$620K', impact: '90+ days overdue' },
+                    'Time Saved': { value: '4 hours', impact: 'Weekly automation' },
+                    'Focus Area': { value: '$800K-$1.2M', impact: 'Recovery potential' }
+                }
+            },
+            'denial-analysis': {
+                name: 'Denial Pattern Analysis',
+                subtitle: 'Real-time denial monitoring and pattern detection',
+                steps: [
+                    { id: 1, icon: '🔍', title: 'Query Denials', description: 'Daily extraction', duration: 2500, action: 'Querying claims database for denied claims...', detail: 'Found 47 denied claims totaling $187,500 (last 24 hours)' },
+                    { id: 2, icon: '🏷️', title: 'Extract Reasons', description: 'Denial codes', duration: 2000, action: 'Extracting denial reason codes and descriptions...', detail: 'Identified 12 unique denial reasons across all claims' },
+                    { id: 3, icon: '📊', title: 'Pattern Analysis', description: 'Group by type', duration: 3500, action: 'Analyzing patterns using ML clustering algorithm...', detail: 'Top patterns: Authorization (38%), Coding (27%), Eligibility (22%)' },
+                    { id: 4, icon: '🎯', title: 'Top 5 Reasons', description: 'Prioritize issues', duration: 2500, action: 'Ranking denial reasons by frequency and $ impact...', detail: '1. Missing auth: $71K, 2. Wrong code: $50K, 3. Not covered: $41K' },
+                    { id: 5, icon: '💰', title: 'Calculate Impact', description: '$ per reason', duration: 2000, action: 'Computing financial impact for each denial type...', detail: 'Total impact: $187.5K daily, $4.5M annual projection' },
+                    { id: 6, icon: '💡', title: 'Generate Actions', description: 'Prevention tips', duration: 3000, action: 'Creating prevention recommendations using AI...', detail: 'Generated 8 actionable recommendations to reduce denials' },
+                    { id: 7, icon: '🚨', title: 'Alert Teams', description: 'Slack/Email notify', duration: 2000, action: 'Sending alerts to coding and authorization teams...', detail: 'Alerted 8 team members via Slack and email' },
+                    { id: 8, icon: '📋', title: 'Create Checklist', description: 'Prevention guide', duration: 1500, action: 'Generating prevention checklist for front-end staff...', detail: 'Created 15-point verification checklist shared with 25 staff' }
+                ],
+                results: {
+                    'Denials Analyzed': { value: '47 claims', impact: 'Last 24 hours' },
+                    'Total Impact': { value: '$187,500', impact: 'Daily denials' },
+                    'Top Denial Reason': { value: 'Missing Auth', impact: '$71K (38%)' },
+                    'Annual Projection': { value: '$4.5M', impact: 'If unchanged' },
+                    'Recovery Potential': { value: '$450K-$600K', impact: 'With prevention' }
+                }
+            },
+            'duplicate-detection': {
+                name: 'Duplicate Payment Detection',
+                subtitle: 'Daily duplicate payment detection and refund processing',
+                steps: [
+                    { id: 1, icon: '🔍', title: 'Query Payments', description: 'Daily payment data', duration: 2500, action: 'Querying payment database for yesterday\'s transactions...', detail: 'Found 342 payments totaling $428,500' },
+                    { id: 2, icon: '🔗', title: 'Match to Claims', description: 'Link payments', duration: 3000, action: 'Matching payments to claims using account number, amount, date...', detail: 'Matched 340/342 payments to claim records' },
+                    { id: 3, icon: '🎯', title: 'Fuzzy Matching', description: 'Find duplicates', duration: 3500, action: 'Running fuzzy matching algorithm to detect duplicates...', detail: 'Algorithm checks: same patient, amount within $5, date within 7 days' },
+                    { id: 4, icon: '⚠️', title: 'Flag Suspicious', description: 'Potential duplicates', duration: 2500, action: 'Flagging potential duplicate payments for review...', detail: 'Flagged 7 potential duplicates totaling $12,450' },
+                    { id: 5, icon: '💰', title: 'Calculate Refunds', description: 'Refund amounts', duration: 2000, action: 'Calculating exact refund amounts for each duplicate...', detail: 'Total refunds due: $12,450 across 7 accounts' },
+                    { id: 6, icon: '📝', title: 'Generate List', description: 'Refund queue', duration: 2000, action: 'Creating refund initiation list for accounting team...', detail: 'Generated CSV with account details, amounts, and contact info' },
+                    { id: 7, icon: '✉️', title: 'Patient Letters', description: 'Notification templates', duration: 2500, action: 'Generating patient notification letters...', detail: 'Created 7 letters explaining duplicate payment and refund timeline' },
+                    { id: 8, icon: '💼', title: 'Update Accounting', description: 'System records', duration: 2000, action: 'Updating accounting system with refund entries...', detail: 'Posted 7 refund entries to QuickBooks' },
+                    { id: 9, icon: '📊', title: 'Track Status', description: 'Refund pipeline', duration: 1500, action: 'Adding to refund tracking dashboard...', detail: 'Updated refund pipeline: 23 pending, $42K in process' },
+                    { id: 10, icon: '📧', title: 'CFO Report', description: 'Monthly summary', duration: 1500, action: 'Compiling monthly duplicate detection report...', detail: 'Monthly total: 31 duplicates detected, $56K refunded' }
+                ],
+                results: {
+                    'Payments Analyzed': { value: '342', impact: 'Daily volume' },
+                    'Duplicates Found': { value: '7', impact: '2% error rate' },
+                    'Total Refunds': { value: '$12,450', impact: 'Today\'s refunds' },
+                    'Monthly Total': { value: '$56,000', impact: '31 duplicates' },
+                    'Annual Savings': { value: '$120K-$180K', impact: 'Leakage prevented' }
+                }
+            },
+            'eligibility-verification': {
+                name: 'Eligibility Verification Automation',
+                subtitle: 'Automated pre-service insurance eligibility checks',
+                steps: [
+                    { id: 1, icon: '📅', title: 'Pull Schedule', description: 'Next-day appointments', duration: 2000, action: 'Pulling tomorrow\'s appointment schedule from EHR...', detail: 'Retrieved 64 scheduled appointments for verification' },
+                    { id: 2, icon: '🏥', title: 'Extract Insurance', description: 'Patient coverage data', duration: 2500, action: 'Extracting insurance information for each patient...', detail: 'Commercial: 42, Medicaid: 15, Medicare: 7' },
+                    { id: 3, icon: '🔗', title: 'Call Payer APIs', description: '270/271 EDI requests', duration: 4000, action: 'Sending eligibility verification requests to payer APIs...', detail: 'Sent 64 EDI 270 transactions to insurance clearinghouse' },
+                    { id: 4, icon: '✅', title: 'Process Responses', description: 'Parse EDI 271', duration: 3000, action: 'Processing EDI 271 eligibility responses...', detail: 'Received 64 responses: 58 active, 6 inactive/invalid' },
+                    { id: 5, icon: '🚨', title: 'Flag Inactive', description: 'Invalid coverage', duration: 2000, action: 'Flagging patients with inactive or invalid coverage...', detail: 'Flagged 6 patients requiring insurance update' },
+                    { id: 6, icon: '📞', title: 'Alert Front Desk', description: 'Patient contact list', duration: 2500, action: 'Generating alert list for front desk staff...', detail: 'Created priority call list with patient contact information' },
+                    { id: 7, icon: '📧', title: 'Patient Notifications', description: 'Update insurance', duration: 2500, action: 'Sending automated SMS/email to patients with invalid coverage...', detail: 'Notified 6 patients to bring updated insurance cards' },
+                    { id: 8, icon: '📊', title: 'Morning Report', description: 'Team briefing', duration: 1500, action: 'Generating morning verification report for registration team...', detail: 'Report: 58 verified (91%), 6 require follow-up (9%)' }
+                ],
+                results: {
+                    'Appointments Checked': { value: '64', impact: 'Tomorrow\'s schedule' },
+                    'Verified Active': { value: '58 (91%)', impact: 'Ready for service' },
+                    'Flagged Inactive': { value: '6 (9%)', impact: 'Require follow-up' },
+                    'Denial Prevention': { value: '$18,000', impact: 'Estimated daily' },
+                    'Annual Impact': { value: '$300K-$450K', impact: 'Denials prevented' }
+                }
+            }
+        };
+
+        let currentWorkflow = 'collection-efficiency';
+        let isExecuting = false;
+        let executionStartTime = 0;
+        let executionInterval = null;
+        let currentZoom = 1;
+
+        // Initialize canvas
+        function initializeCanvas() {
+            const workflow = workflows[currentWorkflow];
+            const steps = workflow.steps;
+            const canvas = d3.select('#workflow-canvas');
+            const container = document.querySelector('.canvas-container');
+
+            const nodeWidth = 200;
+            const nodeHeight = 100;
+            const horizontalGap = 140;
+            const verticalGap = 80;
+            const nodesPerRow = 4;
+
+            canvas.selectAll('*').remove();
+
+            const rows = Math.ceil(steps.length / nodesPerRow);
+            // Always use the calculated width to ensure horizontal scrollbars appear
+            const canvasWidth = (nodesPerRow * nodeWidth) + ((nodesPerRow - 1) * horizontalGap) + 200; // Added extra padding
+            const canvasHeight = (rows * nodeHeight) + ((rows - 1) * verticalGap) + 250; // Added extra vertical padding
+
+            canvas.attr('width', canvasWidth * currentZoom)
+                  .attr('height', canvasHeight * currentZoom);
+
+            const g = canvas.append('g')
+                .attr('id', 'zoom-group')
+                .attr('transform', `scale(${currentZoom})`);
+
+            // Arrowhead marker
+            g.append('defs')
+                .append('marker')
+                .attr('id', 'arrowhead')
+                .attr('markerWidth', 10)
+                .attr('markerHeight', 10)
+                .attr('refX', 8)
+                .attr('refY', 3)
+                .attr('orient', 'auto')
+                .append('polygon')
+                .attr('points', '0 0, 10 3, 0 6')
+                .attr('fill', '#9CA3AF');
+
+            // Calculate positions
+            const positions = steps.map((step, i) => {
+                const row = Math.floor(i / nodesPerRow);
+                const col = i % nodesPerRow;
+                const x = 50 + (col * (nodeWidth + horizontalGap));
+                const y = 100 + (row * (nodeHeight + verticalGap));
+                return { ...step, x, y };
+            });
+
+            // Draw edges
+            for (let i = 0; i < positions.length - 1; i++) {
+                const current = positions[i];
+                const next = positions[i + 1];
+                
+                const startX = current.x + nodeWidth;
+                const startY = current.y + nodeHeight / 2;
+                const endX = next.x;
+                const endY = next.y + nodeHeight / 2;
+
+                // Check if wrapping to next row
+                if (Math.floor(i / nodesPerRow) !== Math.floor((i + 1) / nodesPerRow)) {
+                    // Curved edge for row wrap
+                    const midX = startX + 50;
+                    const midY = startY + verticalGap / 2;
+                    g.append('path')
+                        .attr('class', 'workflow-edge')
+                        .attr('id', `edge-${i}`)
+                        .attr('d', `M ${startX} ${startY} Q ${midX} ${midY}, ${endX} ${endY}`);
+                } else {
+                    // Straight edge
+                    g.append('path')
+                        .attr('class', 'workflow-edge')
+                        .attr('id', `edge-${i}`)
+                        .attr('d', `M ${startX} ${startY} L ${endX} ${endY}`);
+                }
+            }
+
+            // Draw nodes
+            positions.forEach(step => {
+                const node = g.append('g')
+                    .attr('class', 'workflow-node')
+                    .attr('id', `node-${step.id}`)
+                    .attr('data-x', step.x)
+                    .attr('data-y', step.y);
+
+                node.append('rect')
+                    .attr('class', 'node-rect')
+                    .attr('x', step.x)
+                    .attr('y', step.y)
+                    .attr('width', nodeWidth)
+                    .attr('height', nodeHeight);
+
+                node.append('text')
+                    .attr('class', 'node-icon')
+                    .attr('x', step.x + 24)
+                    .attr('y', step.y + 42)
+                    .text(step.icon);
+
+                node.append('text')
+                    .attr('class', 'node-title')
+                    .attr('x', step.x + 65)
+                    .attr('y', step.y + 35)
+                    .text(step.title);
+
+                node.append('text')
+                    .attr('class', 'node-description')
+                    .attr('x', step.x + 65)
+                    .attr('y', step.y + 52)
+                    .text(step.description);
+
+                node.append('text')
+                    .attr('class', 'node-status')
+                    .attr('id', `status-${step.id}`)
+                    .attr('x', step.x + nodeWidth - 35)
+                    .attr('y', step.y + 42)
+                    .text('⏸️');
+            });
+        }
+
+        // Zoom functions
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom + 0.2, 2.0);
+            updateZoom();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom - 0.2, 0.5);
+            updateZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            updateZoom();
+        }
+
+        function fitToScreen() {
+            // Calculate zoom to fit entire workflow in visible area
+            const workflow = workflows[currentWorkflow];
+            const steps = workflow.steps;
+            const container = document.querySelector('.canvas-container');
+            
+            const nodeWidth = 200;
+            const nodeHeight = 100;
+            const horizontalGap = 140;
+            const verticalGap = 80;
+            const nodesPerRow = 4;
+            
+            const rows = Math.ceil(steps.length / nodesPerRow);
+            const contentWidth = (nodesPerRow * nodeWidth) + ((nodesPerRow - 1) * horizontalGap) + 200;
+            const contentHeight = (rows * nodeHeight) + ((rows - 1) * verticalGap) + 250;
+            
+            const containerWidth = container.clientWidth - 40; // Account for padding
+            const containerHeight = container.clientHeight - 40;
+            
+            const zoomX = containerWidth / contentWidth;
+            const zoomY = containerHeight / contentHeight;
+            
+            currentZoom = Math.min(zoomX, zoomY, 1.0); // Don't zoom in beyond 100%
+            currentZoom = Math.max(currentZoom, 0.3); // Minimum 30% zoom
+            updateZoom();
+        }
+
+        function updateZoom() {
+            document.getElementById('zoom-level').textContent = Math.round(currentZoom * 100) + '%';
+            initializeCanvas();
+        }
+
+        // Show step notification
+        function showStepNotification(step) {
+            const notification = document.getElementById('step-notification');
+            const title = document.getElementById('notification-title');
+            const description = document.getElementById('notification-description');
+            
+            title.textContent = `Step ${step.id}/${workflows[currentWorkflow].steps.length}: ${step.title}`;
+            description.innerHTML = `${step.action}<br><small style="opacity: 0.85; margin-top: 4px; display: block;">${step.detail}</small>`;
+            
+            notification.classList.add('visible');
+            scrollToNode(step.id);
+        }
+
+        function hideStepNotification() {
+            document.getElementById('step-notification').classList.remove('visible');
+        }
+
+        // Scroll to node
+        function scrollToNode(stepId) {
+            const node = document.getElementById(`node-${stepId}`);
+            if (node) {
+                const x = parseFloat(node.getAttribute('data-x'));
+                const y = parseFloat(node.getAttribute('data-y'));
+                const container = document.getElementById('canvas-container');
+                const scrollX = (x * currentZoom) - (container.clientWidth / 2) + 100;
+                const scrollY = (y * currentZoom) - (container.clientHeight / 2) + 50;
+                container.scrollTo({
+                    left: Math.max(0, scrollX),
+                    top: Math.max(0, scrollY),
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Launch workflow
+        async function launchWorkflow() {
+            if (isExecuting) return;
+
+            isExecuting = true;
+            document.getElementById('launch-btn').disabled = true;
+            document.getElementById('execution-panel').classList.add('visible');
+            document.getElementById('results-panel').classList.remove('visible');
+            
+            const workflow = workflows[currentWorkflow];
+            const logs = document.getElementById('execution-logs');
+            logs.innerHTML = '<div class="log-entry"><span class="log-timestamp">[00:00]</span>🚀 Initializing workflow execution...</div>';
+
+            executionStartTime = Date.now();
+            executionInterval = setInterval(updateExecutionTime, 100);
+
+            let totalProgress = 0;
+            const stepProgress = 100 / workflow.steps.length;
+
+            for (let i = 0; i < workflow.steps.length; i++) {
+                const step = workflow.steps[i];
+                
+                showStepNotification(step);
+                
+                const startTimestamp = formatTime(Date.now() - executionStartTime);
+                const startLogEntry = document.createElement('div');
+                startLogEntry.className = 'log-entry';
+                startLogEntry.innerHTML = `<span class="log-timestamp">[${startTimestamp}]</span>⏳ ${step.icon} ${step.title} - ${step.action}`;
+                logs.appendChild(startLogEntry);
+                logs.scrollTop = logs.scrollHeight;
+                
+                d3.select(`#node-${step.id} .node-rect`).classed('executing', true);
+                d3.select(`#status-${step.id}`).text('⏳');
+                if (i > 0) {
+                    d3.select(`#edge-${i-1}`).classed('active', true);
+                }
+
+                document.getElementById('status-text').textContent = `Step ${i + 1}/${workflow.steps.length}: ${step.title}...`;
+
+                await new Promise(resolve => setTimeout(resolve, step.duration));
+
+                d3.select(`#node-${step.id} .node-rect`).classed('executing', false).classed('completed', true);
+                d3.select(`#status-${step.id}`).text('✅');
+                if (i > 0) {
+                    d3.select(`#edge-${i-1}`).classed('active', false);
+                }
+
+                totalProgress += stepProgress;
+                document.getElementById('progress-fill').style.width = totalProgress + '%';
+                document.getElementById('progress-percent').textContent = Math.round(totalProgress) + '%';
+
+                const timestamp = formatTime(Date.now() - executionStartTime);
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry success';
+                logEntry.innerHTML = `<span class="log-timestamp">[${timestamp}]</span>✅ ${step.title} completed - ${step.detail}`;
+                logs.appendChild(logEntry);
+                logs.scrollTop = logs.scrollHeight;
+            }
+
+            hideStepNotification();
+
+            clearInterval(executionInterval);
+            const totalTime = formatTime(Date.now() - executionStartTime);
+            
+            document.getElementById('status-text').textContent = '✅ Workflow Completed Successfully!';
+            document.getElementById('progress-fill').style.width = '100%';
+            document.getElementById('progress-percent').textContent = '100%';
+
+            setTimeout(() => {
+                document.getElementById('execution-panel').classList.remove('visible');
+                showResults(totalTime);
+            }, 2000);
+
+            isExecuting = false;
+            document.getElementById('launch-btn').disabled = false;
+        }
+
+        function showResults(totalTime) {
+            const workflow = workflows[currentWorkflow];
+            const resultsGrid = document.getElementById('results-grid');
+            const completionTime = document.getElementById('completion-time');
+            
+            completionTime.textContent = `Completed in ${totalTime} • ${new Date().toLocaleTimeString()}`;
+            resultsGrid.innerHTML = '';
+
+            Object.entries(workflow.results).forEach(([label, data]) => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <div class="result-label">${label}</div>
+                    <div class="result-value">${data.value}</div>
+                    <div class="result-impact">↗ ${data.impact}</div>
+                `;
+                resultsGrid.appendChild(card);
+            });
+
+            document.getElementById('results-panel').classList.add('visible');
+        }
+
+        function resetWorkflow() {
+            if (isExecuting) return;
+
+            clearInterval(executionInterval);
+            isExecuting = false;
+            
+            document.getElementById('launch-btn').disabled = false;
+            document.getElementById('execution-panel').classList.remove('visible');
+            document.getElementById('results-panel').classList.remove('visible');
+            hideStepNotification();
+            
+            initializeCanvas();
+        }
+
+        function updateExecutionTime() {
+            const elapsed = Date.now() - executionStartTime;
+            document.getElementById('execution-time').textContent = `Time: ${formatTime(elapsed)}`;
+        }
+
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return minutes > 0 ? `${minutes}:${seconds.toString().padStart(2, '0')}` : `${seconds}s`;
+        }
+
+        // Workflow selection
+        document.querySelectorAll('.workflow-item').forEach(item => {
+            item.addEventListener('click', function() {
+                if (isExecuting) return;
+
+                document.querySelectorAll('.workflow-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+
+                currentWorkflow = this.dataset.workflow;
+                const workflow = workflows[currentWorkflow];
+
+                document.getElementById('workflow-name').textContent = workflow.name;
+                document.getElementById('workflow-subtitle').textContent = workflow.subtitle;
+                resetWorkflow();
+            });
+        });
+
+        // Initialize
+        window.addEventListener('load', () => {
+            initializeCanvas();
+        });
+
+        window.addEventListener('resize', () => {
+            if (!isExecuting) {
+                initializeCanvas();
+            }
+        });
+    </script>
+</body>
+</html>

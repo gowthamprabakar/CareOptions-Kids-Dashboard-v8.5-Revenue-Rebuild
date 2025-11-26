@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visual Test - KPI Data Display</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            padding: 20px; 
+            background: #f5f5f5;
+        }
+        .status { 
+            padding: 20px; 
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+        .success { border-color: #10B981; background: #D1FAE5; }
+        .error { border-color: #EF4444; background: #FEE2E2; }
+        h1 { color: #111; }
+        .kpi-list {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .kpi-item {
+            padding: 8px;
+            margin: 4px 0;
+            border-left: 4px solid #2B5BA6;
+            background: #f9f9f9;
+        }
+        .kpi-red { border-left-color: #EF4444; }
+        .kpi-amber { border-left-color: #F59E0B; }
+        .kpi-green { border-left-color: #10B981; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Healthcare RCM KPI Data Visual Test</h1>
+    <div id="status" class="status">Loading...</div>
+    <div id="results"></div>
+    
+    <script>
+        const status = document.getElementById('status');
+        const results = document.getElementById('results');
+        
+        fetch('kpi_map.json')
+            .then(r => r.json())
+            .then(data => {
+                status.className = 'status success';
+                status.innerHTML = `
+                    <h2>✅ Data Loaded Successfully!</h2>
+                    <p><strong>Version:</strong> ${data.version}</p>
+                    <p><strong>Total Nodes:</strong> ${data.total_nodes}</p>
+                    <p><strong>Root Name:</strong> ${data.tree.name}</p>
+                    <p><strong>Categories:</strong> ${data.tree.children.length}</p>
+                `;
+                
+                // Show all categories
+                let html = '<div class="kpi-list"><h3>📊 9 Main Categories:</h3>';
+                data.tree.children.forEach((cat, i) => {
+                    const childCount = countChildren(cat);
+                    html += `
+                        <div class="kpi-item kpi-${cat.rag}">
+                            <strong>${i + 1}. ${cat.name}</strong> 
+                            (${childCount} nodes) - 
+                            Value: ${cat.value}, Target: ${cat.target}, 
+                            Status: <span style="color: ${cat.rag === 'red' ? '#EF4444' : cat.rag === 'amber' ? '#F59E0B' : '#10B981'}">${cat.rag.toUpperCase()}</span>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                
+                // Show sample of all nodes
+                html += '<div class="kpi-list"><h3>📋 All 101 KPIs (Sample - First 20):</h3>';
+                data.nodes.slice(0, 20).forEach((node, i) => {
+                    html += `
+                        <div class="kpi-item kpi-${node.rag}">
+                            <strong>${i + 1}. ${node.name}</strong><br>
+                            <small>
+                                ID: ${node.id} | 
+                                Level: ${node.level} | 
+                                Category: ${node.category} | 
+                                Value: ${node.value} | 
+                                Target: ${node.target} | 
+                                RAG: ${node.rag}
+                            </small>
+                        </div>
+                    `;
+                });
+                html += '<p><em>... and 81 more nodes</em></p></div>';
+                
+                // Show flat nodes stats
+                const redCount = data.nodes.filter(n => n.rag === 'red').length;
+                const amberCount = data.nodes.filter(n => n.rag === 'amber').length;
+                const greenCount = data.nodes.filter(n => n.rag === 'green').length;
+                
+                html += `
+                    <div class="status success">
+                        <h3>📈 RAG Status Summary:</h3>
+                        <p>🔴 <strong>Red:</strong> ${redCount} KPIs (Critical)</p>
+                        <p>🟡 <strong>Amber:</strong> ${amberCount} KPIs (Warning)</p>
+                        <p>🟢 <strong>Green:</strong> ${greenCount} KPIs (On Track)</p>
+                    </div>
+                `;
+                
+                results.innerHTML = html;
+            })
+            .catch(err => {
+                status.className = 'status error';
+                status.innerHTML = `<h2>❌ Error Loading Data</h2><p>${err.message}</p>`;
+            });
+        
+        function countChildren(node) {
+            let count = 1;
+            if (node.children) {
+                node.children.forEach(child => {
+                    count += countChildren(child);
+                });
+            }
+            return count;
+        }
+    </script>
+</body>
+</html>
