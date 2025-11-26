@@ -1719,17 +1719,35 @@
             const isShiftClick = event.shiftKey;
             
             if (isShiftClick) {
-                // Shift+Click: Always show detail panel for any node
-                console.log('Shift+Click - Opening KPI card for:', d.data.name);
+                // Shift+Click: Show detail panel only for KPI nodes (level 4)
+                console.log('Shift+Click - Node:', d.data.name, '| Level:', d.data.level, '| Type:', d.data.type);
                 
-                // Find the complete KPI data from the flat nodes array
-                const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
-                
-                if (fullKpiData) {
-                    showInfoPanel(fullKpiData);
+                // Only show KPI cards for actual KPI nodes (level 4)
+                if (d.data.level === 4 && d.data.type === 'kpi') {
+                    // Find the complete KPI data from the flat nodes array
+                    const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
+                    
+                    if (fullKpiData) {
+                        console.log('✅ Opening KPI card for:', d.data.name);
+                        showInfoPanel(fullKpiData);
+                    } else {
+                        console.warn('⚠️ KPI data not found for:', d.data.id);
+                        // Fallback: use the tree node data
+                        showInfoPanel(d.data);
+                    }
                 } else {
-                    // Fallback: use the tree node data
-                    showInfoPanel(d.data);
+                    // Non-KPI node - show info message
+                    const nodeType = d.data.type === 'pillar' ? 'Pillar' : 
+                                   d.data.type === 'macro' ? 'Macro Process' : 
+                                   d.data.type === 'category' ? 'Category' : 'Node';
+                    console.log(`ℹ️ ${nodeType} node clicked. Expand to see KPIs below.`);
+                    
+                    // Auto-expand to show children
+                    if (d._children) {
+                        d.children = d._children;
+                        d._children = null;
+                        updateTree(d);
+                    }
                 }
             } else {
                 // Normal Click: Expand/collapse behavior
@@ -1750,15 +1768,22 @@
                     }
                     updateTree(d);
                 } else {
-                    // Leaf node with normal click - also show detail panel
-                    console.log('Leaf node clicked:', d.data.name);
+                    // Leaf node with normal click - show detail panel only for KPIs
+                    console.log('Leaf node clicked:', d.data.name, '| Type:', d.data.type);
                     
-                    const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
-                    
-                    if (fullKpiData) {
-                        showInfoPanel(fullKpiData);
+                    // Only show KPI cards for actual KPI nodes
+                    if (d.data.level === 4 && d.data.type === 'kpi') {
+                        const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
+                        
+                        if (fullKpiData) {
+                            console.log('✅ Opening KPI card for:', d.data.name);
+                            showInfoPanel(fullKpiData);
+                        } else {
+                            console.warn('⚠️ KPI data not found for:', d.data.id);
+                            showInfoPanel(d.data);
+                        }
                     } else {
-                        showInfoPanel(d.data);
+                        console.log('ℹ️ Non-KPI leaf node. No detail card available.');
                     }
                 }
             }
