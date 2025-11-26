@@ -1718,20 +1718,32 @@
             // Check if Shift key is pressed for detail view
             const isShiftClick = event.shiftKey;
             
+            // ALWAYS log what was clicked
+            console.log('════════════════════════════════════════════════════════');
+            console.log('🖱️ NODE CLICKED:', d.data.name);
+            console.log('📊 Level:', d.data.level);
+            console.log('🏷️ Type:', d.data.type);
+            console.log('🔑 ID:', d.data.id);
+            console.log('⌨️ Shift key:', isShiftClick ? 'YES' : 'NO');
+            
             if (isShiftClick) {
                 // Shift+Click: Show detail panel only for KPI nodes (level 4)
-                console.log('Shift+Click - Node:', d.data.name, '| Level:', d.data.level, '| Type:', d.data.type);
+                console.log('👉 This is a SHIFT+CLICK');
                 
                 // Only show KPI cards for actual KPI nodes (level 4)
                 if (d.data.level === 4 && d.data.type === 'kpi') {
+                    console.log('✅ This IS a KPI node (level 4)! Opening card...');
                     // Find the complete KPI data from the flat nodes array
                     const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
                     
                     if (fullKpiData) {
-                        console.log('✅ Opening KPI card for:', d.data.name);
+                        console.log('✅ Found KPI data in nodes array');
+                        console.log('✅ Calling showInfoPanel...');
                         showInfoPanel(fullKpiData);
+                        console.log('✅ showInfoPanel called successfully');
                     } else {
                         console.warn('⚠️ KPI data not found for:', d.data.id);
+                        console.log('⚠️ Using fallback data');
                         // Fallback: use the tree node data
                         showInfoPanel(d.data);
                     }
@@ -1740,7 +1752,7 @@
                     const nodeType = d.data.type === 'pillar' ? 'Pillar' : 
                                    d.data.type === 'macro' ? 'Macro Process' : 
                                    d.data.type === 'category' ? 'Category' : 'Node';
-                    console.log(`ℹ️ ${nodeType} node clicked. Expand to see KPIs below.`);
+                    console.log(`❌ This is NOT a KPI node - it's a ${nodeType}`);
                     
                     // Auto-expand to show children
                     if (d._children) {
@@ -1751,11 +1763,12 @@
                 }
             } else {
                 // Normal Click: Expand/collapse behavior
+                console.log('👉 This is a NORMAL CLICK (no shift)');
                 const hasChildren = d.children || d._children;
                 
                 if (hasChildren) {
                     // Node has children - toggle expand/collapse
-                    console.log('Normal click - Toggling node:', d.data.name, '- Currently', d.children ? 'expanded' : 'collapsed');
+                    console.log('🔄 Node has children - toggling expand/collapse');
                     
                     if (d.children) {
                         // Currently expanded - collapse it
@@ -1769,14 +1782,16 @@
                     updateTree(d);
                 } else {
                     // Leaf node with normal click - show detail panel only for KPIs
-                    console.log('Leaf node clicked:', d.data.name, '| Type:', d.data.type);
+                    console.log('🍃 Leaf node (no children)');
                     
                     // Only show KPI cards for actual KPI nodes
                     if (d.data.level === 4 && d.data.type === 'kpi') {
+                        console.log('✅ This IS a KPI node (level 4)! Opening card...');
                         const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
                         
                         if (fullKpiData) {
-                            console.log('✅ Opening KPI card for:', d.data.name);
+                            console.log('✅ Found KPI data in nodes array');
+                            console.log('✅ Calling showInfoPanel...');
                             showInfoPanel(fullKpiData);
                         } else {
                             console.warn('⚠️ KPI data not found for:', d.data.id);
