@@ -21,104 +21,55 @@
     "level": 0,
     "children": [
       {
-        "name": "Patient Acquisition",
-        "id": "pillar_patient_acquisition",
+        "name": "Patient Access & Intake",
+        "id": "pillar_patient_access_and_intake",
         "level": 1,
         "children": [
           {
-            "name": "Lead Intake & Conversion",
-            "id": "macro_lead_intake_&_conversion",
+            "name": "Patient Acquisition",
+            "id": "macro_patient_acquisition",
             "level": 2,
             "children": [
               {
-                "name": "kpi_1_1_1",
-                "id": "cat_kpi_1_1_1",
+                "name": "Lead Intake & Conversion",
+                "id": "cat_lead_intake_and_conversion",
                 "level": 3,
                 "children": [
                   {
                     "name": "New Patient Lead Volume",
                     "id": "kpi_1_1_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_2",
-                "id": "cat_kpi_1_1_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Lead Source Mix - Google",
                     "id": "kpi_1_1_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_3",
-                "id": "cat_kpi_1_1_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Lead Source Mix - Referral",
                     "id": "kpi_1_1_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_4",
-                "id": "cat_kpi_1_1_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Lead Source Mix - Attorney",
                     "id": "kpi_1_1_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_5",
-                "id": "cat_kpi_1_1_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Conversion Rate by Source",
                     "id": "kpi_1_1_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_6",
-                "id": "cat_kpi_1_1_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Call Abandon Rate",
                     "id": "kpi_1_1_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_7",
-                "id": "cat_kpi_1_1_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Referral-to-Appointment Conversion",
                     "id": "kpi_1_1_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_1_8",
-                "id": "cat_kpi_1_1_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Referral Documentation Completeness",
                     "id": "kpi_1_1_8",
@@ -127,132 +78,62 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Scheduling & Appointment Mgmt",
-        "id": "pillar_scheduling_&_appointment_mgmt",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Access Efficiency",
-            "id": "macro_access_efficiency",
+            "name": "Scheduling & Appointment Mgmt",
+            "id": "macro_scheduling_and_appointment_mgmt",
             "level": 2,
             "children": [
               {
-                "name": "kpi_1_2_1",
-                "id": "cat_kpi_1_2_1",
+                "name": "Access Efficiency",
+                "id": "cat_access_efficiency",
                 "level": 3,
                 "children": [
                   {
                     "name": "Days to First Appointment",
                     "id": "kpi_1_2_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_2",
-                "id": "cat_kpi_1_2_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Slot Availability Rate",
                     "id": "kpi_1_2_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_3",
-                "id": "cat_kpi_1_2_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Provider Schedule Saturation",
                     "id": "kpi_1_2_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_4",
-                "id": "cat_kpi_1_2_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Insurance Clearance Delay",
                     "id": "kpi_1_2_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_5",
-                "id": "cat_kpi_1_2_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Appointment Wait Time In-Clinic",
                     "id": "kpi_1_2_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_6",
-                "id": "cat_kpi_1_2_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Check-in to Rooming Time",
                     "id": "kpi_1_2_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_7",
-                "id": "cat_kpi_1_2_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Rooming to Provider Time",
                     "id": "kpi_1_2_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_8",
-                "id": "cat_kpi_1_2_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "No-Show Rate",
                     "id": "kpi_1_2_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_9",
-                "id": "cat_kpi_1_2_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "No-Show Rate - New Patients",
                     "id": "kpi_1_2_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_2_10",
-                "id": "cat_kpi_1_2_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "No-Show Rate - Follow-ups",
                     "id": "kpi_1_2_10",
@@ -261,206 +142,101 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Intake Documentation",
-        "id": "pillar_intake_documentation",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Packet Completeness",
-            "id": "macro_packet_completeness",
+            "name": "Intake Documentation",
+            "id": "macro_intake_documentation",
             "level": 2,
             "children": [
               {
-                "name": "kpi_1_3_1",
-                "id": "cat_kpi_1_3_1",
+                "name": "Packet Completeness",
+                "id": "cat_packet_completeness",
                 "level": 3,
                 "children": [
                   {
                     "name": "Overall Packet Completeness Rate",
                     "id": "kpi_1_3_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_2",
-                "id": "cat_kpi_1_3_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Demographics Completeness",
                     "id": "kpi_1_3_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_3",
-                "id": "cat_kpi_1_3_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Insurance Card Upload Rate",
                     "id": "kpi_1_3_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_4",
-                "id": "cat_kpi_1_3_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Claim Number Documentation",
                     "id": "kpi_1_3_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_5",
-                "id": "cat_kpi_1_3_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Attorney Info Completeness",
                     "id": "kpi_1_3_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_6",
-                "id": "cat_kpi_1_3_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Imaging Upload Rate",
                     "id": "kpi_1_3_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_7",
-                "id": "cat_kpi_1_3_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Consent Forms Completion",
                     "id": "kpi_1_3_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_8",
-                "id": "cat_kpi_1_3_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Missing Packet Item Rate",
                     "id": "kpi_1_3_8",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Insurance Verification",
-            "id": "macro_insurance_verification",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_1_3_9",
-                "id": "cat_kpi_1_3_9",
+                "name": "Insurance Verification",
+                "id": "cat_insurance_verification",
                 "level": 3,
                 "children": [
                   {
                     "name": "Eligibility Verification Accuracy",
                     "id": "kpi_1_3_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_10",
-                "id": "cat_kpi_1_3_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Active Coverage Verification",
                     "id": "kpi_1_3_10",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_11",
-                "id": "cat_kpi_1_3_11",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Copay/Deductible Validation",
                     "id": "kpi_1_3_11",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_12",
-                "id": "cat_kpi_1_3_12",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Policy Dates Verification",
                     "id": "kpi_1_3_12",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_13",
-                "id": "cat_kpi_1_3_13",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Benefit Verification Turnaround",
                     "id": "kpi_1_3_13",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Financial Clearance",
-            "id": "macro_financial_clearance",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_1_3_14",
-                "id": "cat_kpi_1_3_14",
+                "name": "Financial Clearance",
+                "id": "cat_financial_clearance",
                 "level": 3,
                 "children": [
                   {
                     "name": "Pre-Visit Financial Clearance Rate",
                     "id": "kpi_1_3_14",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_3_15",
-                "id": "cat_kpi_1_3_15",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Prior Auth Required Identification",
                     "id": "kpi_1_3_15",
@@ -469,72 +245,37 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Clinical Pre-Visit Prep",
-        "id": "pillar_clinical_pre-visit_prep",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Records Readiness",
-            "id": "macro_records_readiness",
+            "name": "Clinical Pre-Visit Prep",
+            "id": "macro_clinical_pre-visit_prep",
             "level": 2,
             "children": [
               {
-                "name": "kpi_1_4_1",
-                "id": "cat_kpi_1_4_1",
+                "name": "Records Readiness",
+                "id": "cat_records_readiness",
                 "level": 3,
                 "children": [
                   {
                     "name": "Imaging Availability Before Visit",
                     "id": "kpi_1_4_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_4_2",
-                "id": "cat_kpi_1_4_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "MRI Upload Completeness",
                     "id": "kpi_1_4_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_4_3",
-                "id": "cat_kpi_1_4_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "X-Ray Upload Completeness",
                     "id": "kpi_1_4_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_4_4",
-                "id": "cat_kpi_1_4_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Radiologist Report Availability",
                     "id": "kpi_1_4_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_4_5",
-                "id": "cat_kpi_1_4_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Referral Notes Availability",
                     "id": "kpi_1_4_5",
@@ -543,60 +284,32 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Patient Experience",
-        "id": "pillar_patient_experience",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Service Quality",
-            "id": "macro_service_quality",
+            "name": "Patient Experience",
+            "id": "macro_patient_experience",
             "level": 2,
             "children": [
               {
-                "name": "kpi_1_5_1",
-                "id": "cat_kpi_1_5_1",
+                "name": "Service Quality",
+                "id": "cat_service_quality",
                 "level": 3,
                 "children": [
                   {
                     "name": "New Patient NPS",
                     "id": "kpi_1_5_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_5_2",
-                "id": "cat_kpi_1_5_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Intake Satisfaction Score",
                     "id": "kpi_1_5_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_5_3",
-                "id": "cat_kpi_1_5_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Staff Courtesy Rating",
                     "id": "kpi_1_5_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_1_5_4",
-                "id": "cat_kpi_1_5_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Process Speed Rating",
                     "id": "kpi_1_5_4",
@@ -609,178 +322,94 @@
         ]
       },
       {
-        "name": "Provider Documentation",
-        "id": "pillar_provider_documentation",
+        "name": "Clinical Operations",
+        "id": "pillar_clinical_operations",
         "level": 1,
         "children": [
           {
-            "name": "Note Completion",
-            "id": "macro_note_completion",
+            "name": "Provider Documentation",
+            "id": "macro_provider_documentation",
             "level": 2,
             "children": [
               {
-                "name": "kpi_2_1_1",
-                "id": "cat_kpi_2_1_1",
+                "name": "Note Completion",
+                "id": "cat_note_completion",
                 "level": 3,
                 "children": [
                   {
                     "name": "Provider Note Completion Rate 24h",
                     "id": "kpi_2_1_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_2",
-                "id": "cat_kpi_2_1_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Initial Note Completion",
                     "id": "kpi_2_1_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_3",
-                "id": "cat_kpi_2_1_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Addendum Requirement Rate",
                     "id": "kpi_2_1_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_4",
-                "id": "cat_kpi_2_1_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Late Documentation Count",
                     "id": "kpi_2_1_4",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Documentation Quality",
-            "id": "macro_documentation_quality",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_1_5",
-                "id": "cat_kpi_2_1_5",
+                "name": "Documentation Quality",
+                "id": "cat_documentation_quality",
                 "level": 3,
                 "children": [
                   {
                     "name": "Clinical Documentation Accuracy",
                     "id": "kpi_2_1_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_6",
-                "id": "cat_kpi_2_1_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "HPI Completeness",
                     "id": "kpi_2_1_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_7",
-                "id": "cat_kpi_2_1_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "ROS Completeness",
                     "id": "kpi_2_1_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_8",
-                "id": "cat_kpi_2_1_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Physical Exam Completeness",
                     "id": "kpi_2_1_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_9",
-                "id": "cat_kpi_2_1_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Assessment Plan Quality",
                     "id": "kpi_2_1_9",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Coding Alignment",
-            "id": "macro_coding_alignment",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_1_10",
-                "id": "cat_kpi_2_1_10",
+                "name": "Coding Alignment",
+                "id": "cat_coding_alignment",
                 "level": 3,
                 "children": [
                   {
                     "name": "Provider-to-Coder Match Rate",
                     "id": "kpi_2_1_10",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_11",
-                "id": "cat_kpi_2_1_11",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "CPT Justification Completeness",
                     "id": "kpi_2_1_11",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_12",
-                "id": "cat_kpi_2_1_12",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "ICD Linkage Correctness",
                     "id": "kpi_2_1_12",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_1_13",
-                "id": "cat_kpi_2_1_13",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Medical Necessity Documentation",
                     "id": "kpi_2_1_13",
@@ -789,103 +418,54 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Clinical Workflow",
-        "id": "pillar_clinical_workflow",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Patient Throughput",
-            "id": "macro_patient_throughput",
+            "name": "Clinical Workflow",
+            "id": "macro_clinical_workflow",
             "level": 2,
             "children": [
               {
-                "name": "kpi_2_2_1",
-                "id": "cat_kpi_2_2_1",
+                "name": "Patient Throughput",
+                "id": "cat_patient_throughput",
                 "level": 3,
                 "children": [
                   {
                     "name": "Rooming Time Efficiency",
                     "id": "kpi_2_2_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_2_2",
-                "id": "cat_kpi_2_2_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Provider Time per Encounter",
                     "id": "kpi_2_2_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_2_3",
-                "id": "cat_kpi_2_2_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "New Visit Duration",
                     "id": "kpi_2_2_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_2_4",
-                "id": "cat_kpi_2_2_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Follow-up Visit Duration",
                     "id": "kpi_2_2_4",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "EOD Closure",
-            "id": "macro_eod_closure",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_2_5",
-                "id": "cat_kpi_2_2_5",
+                "name": "EOD Closure",
+                "id": "cat_eod_closure",
                 "level": 3,
                 "children": [
                   {
                     "name": "EOD Clinical Closure Rate",
                     "id": "kpi_2_2_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_2_6",
-                "id": "cat_kpi_2_2_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Notes Closed EOD",
                     "id": "kpi_2_2_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_2_7",
-                "id": "cat_kpi_2_2_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Orders Signed EOD",
                     "id": "kpi_2_2_7",
@@ -894,146 +474,76 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Orders Management",
-        "id": "pillar_orders_management",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Diagnostic Orders",
-            "id": "macro_diagnostic_orders",
+            "name": "Orders Management",
+            "id": "macro_orders_management",
             "level": 2,
             "children": [
               {
-                "name": "kpi_2_3_1",
-                "id": "cat_kpi_2_3_1",
+                "name": "Diagnostic Orders",
+                "id": "cat_diagnostic_orders",
                 "level": 3,
                 "children": [
                   {
                     "name": "Imaging Order Accuracy",
                     "id": "kpi_2_3_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_2",
-                "id": "cat_kpi_2_3_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "CPT Accuracy MRI/XR",
                     "id": "kpi_2_3_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_3",
-                "id": "cat_kpi_2_3_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Laterality Correctness",
                     "id": "kpi_2_3_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_4",
-                "id": "cat_kpi_2_3_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "ICD Linkage Imaging",
                     "id": "kpi_2_3_4",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Lab Orders",
-            "id": "macro_lab_orders",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_3_5",
-                "id": "cat_kpi_2_3_5",
+                "name": "Lab Orders",
+                "id": "cat_lab_orders",
                 "level": 3,
                 "children": [
                   {
                     "name": "Lab Order Timeliness",
                     "id": "kpi_2_3_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_6",
-                "id": "cat_kpi_2_3_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Critical Lab Follow-up SLA",
                     "id": "kpi_2_3_6",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Prescriptions",
-            "id": "macro_prescriptions",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_3_7",
-                "id": "cat_kpi_2_3_7",
+                "name": "Prescriptions",
+                "id": "cat_prescriptions",
                 "level": 3,
                 "children": [
                   {
                     "name": "Controlled Substance Compliance",
                     "id": "kpi_2_3_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_8",
-                "id": "cat_kpi_2_3_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "I-STOP Verification Rate",
                     "id": "kpi_2_3_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_9",
-                "id": "cat_kpi_2_3_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "UDS Compliance Rate",
                     "id": "kpi_2_3_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_3_10",
-                "id": "cat_kpi_2_3_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "PDMP Audit Completion",
                     "id": "kpi_2_3_10",
@@ -1042,122 +552,66 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Provider Performance",
-        "id": "pillar_provider_performance",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Productivity",
-            "id": "macro_productivity",
+            "name": "Provider Performance",
+            "id": "macro_provider_performance",
             "level": 2,
             "children": [
               {
-                "name": "kpi_2_4_1",
-                "id": "cat_kpi_2_4_1",
+                "name": "Productivity",
+                "id": "cat_productivity",
                 "level": 3,
                 "children": [
                   {
                     "name": "RVU per Provider Monthly",
                     "id": "kpi_2_4_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_4_2",
-                "id": "cat_kpi_2_4_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "RVU per Encounter",
                     "id": "kpi_2_4_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_4_3",
-                "id": "cat_kpi_2_4_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "RVU per Hour",
                     "id": "kpi_2_4_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Utilization",
-            "id": "macro_utilization",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_4_4",
-                "id": "cat_kpi_2_4_4",
+                "name": "Utilization",
+                "id": "cat_utilization",
                 "level": 3,
                 "children": [
                   {
                     "name": "Provider Utilization Rate",
                     "id": "kpi_2_4_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_4_5",
-                "id": "cat_kpi_2_4_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Template Fill Percentage",
                     "id": "kpi_2_4_5",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Clinical Errors",
-            "id": "macro_clinical_errors",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_4_6",
-                "id": "cat_kpi_2_4_6",
+                "name": "Clinical Errors",
+                "id": "cat_clinical_errors",
                 "level": 3,
                 "children": [
                   {
                     "name": "Clinical Documentation Error Rate",
                     "id": "kpi_2_4_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_4_7",
-                "id": "cat_kpi_2_4_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Missing Diagnosis Rate",
                     "id": "kpi_2_4_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_4_8",
-                "id": "cat_kpi_2_4_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Incorrect ICD Severity",
                     "id": "kpi_2_4_8",
@@ -1166,77 +620,42 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Care Quality & Safety",
-        "id": "pillar_care_quality_&_safety",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Patient Safety",
-            "id": "macro_patient_safety",
+            "name": "Care Quality & Safety",
+            "id": "macro_care_quality_and_safety",
             "level": 2,
             "children": [
               {
-                "name": "kpi_2_5_1",
-                "id": "cat_kpi_2_5_1",
+                "name": "Patient Safety",
+                "id": "cat_patient_safety",
                 "level": 3,
                 "children": [
                   {
                     "name": "Adverse Event Rate",
                     "id": "kpi_2_5_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_5_2",
-                "id": "cat_kpi_2_5_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Medication Error Rate",
                     "id": "kpi_2_5_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_5_3",
-                "id": "cat_kpi_2_5_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Patient Fall Rate",
                     "id": "kpi_2_5_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_2_5_4",
-                "id": "cat_kpi_2_5_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Infection Control Compliance",
                     "id": "kpi_2_5_4",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Care Coordination",
-            "id": "macro_care_coordination",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_2_5_5",
-                "id": "cat_kpi_2_5_5",
+                "name": "Care Coordination",
+                "id": "cat_care_coordination",
                 "level": 3,
                 "children": [
                   {
@@ -1251,68 +670,40 @@
         ]
       },
       {
-        "name": "Surgical Candidacy",
-        "id": "pillar_surgical_candidacy",
+        "name": "Surgical Coordination",
+        "id": "pillar_surgical_coordination",
         "level": 1,
         "children": [
           {
-            "name": "Pre-Surgical Requirements",
-            "id": "macro_pre-surgical_requirements",
+            "name": "Surgical Candidacy",
+            "id": "macro_surgical_candidacy",
             "level": 2,
             "children": [
               {
-                "name": "kpi_3_1_1",
-                "id": "cat_kpi_3_1_1",
+                "name": "Pre-Surgical Requirements",
+                "id": "cat_pre-surgical_requirements",
                 "level": 3,
                 "children": [
                   {
                     "name": "Surgical Candidacy Compliance",
                     "id": "kpi_3_1_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_1_2",
-                "id": "cat_kpi_3_1_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "MRI within 6 Months",
                     "id": "kpi_3_1_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_1_3",
-                "id": "cat_kpi_3_1_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "X-Ray within 3 Months",
                     "id": "kpi_3_1_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_1_4",
-                "id": "cat_kpi_3_1_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Conservative Therapy Documentation",
                     "id": "kpi_3_1_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_1_5",
-                "id": "cat_kpi_3_1_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Surgical Recommendation Documentation",
                     "id": "kpi_3_1_5",
@@ -1321,139 +712,69 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Pre-Cert & Authorization",
-        "id": "pillar_pre-cert_&_authorization",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Authorization Workflow",
-            "id": "macro_authorization_workflow",
+            "name": "Pre-Cert & Authorization",
+            "id": "macro_pre-cert_and_authorization",
             "level": 2,
             "children": [
               {
-                "name": "kpi_3_2_1",
-                "id": "cat_kpi_3_2_1",
+                "name": "Authorization Workflow",
+                "id": "cat_authorization_workflow",
                 "level": 3,
                 "children": [
                   {
                     "name": "Authorization Approval Rate",
                     "id": "kpi_3_2_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_2",
-                "id": "cat_kpi_3_2_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Correct CPT Submission",
                     "id": "kpi_3_2_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_3",
-                "id": "cat_kpi_3_2_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "ICD CPT Linkage Accuracy",
                     "id": "kpi_3_2_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_4",
-                "id": "cat_kpi_3_2_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Imaging Attachment Rate",
                     "id": "kpi_3_2_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_5",
-                "id": "cat_kpi_3_2_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Clinical Notes Compliance",
                     "id": "kpi_3_2_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_6",
-                "id": "cat_kpi_3_2_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Payer Criteria Met Rate",
                     "id": "kpi_3_2_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_7",
-                "id": "cat_kpi_3_2_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Authorization Turnaround Time",
                     "id": "kpi_3_2_7",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Medical Necessity",
-            "id": "macro_medical_necessity",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_3_2_8",
-                "id": "cat_kpi_3_2_8",
+                "name": "Medical Necessity",
+                "id": "cat_medical_necessity",
                 "level": 3,
                 "children": [
                   {
                     "name": "Medical Necessity Package Completeness",
                     "id": "kpi_3_2_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_9",
-                "id": "cat_kpi_3_2_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Conservative Care Documentation",
                     "id": "kpi_3_2_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_2_10",
-                "id": "cat_kpi_3_2_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "CPT Justification Narrative Quality",
                     "id": "kpi_3_2_10",
@@ -1462,163 +783,79 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Surgical Scheduling",
-        "id": "pillar_surgical_scheduling",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "OR Scheduling",
-            "id": "macro_or_scheduling",
+            "name": "Surgical Scheduling",
+            "id": "macro_surgical_scheduling",
             "level": 2,
             "children": [
               {
-                "name": "kpi_3_3_1",
-                "id": "cat_kpi_3_3_1",
+                "name": "OR Scheduling",
+                "id": "cat_or_scheduling",
                 "level": 3,
                 "children": [
                   {
                     "name": "Surgery Scheduling Lead Time",
                     "id": "kpi_3_3_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_2",
-                "id": "cat_kpi_3_3_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Provider Calendar Availability",
                     "id": "kpi_3_3_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_3",
-                "id": "cat_kpi_3_3_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Patient Readiness Rate",
                     "id": "kpi_3_3_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_4",
-                "id": "cat_kpi_3_3_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Insurance Surgical Clearance",
                     "id": "kpi_3_3_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_5",
-                "id": "cat_kpi_3_3_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Facility Availability Rate",
                     "id": "kpi_3_3_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_6",
-                "id": "cat_kpi_3_3_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "EOD Surgical Deployment Rate",
                     "id": "kpi_3_3_6",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "OR Utilization",
-            "id": "macro_or_utilization",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_3_3_7",
-                "id": "cat_kpi_3_3_7",
+                "name": "OR Utilization",
+                "id": "cat_or_utilization",
                 "level": 3,
                 "children": [
                   {
                     "name": "OR Block Utilization Rate",
                     "id": "kpi_3_3_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_8",
-                "id": "cat_kpi_3_3_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Case Duration Variance",
                     "id": "kpi_3_3_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_9",
-                "id": "cat_kpi_3_3_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "First Case On-Time Start",
                     "id": "kpi_3_3_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_10",
-                "id": "cat_kpi_3_3_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Surgery Cancellation Rate",
                     "id": "kpi_3_3_10",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_11",
-                "id": "cat_kpi_3_3_11",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "No Auth Cancellation Rate",
                     "id": "kpi_3_3_11",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_3_12",
-                "id": "cat_kpi_3_3_12",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Patient Readiness Failure Rate",
                     "id": "kpi_3_3_12",
@@ -1627,91 +864,49 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Post-Op Care",
-        "id": "pillar_post-op_care",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Post-Op Compliance",
-            "id": "macro_post-op_compliance",
+            "name": "Post-Op Care",
+            "id": "macro_post-op_care",
             "level": 2,
             "children": [
               {
-                "name": "kpi_3_4_1",
-                "id": "cat_kpi_3_4_1",
+                "name": "Post-Op Compliance",
+                "id": "cat_post-op_compliance",
                 "level": 3,
                 "children": [
                   {
                     "name": "Post-Op Visit Compliance",
                     "id": "kpi_3_4_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_4_2",
-                "id": "cat_kpi_3_4_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Follow-up within 7 Days",
                     "id": "kpi_3_4_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_4_3",
-                "id": "cat_kpi_3_4_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Follow-up within 30 Days",
                     "id": "kpi_3_4_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Complications",
-            "id": "macro_complications",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_3_4_4",
-                "id": "cat_kpi_3_4_4",
+                "name": "Complications",
+                "id": "cat_complications",
                 "level": 3,
                 "children": [
                   {
                     "name": "Post-Op Complication Rate",
                     "id": "kpi_3_4_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_4_5",
-                "id": "cat_kpi_3_4_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Surgical Site Infection Rate",
                     "id": "kpi_3_4_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_4_6",
-                "id": "cat_kpi_3_4_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Post-Op Neurologic Deficit",
                     "id": "kpi_3_4_6",
@@ -1720,79 +915,44 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Surgical Billing",
-        "id": "pillar_surgical_billing",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Billing Lag",
-            "id": "macro_billing_lag",
+            "name": "Surgical Billing",
+            "id": "macro_surgical_billing",
             "level": 2,
             "children": [
               {
-                "name": "kpi_3_5_1",
-                "id": "cat_kpi_3_5_1",
+                "name": "Billing Lag",
+                "id": "cat_billing_lag",
                 "level": 3,
                 "children": [
                   {
                     "name": "Surgery to Billing Lag Time",
                     "id": "kpi_3_5_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_5_2",
-                "id": "cat_kpi_3_5_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Op Note Completion Time",
                     "id": "kpi_3_5_2",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Coding Accuracy",
-            "id": "macro_coding_accuracy",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_3_5_3",
-                "id": "cat_kpi_3_5_3",
+                "name": "Coding Accuracy",
+                "id": "cat_coding_accuracy",
                 "level": 3,
                 "children": [
                   {
                     "name": "Surgical CPT ICD Accuracy",
                     "id": "kpi_3_5_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_5_4",
-                "id": "cat_kpi_3_5_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "CPT Modifier Accuracy",
                     "id": "kpi_3_5_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_3_5_5",
-                "id": "cat_kpi_3_5_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Bundling Compliance Rate",
                     "id": "kpi_3_5_5",
@@ -1805,92 +965,50 @@
         ]
       },
       {
-        "name": "Pre-Billing Readiness",
-        "id": "pillar_pre-billing_readiness",
+        "name": "Revenue Cycle Management",
+        "id": "pillar_revenue_cycle_management",
         "level": 1,
         "children": [
           {
-            "name": "Clinical to Coding",
-            "id": "macro_clinical_to_coding",
+            "name": "Pre-Billing Readiness",
+            "id": "macro_pre-billing_readiness",
             "level": 2,
             "children": [
               {
-                "name": "kpi_4_1_1",
-                "id": "cat_kpi_4_1_1",
+                "name": "Clinical to Coding",
+                "id": "cat_clinical_to_coding",
                 "level": 3,
                 "children": [
                   {
                     "name": "Clinical Doc to Coding Accuracy",
                     "id": "kpi_4_1_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_1_2",
-                "id": "cat_kpi_4_1_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Provider Note Completeness for Coding",
                     "id": "kpi_4_1_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_1_3",
-                "id": "cat_kpi_4_1_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Injury Causality Documentation",
                     "id": "kpi_4_1_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_1_4",
-                "id": "cat_kpi_4_1_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Imaging Documentation Linkage",
                     "id": "kpi_4_1_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_1_5",
-                "id": "cat_kpi_4_1_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Medical Necessity for Coding",
                     "id": "kpi_4_1_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_1_6",
-                "id": "cat_kpi_4_1_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Coding Lag Time",
                     "id": "kpi_4_1_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_1_7",
-                "id": "cat_kpi_4_1_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Encounters Awaiting Signatures",
                     "id": "kpi_4_1_7",
@@ -1899,175 +1017,84 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Claim Creation",
-        "id": "pillar_claim_creation",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Scrubbing & Edits",
-            "id": "macro_scrubbing_&_edits",
+            "name": "Claim Creation",
+            "id": "macro_claim_creation",
             "level": 2,
             "children": [
               {
-                "name": "kpi_4_2_1",
-                "id": "cat_kpi_4_2_1",
+                "name": "Scrubbing & Edits",
+                "id": "cat_scrubbing_and_edits",
                 "level": 3,
                 "children": [
                   {
                     "name": "Claim Scrubbing Accuracy",
                     "id": "kpi_4_2_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_2",
-                "id": "cat_kpi_4_2_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Demographic Error Rate",
                     "id": "kpi_4_2_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_3",
-                "id": "cat_kpi_4_2_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Insurance Mismatch Rate",
                     "id": "kpi_4_2_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_4",
-                "id": "cat_kpi_4_2_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Policy Termination Detection",
                     "id": "kpi_4_2_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_5",
-                "id": "cat_kpi_4_2_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Missing Auth Number Rate",
                     "id": "kpi_4_2_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_6",
-                "id": "cat_kpi_4_2_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "CPT ICD Mismatch Rate",
                     "id": "kpi_4_2_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_7",
-                "id": "cat_kpi_4_2_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Modifier Error Rate",
                     "id": "kpi_4_2_7",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Clean Claims",
-            "id": "macro_clean_claims",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_4_2_8",
-                "id": "cat_kpi_4_2_8",
+                "name": "Clean Claims",
+                "id": "cat_clean_claims",
                 "level": 3,
                 "children": [
                   {
                     "name": "Clean Claim Rate",
                     "id": "kpi_4_2_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_9",
-                "id": "cat_kpi_4_2_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Error-Free Submission Rate",
                     "id": "kpi_4_2_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_10",
-                "id": "cat_kpi_4_2_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Claim Submission Lag",
                     "id": "kpi_4_2_10",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_11",
-                "id": "cat_kpi_4_2_11",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Lag by Commercial Payers",
                     "id": "kpi_4_2_11",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_12",
-                "id": "cat_kpi_4_2_12",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Lag by WC Payers",
                     "id": "kpi_4_2_12",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_2_13",
-                "id": "cat_kpi_4_2_13",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Lag by PIP Payers",
                     "id": "kpi_4_2_13",
@@ -2076,163 +1103,79 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Payer Response",
-        "id": "pillar_payer_response",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "First Pass Success",
-            "id": "macro_first_pass_success",
+            "name": "Payer Response",
+            "id": "macro_payer_response",
             "level": 2,
             "children": [
               {
-                "name": "kpi_4_3_1",
-                "id": "cat_kpi_4_3_1",
+                "name": "First Pass Success",
+                "id": "cat_first_pass_success",
                 "level": 3,
                 "children": [
                   {
                     "name": "First Pass Acceptance FPA",
                     "id": "kpi_4_3_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_2",
-                "id": "cat_kpi_4_3_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "FPA - Commercial Insurance",
                     "id": "kpi_4_3_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_3",
-                "id": "cat_kpi_4_3_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "FPA - Workers Comp",
                     "id": "kpi_4_3_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_4",
-                "id": "cat_kpi_4_3_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "FPA - PIP No-Fault",
                     "id": "kpi_4_3_4",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Denial Management",
-            "id": "macro_denial_management",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_4_3_5",
-                "id": "cat_kpi_4_3_5",
+                "name": "Denial Management",
+                "id": "cat_denial_management",
                 "level": 3,
                 "children": [
                   {
                     "name": "Overall Denial Rate",
                     "id": "kpi_4_3_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_6",
-                "id": "cat_kpi_4_3_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Technical Denial Rate",
                     "id": "kpi_4_3_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_7",
-                "id": "cat_kpi_4_3_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Clinical Denial Rate",
                     "id": "kpi_4_3_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_8",
-                "id": "cat_kpi_4_3_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "No-Auth Denial Rate",
                     "id": "kpi_4_3_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_9",
-                "id": "cat_kpi_4_3_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Timely Filing Denial Rate",
                     "id": "kpi_4_3_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_10",
-                "id": "cat_kpi_4_3_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Eligibility Denial Rate",
                     "id": "kpi_4_3_10",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_11",
-                "id": "cat_kpi_4_3_11",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Denial Recovery Rate",
                     "id": "kpi_4_3_11",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_3_12",
-                "id": "cat_kpi_4_3_12",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Denial Recovery Turnaround",
                     "id": "kpi_4_3_12",
@@ -2241,91 +1184,49 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Appeals",
-        "id": "pillar_appeals",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Appeal Performance",
-            "id": "macro_appeal_performance",
+            "name": "Appeals",
+            "id": "macro_appeals",
             "level": 2,
             "children": [
               {
-                "name": "kpi_4_4_1",
-                "id": "cat_kpi_4_4_1",
+                "name": "Appeal Performance",
+                "id": "cat_appeal_performance",
                 "level": 3,
                 "children": [
                   {
                     "name": "Appeal Success Rate",
                     "id": "kpi_4_4_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_4_2",
-                "id": "cat_kpi_4_4_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Appeal Overturn Rate",
                     "id": "kpi_4_4_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_4_3",
-                "id": "cat_kpi_4_4_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Appeal Documentation Quality",
                     "id": "kpi_4_4_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_4_4",
-                "id": "cat_kpi_4_4_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Appeal SLA Compliance",
                     "id": "kpi_4_4_4",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Underpayment",
-            "id": "macro_underpayment",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_4_4_5",
-                "id": "cat_kpi_4_4_5",
+                "name": "Underpayment",
+                "id": "cat_underpayment",
                 "level": 3,
                 "children": [
                   {
                     "name": "Underpayment Detection Rate",
                     "id": "kpi_4_4_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_4_6",
-                "id": "cat_kpi_4_4_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Allowed vs Paid Variance",
                     "id": "kpi_4_4_6",
@@ -2334,139 +1235,69 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "AR & Cash Posting",
-        "id": "pillar_ar_&_cash_posting",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "AR Aging",
-            "id": "macro_ar_aging",
+            "name": "AR & Cash Posting",
+            "id": "macro_ar_and_cash_posting",
             "level": 2,
             "children": [
               {
-                "name": "kpi_4_5_1",
-                "id": "cat_kpi_4_5_1",
+                "name": "AR Aging",
+                "id": "cat_ar_aging",
                 "level": 3,
                 "children": [
                   {
                     "name": "AR Days Overall",
                     "id": "kpi_4_5_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_2",
-                "id": "cat_kpi_4_5_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "AR 0-30 Days",
                     "id": "kpi_4_5_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_3",
-                "id": "cat_kpi_4_5_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "AR 31-60 Days",
                     "id": "kpi_4_5_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_4",
-                "id": "cat_kpi_4_5_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "AR 61-90 Days",
                     "id": "kpi_4_5_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_5",
-                "id": "cat_kpi_4_5_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "AR Over 90 Days",
                     "id": "kpi_4_5_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_6",
-                "id": "cat_kpi_4_5_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "AR Over 120 Days",
                     "id": "kpi_4_5_6",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Cash Posting",
-            "id": "macro_cash_posting",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_4_5_7",
-                "id": "cat_kpi_4_5_7",
+                "name": "Cash Posting",
+                "id": "cat_cash_posting",
                 "level": 3,
                 "children": [
                   {
                     "name": "Payment Posting Accuracy",
                     "id": "kpi_4_5_7",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_8",
-                "id": "cat_kpi_4_5_8",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Posting Error Rate",
                     "id": "kpi_4_5_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_9",
-                "id": "cat_kpi_4_5_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Adjustment Accuracy",
                     "id": "kpi_4_5_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_5_10",
-                "id": "cat_kpi_4_5_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Payment Posting Lag",
                     "id": "kpi_4_5_10",
@@ -2475,163 +1306,79 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Financial Performance",
-        "id": "pillar_financial_performance",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Collections",
-            "id": "macro_collections",
+            "name": "Financial Performance",
+            "id": "macro_financial_performance",
             "level": 2,
             "children": [
               {
-                "name": "kpi_4_6_1",
-                "id": "cat_kpi_4_6_1",
+                "name": "Collections",
+                "id": "cat_collections",
                 "level": 3,
                 "children": [
                   {
                     "name": "Net Collection Rate NCR",
                     "id": "kpi_4_6_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_2",
-                "id": "cat_kpi_4_6_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Gross Collection Rate",
                     "id": "kpi_4_6_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_3",
-                "id": "cat_kpi_4_6_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Adjusted Collection Rate",
                     "id": "kpi_4_6_3",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_4",
-                "id": "cat_kpi_4_6_4",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Days in AR",
                     "id": "kpi_4_6_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_5",
-                "id": "cat_kpi_4_6_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Collection Rate - Commercial",
                     "id": "kpi_4_6_5",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_6",
-                "id": "cat_kpi_4_6_6",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Collection Rate - WC",
                     "id": "kpi_4_6_6",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_7",
-                "id": "cat_kpi_4_6_7",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Collection Rate - PIP",
                     "id": "kpi_4_6_7",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Write-Off & Compliance",
-            "id": "macro_write-off_&_compliance",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_4_6_8",
-                "id": "cat_kpi_4_6_8",
+                "name": "Write-Off & Compliance",
+                "id": "cat_write-off_and_compliance",
                 "level": 3,
                 "children": [
                   {
                     "name": "Timely Filing Compliance",
                     "id": "kpi_4_6_8",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_9",
-                "id": "cat_kpi_4_6_9",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Timely Filing Denial Count",
                     "id": "kpi_4_6_9",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_10",
-                "id": "cat_kpi_4_6_10",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Total Write-Off Rate",
                     "id": "kpi_4_6_10",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_11",
-                "id": "cat_kpi_4_6_11",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Avoidable Write-Off Rate",
                     "id": "kpi_4_6_11",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_4_6_12",
-                "id": "cat_kpi_4_6_12",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Contractual Adjustment Rate",
                     "id": "kpi_4_6_12",
@@ -2644,75 +1391,47 @@
         ]
       },
       {
-        "name": "Regulatory Compliance",
-        "id": "pillar_regulatory_compliance",
+        "name": "Compliance & Risk Management",
+        "id": "pillar_compliance_and_risk_management",
         "level": 1,
         "children": [
           {
-            "name": "HIPAA Compliance",
-            "id": "macro_hipaa_compliance",
+            "name": "Regulatory Compliance",
+            "id": "macro_regulatory_compliance",
             "level": 2,
             "children": [
               {
-                "name": "kpi_5_1_1",
-                "id": "cat_kpi_5_1_1",
+                "name": "HIPAA Compliance",
+                "id": "cat_hipaa_compliance",
                 "level": 3,
                 "children": [
                   {
                     "name": "HIPAA Training Completion",
                     "id": "kpi_5_1_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_1_2",
-                "id": "cat_kpi_5_1_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "PHI Access Audit Compliance",
                     "id": "kpi_5_1_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_1_3",
-                "id": "cat_kpi_5_1_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Breach Incident Rate",
                     "id": "kpi_5_1_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Clinical Compliance",
-            "id": "macro_clinical_compliance",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_5_1_4",
-                "id": "cat_kpi_5_1_4",
+                "name": "Clinical Compliance",
+                "id": "cat_clinical_compliance",
                 "level": 3,
                 "children": [
                   {
                     "name": "Medical Record Compliance Score",
                     "id": "kpi_5_1_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_1_5",
-                "id": "cat_kpi_5_1_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Controlled Substance Audit Score",
                     "id": "kpi_5_1_5",
@@ -2721,79 +1440,44 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Risk Management",
-        "id": "pillar_risk_management",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Clinical Risk",
-            "id": "macro_clinical_risk",
+            "name": "Risk Management",
+            "id": "macro_risk_management",
             "level": 2,
             "children": [
               {
-                "name": "kpi_5_2_1",
-                "id": "cat_kpi_5_2_1",
+                "name": "Clinical Risk",
+                "id": "cat_clinical_risk",
                 "level": 3,
                 "children": [
                   {
                     "name": "Incident Report Completion Rate",
                     "id": "kpi_5_2_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_2_2",
-                "id": "cat_kpi_5_2_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Risk Event Closure Time",
                     "id": "kpi_5_2_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_2_3",
-                "id": "cat_kpi_5_2_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Near Miss Reporting Rate",
                     "id": "kpi_5_2_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Financial Risk",
-            "id": "macro_financial_risk",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_5_2_4",
-                "id": "cat_kpi_5_2_4",
+                "name": "Financial Risk",
+                "id": "cat_financial_risk",
                 "level": 3,
                 "children": [
                   {
                     "name": "Fraud Detection Rate",
                     "id": "kpi_5_2_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_2_5",
-                "id": "cat_kpi_5_2_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Overpayment Recovery Rate",
                     "id": "kpi_5_2_5",
@@ -2802,79 +1486,44 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Quality Assurance",
-        "id": "pillar_quality_assurance",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Clinical Quality",
-            "id": "macro_clinical_quality",
+            "name": "Quality Assurance",
+            "id": "macro_quality_assurance",
             "level": 2,
             "children": [
               {
-                "name": "kpi_5_3_1",
-                "id": "cat_kpi_5_3_1",
+                "name": "Clinical Quality",
+                "id": "cat_clinical_quality",
                 "level": 3,
                 "children": [
                   {
                     "name": "Clinical Quality Score",
                     "id": "kpi_5_3_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_3_2",
-                "id": "cat_kpi_5_3_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Peer Review Completion Rate",
                     "id": "kpi_5_3_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_3_3",
-                "id": "cat_kpi_5_3_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Quality Improvement Initiatives",
                     "id": "kpi_5_3_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Billing Quality",
-            "id": "macro_billing_quality",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_5_3_4",
-                "id": "cat_kpi_5_3_4",
+                "name": "Billing Quality",
+                "id": "cat_billing_quality",
                 "level": 3,
                 "children": [
                   {
                     "name": "Coding Audit Pass Rate",
                     "id": "kpi_5_3_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_3_5",
-                "id": "cat_kpi_5_3_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Billing Compliance Score",
                     "id": "kpi_5_3_5",
@@ -2883,79 +1532,44 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Credentialing",
-        "id": "pillar_credentialing",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Provider Credentialing",
-            "id": "macro_provider_credentialing",
+            "name": "Credentialing",
+            "id": "macro_credentialing",
             "level": 2,
             "children": [
               {
-                "name": "kpi_5_4_1",
-                "id": "cat_kpi_5_4_1",
+                "name": "Provider Credentialing",
+                "id": "cat_provider_credentialing",
                 "level": 3,
                 "children": [
                   {
                     "name": "Provider Credentialing Current",
                     "id": "kpi_5_4_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_4_2",
-                "id": "cat_kpi_5_4_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "License Renewal Compliance",
                     "id": "kpi_5_4_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_4_3",
-                "id": "cat_kpi_5_4_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "DEA Renewal Compliance",
                     "id": "kpi_5_4_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Staff Credentialing",
-            "id": "macro_staff_credentialing",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_5_4_4",
-                "id": "cat_kpi_5_4_4",
+                "name": "Staff Credentialing",
+                "id": "cat_staff_credentialing",
                 "level": 3,
                 "children": [
                   {
                     "name": "Staff Certification Current",
                     "id": "kpi_5_4_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_4_5",
-                "id": "cat_kpi_5_4_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Continuing Education Compliance",
                     "id": "kpi_5_4_5",
@@ -2964,79 +1578,44 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Audit & Monitoring",
-        "id": "pillar_audit_&_monitoring",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Internal Audits",
-            "id": "macro_internal_audits",
+            "name": "Audit & Monitoring",
+            "id": "macro_audit_and_monitoring",
             "level": 2,
             "children": [
               {
-                "name": "kpi_5_5_1",
-                "id": "cat_kpi_5_5_1",
+                "name": "Internal Audits",
+                "id": "cat_internal_audits",
                 "level": 3,
                 "children": [
                   {
                     "name": "Internal Audit Completion Rate",
                     "id": "kpi_5_5_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_5_2",
-                "id": "cat_kpi_5_5_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Audit Finding Closure Rate",
                     "id": "kpi_5_5_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_5_3",
-                "id": "cat_kpi_5_5_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "High Risk Finding Rate",
                     "id": "kpi_5_5_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "External Audits",
-            "id": "macro_external_audits",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_5_5_4",
-                "id": "cat_kpi_5_5_4",
+                "name": "External Audits",
+                "id": "cat_external_audits",
                 "level": 3,
                 "children": [
                   {
                     "name": "External Audit Pass Rate",
                     "id": "kpi_5_5_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_5_5",
-                "id": "cat_kpi_5_5_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Payer Audit Deficiency Rate",
                     "id": "kpi_5_5_5",
@@ -3045,79 +1624,44 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Policy Management",
-        "id": "pillar_policy_management",
-        "level": 1,
-        "children": [
+          },
           {
-            "name": "Policy Compliance",
-            "id": "macro_policy_compliance",
+            "name": "Policy Management",
+            "id": "macro_policy_management",
             "level": 2,
             "children": [
               {
-                "name": "kpi_5_6_1",
-                "id": "cat_kpi_5_6_1",
+                "name": "Policy Compliance",
+                "id": "cat_policy_compliance",
                 "level": 3,
                 "children": [
                   {
                     "name": "Policy Acknowledgment Rate",
                     "id": "kpi_5_6_1",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_6_2",
-                "id": "cat_kpi_5_6_2",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Policy Review Currency",
                     "id": "kpi_5_6_2",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_6_3",
-                "id": "cat_kpi_5_6_3",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Policy Violation Rate",
                     "id": "kpi_5_6_3",
                     "level": 4
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "name": "Training",
-            "id": "macro_training",
-            "level": 2,
-            "children": [
+              },
               {
-                "name": "kpi_5_6_4",
-                "id": "cat_kpi_5_6_4",
+                "name": "Training",
+                "id": "cat_training",
                 "level": 3,
                 "children": [
                   {
                     "name": "Annual Training Completion",
                     "id": "kpi_5_6_4",
                     "level": 4
-                  }
-                ]
-              },
-              {
-                "name": "kpi_5_6_5",
-                "id": "cat_kpi_5_6_5",
-                "level": 3,
-                "children": [
+                  },
                   {
                     "name": "Training Effectiveness Score",
                     "id": "kpi_5_6_5",
