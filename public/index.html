@@ -1537,16 +1537,16 @@
             console.log('Root hierarchy created with', root.descendants().length, 'total nodes');
 
             root.descendants().forEach(d => {
-                // Start with only first 2 levels expanded (Root + Main Categories)
-                // This allows users to click and expand individual categories
-                if (d.depth > 1) {
+                // Start with first 3 levels expanded to show Category nodes
+                // KPI nodes (level 4) are one click away
+                if (d.depth > 2) {
                     d._children = d.children;
                     d.children = null;
                 }
             });
 
             const expandedNodes = root.descendants().filter(d => d.children !== null);
-            console.log('Expanded nodes (depth <= 3):', expandedNodes.length);
+            console.log('Expanded nodes (depth <= 2):', expandedNodes.length);
 
             treeLayout = d3.tree()
                 .size([height * 1.8, width * 1.5])
