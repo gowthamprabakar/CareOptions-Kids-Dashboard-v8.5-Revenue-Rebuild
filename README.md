@@ -1,13 +1,12 @@
-# CareOptions for Kids - Revenue Cycle Management Dashboard v8.5
+# New York Spine Specialists (NYSS) - Patient Access & Intake Dashboard
 
 ## 🏥 Overview
 
-A comprehensive executive intelligence system for **CareOptions for Kids** healthcare revenue cycle management, featuring 101 KPIs across 9 critical categories with complete **10-layer decision intelligence** for each metric, including AI-powered root cause analysis, predictive insights, and detailed action plans.
+A comprehensive executive intelligence system for **New York Spine Specialists (NYSS)** focusing on Patient Access & Intake operations, featuring **14 strategic KPIs** across 5 macro processes with complete **10-layer decision intelligence** for each metric, including AI-powered root cause analysis, predictive insights, and detailed action plans.
 
-**Rebuilt on modern infrastructure:** Hono + TypeScript + Cloudflare Pages
-
-**Client:** CareOptions for Kids - Pediatric Healthcare Provider  
-**Branding:** Playful, child-friendly color palette with professional healthcare analytics
+**Built on:** Hono + TypeScript + Cloudflare Pages  
+**Organization:** New York Spine Specialists (NYSS)  
+**Focus:** Pillar 1 - Patient Access & Intake  
 
 ## 🌐 Live Dashboard
 
@@ -19,7 +18,7 @@ A comprehensive executive intelligence system for **CareOptions for Kids** healt
 🔗 Access: `/` or `/index.html`
 
 **Features:**
-- Interactive D3.js hierarchical tree with 101 nodes
+- Interactive D3.js hierarchical tree with 14 KPI nodes
 - **Normal Click:** Expand/collapse nodes to explore tree structure
 - **Shift+Click:** Open complete 10-layer intelligence card
 - Tree expands horizontally (left to right) with +/- indicators
@@ -30,186 +29,142 @@ A comprehensive executive intelligence system for **CareOptions for Kids** healt
 🔗 Access: `/command-center.html`
 
 **Features:**
-- Complete table view of all 101 KPIs
+- Complete table view of all 14 KPIs
 - Filter by RAG status (Red/Amber/Green/All)
 - Search functionality across all metrics
 - Sort by any column
 - **Click any row for same 10-layer intelligence card** with 3 interactive charts
-- **Identical KPI cards** to Executive Intelligence dashboard
-- Neo4j dependency graph, predictive forecast chart, trend sparkline
 
-### 3. **Control Center** (Interactive Simulation - 99 KPI Sliders!)
+### 3. **Control Center** (Interactive Simulation)
 🔗 Access: `/control-center.html`
 
 **Features:**
-- **99 Interactive KPI Sliders** (utilizing 99% of all available metrics!)
-- **35 Key Metrics Sidebar** with real-time updates and baseline comparison
-- **5 Organized Categories:**
-  - 💰 Financial Health Controls (45 KPIs) - Collection, Cash Flow, AR, Bad Debt, Revenue
-  - ⚙️ Operational Efficiency Controls (34 KPIs) - Payments, Variance, Denials, Writeoffs, Forecasting
-  - 🏥 Payer Performance Controls (9 KPIs) - Revenue index, payments, deposits
-  - 🗺️ State Performance Controls (9 KPIs) - State-level tracking
-  - 📊 Geographic Revenue Distribution (2 KPIs) - State and payer distribution
-- **50+ Dependency Relationships** across 10 interdependent KPI groups
-- **Real-time Cascading Effects:** Adjust one slider, see instant impact across all related metrics
-- **Visual Impact Display:** Arrows, colors, animations showing how changes propagate
-- **Baseline Comparison:** Track changes from original values with percentage indicators
-- **What-If Scenario Simulation** with immediate feedback
-- **Reset to Baseline** functionality to start fresh
+- Interactive KPI sliders for simulation
+- Real-time updates and baseline comparison
+- What-If Scenario Simulation with immediate feedback
 
 ### 4. **People Graph** (Organizational Hierarchy)
 🔗 Access: `/people-graph.html`
 
 **Features:**
-- **28 Employees** across complete organizational hierarchy (CEO → Staff)
-- **D3.js Organizational Tree** with vertical layout showing reporting structure
-- **Profile Pictures** for every employee (circular nodes with photos)
-- **4 Organization Levels:** Executive → VPs → Directors → Managers/Staff
-- **Color-Coded by Level:**
-  - 🔴 Red (Executive Leadership - CEO, CFO)
-  - 🟡 Amber (Vice Presidents)
-  - 🔵 Blue (Directors)
-  - 🟢 Green (Managers & Staff)
-- **6 Departments:** Executive, RCM Operations, Finance, Compliance, Analytics, Payer Relations, Regional
-- **Interactive Person Nodes:** Click any person to see detailed profile
-- **Person Detail Panel:** Shows profile, contact info, and all assigned KPIs
-- **KPI Ownership Mapping:** Each person has specific KPIs they're accountable for
-- **KPI Mini-Cards:** Click any KPI to view full 10-layer intelligence
-- **Complete Integration:** All KPI data linked to existing kpi_map.json
-- **Zoom Controls:** Pan, zoom in/out, reset view for easy navigation
-- **Legend:** Visual guide showing organization levels and colors
+- Complete organizational hierarchy
+- KPI ownership mapping
+- Interactive person profiles with detailed KPI assignments
 
 ### 5. **🤖 Automation Hub** (Agentic AI Workflow Automation)
 🔗 Access: `/automation-hub.html`
 
 **Features:**
-- **5 High-Impact Automation Workflows** with realistic RCM processes
-- **n8n-Style Visual Workflow Canvas** with D3.js step-by-step visualization
-- **Agentic AI Execution:** Click "🚀 Launch Automation" to execute workflows
-- **Real-time Step Tracking:** Watch each step execute with live status updates
-- **Multi-row Node Layout:** 4 nodes per row with smart edge routing
-- **Progress Panel:** Live execution logs with timestamps and detailed actions
-- **Results Dashboard:** Financial impact, time saved, ROI calculations
+- 5 high-impact automation workflows
+- Real-time workflow execution simulation
+- Financial impact and ROI calculations
 
-**5 Automations Available:**
+## 📊 KPI Structure (14 Strategic KPIs)
 
-1. **💰 Collection Efficiency** (7 steps, 95% accuracy)
-   - Query AR database for 30+ day overdue accounts
-   - Segment by communication preferences (Email/SMS/Portal)
-   - AI-generate personalized payment reminders
-   - Multi-channel dispatch via SendGrid/Twilio/Portal APIs
-   - Log communication in Salesforce CRM
-   - Schedule 7-day follow-up reminders
-   - Generate executive summary report
-   - **Impact:** $150K-$250K quarterly recovery, 4.5 hours saved
+### **Macro Process 1: Patient Acquisition** (2 KPIs)
 
-2. **📊 DSO Aging Report** (8 steps, 98% accuracy)
-   - Connect to AR database in real-time
-   - Calculate aging buckets (0-30, 31-60, 61-90, 90+)
-   - Segment by payer type (Commercial/Medicaid/Medicare)
-   - Generate trend charts with Chart.js
-   - Calculate DSO metrics vs. benchmarks
-   - Format executive PDF report
-   - Distribute to 12 stakeholders via email
-   - Update executive dashboard
-   - **Impact:** $800K-$1.2M focus area, 4 hours saved weekly
+#### Category 1.1 — Lead Intake & Conversion
+1. **New Patient Lead Volume**
+   - Target: 280 patients/month
+   - Current: 245 patients/month
+   - Status: 🟡 Amber
+   - Sub-KPIs: Lead source mix, Conversion by source, Call abandon rate
 
-3. **🚨 Denial Pattern Analysis** (8 steps, 90% accuracy)
-   - Query denied claims from last 24 hours
-   - Extract denial reason codes
-   - ML-powered pattern clustering
-   - Identify top 5 denial reasons by $ impact
-   - Calculate financial impact per reason type
-   - Generate AI prevention recommendations
-   - Alert coding and authorization teams
-   - Create prevention checklist
-   - **Impact:** $450K-$600K annual recovery
+2. **Referral-to-Appointment Conversion**
+   - Target: 85%
+   - Current: 78%
+   - Status: 🟡 Amber
 
-4. **🔍 Duplicate Payment Detection** (10 steps, 93% accuracy)
-   - Query payment database (daily)
-   - Match payments to claims
-   - Fuzzy matching algorithm for duplicates
-   - Flag suspicious transactions
-   - Calculate refund amounts
-   - Generate refund initiation list
-   - Create patient notification letters
-   - Update QuickBooks accounting system
-   - Track refund pipeline status
-   - Monthly CFO summary report
-   - **Impact:** $120K-$180K annual savings
+### **Macro Process 2: Scheduling & Appointment Management** (3 KPIs)
 
-5. **✅ Eligibility Verification** (8 steps, 96% accuracy)
-   - Pull next-day appointment schedule from EHR
-   - Extract patient insurance information
-   - Call payer APIs (270/271 EDI transactions)
-   - Process eligibility responses
-   - Flag patients with inactive/invalid coverage
-   - Alert front desk with priority call list
-   - Send automated SMS/email to patients
-   - Generate morning verification report
-   - **Impact:** $300K-$450K denial prevention
+#### Category 2.1 — Access Efficiency
+3. **Days to First Appointment**
+   - Target: 3.0 days
+   - Current: 5.2 days
+   - Status: 🔴 Red
+   - Sub-KPIs: Slot availability, Provider load, Insurance clearance lag
 
-**Technical Features:**
-- **Step-by-step execution** with pulsing animations on active nodes
-- **Real-time notifications** showing current step with detailed action/detail
-- **Execution logs** with timestamps and completion messages
-- **Auto-scrolling** to keep current step in view
-- **Zoom controls** for workflow canvas (zoom in/out/reset)
-- **Results panel** with 5-6 key metrics per workflow
-- **Total Annual Impact:** $1.82M - $2.68M across all 5 automations
+4. **Appointment Wait Time (In-clinic)**
+   - Target: 15 minutes
+   - Current: 18 minutes
+   - Status: 🟡 Amber
 
-## 📊 KPI Structure (101 Nodes)
+5. **No-Show Rate**
+   - Target: 10%
+   - Current: 14.5%
+   - Status: 🔴 Red
 
-### **1. Revenue Performance** (18 nodes)
-- Expected Revenue (5 nodes) - Daily, Weekly, Monthly, By State, By Payer
-- Billed Revenue (3 nodes) - Daily, Weekly, Monthly
-- Revenue Index % (3 nodes) - Daily, WoW, MoM
-- Unbilled Revenue (2 nodes) - Amount, Rate %
+### **Macro Process 3: Intake Documentation & Verification** (5 KPIs)
 
-### **2. Payment Performance** (17 nodes)
-- Payments Posted, On-Time Payments, Overdue Payments
-- Expected Payment, Payment Variance
+#### Category 3.1 — Packet Completeness
+6. **Packet Completeness Rate**
+   - Target: 98%
+   - Current: 92%
+   - Status: 🟡 Amber
+   - Sub-KPIs: Demographics, Insurance card, Claim #, Attorney info, Imaging, Consent forms
 
-### **3. Cash Flow Health** (8 nodes)
-- Cash Deposits, Cash Collection Rate, Deposit Variance
+7. **Missing Packet Item Rate**
+   - Target: 2%
+   - Current: 8.5%
+   - Status: 🔴 Red
 
-### **4. Collection Efficiency** (5 nodes)
-- Expected Collection Rate, Collection Rate (Payments), Collection Rate (Cash)
-- Collection Trend (WoW/MoM/QoQ)
+#### Category 3.2 — Insurance Verification
+8. **Eligibility Verification Accuracy**
+   - Target: 98%
+   - Current: 94%
+   - Status: 🟡 Amber
+   - Critical for: PIP/WC/Commercial insurance clearance
 
-### **5. Accounts Receivable Risk** (15 nodes)
-- Total AR (Current, Rolling, Actual, Calculated)
-- Aged AR (0-60 days, >60 days, Aged %)
-- DSO, Bad Debt
+9. **Benefit Verification Turnaround**
+   - Target: 1.5 days
+   - Current: 2.8 days
+   - Status: 🔴 Red
 
-### **6. Payer Performance** (9 nodes)
-- Payer Revenue Index %, Payer Expected vs Payment %
-- Payer Cash Deposit %, Top Payer Metrics
+#### Category 3.3 — Financial Clearance
+10. **Pre-Visit Financial Clearance Rate**
+    - Target: 95%
+    - Current: 88%
+    - Status: 🟡 Amber
 
-### **7. State Performance** (9 nodes)
-- State Revenue Index %, State Payment %, State Cash %
-- State AR, State Writeoffs, State Variance
+### **Macro Process 4: Clinical Pre-Visit Preparation** (2 KPIs)
 
-### **8. Denials & Writeoffs** (11 nodes)
-- Denials (Amount, %, By State, By Payer)
-- Writeoffs (Amount, Rate, By State, By Payer)
+#### Category 4.1 — Clinical Records Readiness
+11. **Imaging Availability Before Visit**
+    - Target: 95%
+    - Current: 85%
+    - Status: 🟡 Amber
+    - Types: MRI, X-ray, Radiologist reports
 
-### **9. Forecast Accuracy & Variance** (8 nodes)
-- WoW/MoM/QoQ Forecast Deviation
-- Triple Variance Analysis
+12. **Referral Notes Availability**
+    - Target: 98%
+    - Current: 90%
+    - Status: 🟡 Amber
+
+### **Macro Process 5: Patient Experience** (2 KPIs)
+
+#### Category 5.1 — Service Quality
+13. **New Patient NPS (Net Promoter Score)**
+    - Target: 80
+    - Current: 72
+    - Status: 🟡 Amber
+
+14. **Intake Satisfaction Score**
+    - Target: 4.5/5
+    - Current: 4.2/5
+    - Status: 🟡 Amber
 
 ## 🎯 10-Layer Decision Intelligence
 
 Every KPI includes comprehensive intelligence across 10 layers:
 
-1. **Context & Business Impact** - Metric definition and strategic purpose
-2. **Current State Analysis** - RAG status, current value, performance gap
+1. **Context & Business Impact** - Metric definition, business significance, industry benchmarks
+2. **Current State Analysis** - RAG status, current value, performance gap, financial impact
 3. **Historical Trends** - Interactive sparkline visualizations (6 months)
 4. **Root Cause Analysis** - AI-powered identification with confidence scores
 5. **Predictive Insights** - AI forecasts with 3 scenarios (Best/Likely/Worst)
 6. **Trend Analysis** - Statistical trend quality assessment
-7. **Dependencies** - Upstream/downstream/peer relationships with Neo4j graph
-8. **People & Accountability** - Enhanced with titles, departments, emails
+7. **Dependencies** - Upstream/downstream/peer relationships
+8. **People & Accountability** - Owners with titles, departments, emails
 9. **Recommended Actions** - Detailed action objects with priorities, owners, timelines
 10. **Contributing Factors** - Internal/external drivers
 
@@ -228,25 +183,22 @@ Every KPI includes comprehensive intelligence across 10 layers:
 ```
 webapp/
 ├── src/
-│   ├── index.tsx           # Main Hono application entry
-│   └── renderer.tsx        # TSX renderer
-├── public/                 # Static assets (automatically served)
-│   ├── index.html          # Executive Intelligence Dashboard (D3 Tree + AI)
-│   ├── command-center.html # KPI Matrix Table View
-│   ├── control-center.html # Interactive Simulation (99 KPI Sliders)
-│   ├── people-graph.html   # Organizational Hierarchy
-│   ├── automation-hub.html # 🤖 Agentic AI Workflow Automation
-│   ├── kpi_map.json        # Complete KPI data (101 nodes)
-│   ├── people_data.json    # Organizational data (28 employees)
-│   └── static/             # CSS and other assets
-├── dist/                   # Build output directory
-├── ecosystem.config.cjs    # PM2 configuration
-├── vite.config.ts          # Vite configuration
-├── wrangler.jsonc          # Cloudflare Pages configuration
-├── tsconfig.json           # TypeScript configuration
-├── package.json            # Dependencies and scripts
-├── .gitignore              # Git ignore rules
-└── README.md               # This file
+│   ├── index.tsx               # Main Hono application entry
+│   └── renderer.tsx            # TSX renderer
+├── public/                     # Static assets
+│   ├── index.html              # Executive Intelligence Dashboard
+│   ├── command-center.html     # KPI Matrix Table View
+│   ├── control-center.html     # Interactive Simulation
+│   ├── people-graph.html       # Organizational Hierarchy
+│   ├── automation-hub.html     # AI Workflow Automation
+│   ├── kpi_map.json            # NYSS KPI data (14 nodes)
+│   └── people_data.json        # Organizational data
+├── generate_nyss_kpi_data.py   # KPI data generator script
+├── dist/                       # Build output directory
+├── ecosystem.config.cjs        # PM2 configuration
+├── vite.config.ts              # Vite configuration
+├── wrangler.jsonc              # Cloudflare Pages configuration
+└── README.md                   # This file
 ```
 
 ## 💾 Data Architecture
@@ -254,8 +206,10 @@ webapp/
 ### **kpi_map.json Structure:**
 ```json
 {
-  "version": "8.1-healthcare-rcm-realistic",
-  "total_nodes": 101,
+  "version": "1.0-nyss-patient-access-intake",
+  "total_nodes": 14,
+  "organization": "New York Spine Specialists (NYSS)",
+  "pillar": "Patient Access & Intake",
   "intelligence_layers": [
     "Context & Business Impact",
     "Current State Analysis",
@@ -269,44 +223,31 @@ webapp/
     "Contributing Factors"
   ],
   "tree": {
-    "name": "Revenue Cycle Management",
-    "id": "rcm_root",
+    "name": "Patient Access & Intake",
+    "id": "nyss_root",
     "level": 0,
-    "children": [ /* 9 main categories */ ]
+    "children": [ /* 5 macro processes */ ]
   },
-  "nodes": [ /* Flat array of 101 nodes with full intelligence */ ]
+  "nodes": [ /* Flat array of 14 nodes with full intelligence */ ]
 }
 ```
-
-### **Each Node Contains:**
-- **Basic metrics:** id, name, value, target, rag, trend
-- **10-layer intelligence:** Complete decision support data
-- **Visualization data:** sparkline datasets, Chart.js configurations
-- **Financial impact:** Monetary value of performance gaps
 
 ## 🎨 Visual Features
 
 ### **RAG Status Colors:**
-- 🔴 **Red**: Critical issues requiring immediate attention
-- 🟡 **Amber**: Warning status, monitor closely
-- 🟢 **Green**: On track, meeting targets
+- 🔴 **Red**: Critical issues requiring immediate attention (5 KPIs)
+- 🟡 **Amber**: Warning status, monitor closely (9 KPIs)
+- 🟢 **Green**: On track, meeting targets (0 KPIs - opportunity for improvement!)
 
 ### **Interactive Charts & Graphs:**
 - **📈 Historical Trend Sparklines** - 6 months performance data with Chart.js
 - **📊 Predictive Forecast Chart** - 3-scenario projection (Best/Likely/Worst cases)
 - **🔗 Neo4j-Style Dependency Network** - Interactive D3.js force-directed graph
-  - Draggable nodes with physics simulation
-  - Color-coded by relationship type (upstream/current/downstream)
-  - Real-time visual dependency mapping
 
 ## 🔧 Development
 
 ### **Local Development:**
 ```bash
-# Install dependencies
-cd /home/user/webapp
-npm install
-
 # Build the project (REQUIRED before first start)
 npm run build
 
@@ -322,9 +263,12 @@ pm2 logs webapp --nostream
 
 # Restart service
 pm2 restart webapp
+```
 
-# Stop service
-pm2 stop webapp
+### **Regenerate KPI Data:**
+```bash
+cd /home/user/webapp
+python3 generate_nyss_kpi_data.py
 ```
 
 ### **Available Scripts:**
@@ -335,47 +279,49 @@ pm2 stop webapp
   "build": "vite build",
   "preview": "wrangler pages dev dist",
   "deploy": "npm run build && wrangler pages deploy dist",
-  "deploy:prod": "npm run build && wrangler pages deploy dist --project-name careoptions-kids-dashboard",
   "clean-port": "fuser -k 3000/tcp 2>/dev/null || true",
   "test": "curl http://localhost:3000"
 }
 ```
 
-### **Git Workflow:**
-```bash
-# Check status
-npm run git:status
-
-# Commit changes
-npm run git:commit "Your commit message"
-
-# View log
-npm run git:log
-```
-
 ## 📈 Key Metrics Summary
 
-| Category | Total Nodes | Red KPIs | Amber KPIs | Green KPIs |
-|----------|-------------|----------|------------|------------|
-| Revenue Performance | 18 | 2 | 8 | 8 |
-| Payment Performance | 17 | 3 | 12 | 2 |
-| Cash Flow Health | 8 | 0 | 8 | 0 |
-| Collection Efficiency | 5 | 1 | 4 | 0 |
-| AR Risk | 15 | 8 | 4 | 3 |
-| Payer Performance | 9 | 0 | 8 | 1 |
-| State Performance | 9 | 2 | 7 | 0 |
-| Denials & Writeoffs | 11 | 11 | 0 | 0 |
-| Forecast Accuracy | 8 | 3 | 5 | 0 |
-| **Total** | **101** | **30** | **56** | **15** |
+| Macro Process | KPIs | Red | Amber | Green |
+|--------------|------|-----|-------|-------|
+| Patient Acquisition | 2 | 0 | 2 | 0 |
+| Scheduling & Appointment | 3 | 2 | 1 | 0 |
+| Intake Documentation | 5 | 2 | 3 | 0 |
+| Clinical Pre-Visit | 2 | 0 | 2 | 0 |
+| Patient Experience | 2 | 0 | 2 | 0 |
+| **Total** | **14** | **4** | **10** | **0** |
 
 ## 🎯 Use Cases
 
-1. **Executive Leadership:** High-level RCM performance overview
-2. **Finance Teams:** Revenue, payment, and cash flow tracking
-3. **Operations:** AR management, denial reduction
-4. **Strategy:** Forecast accuracy, variance analysis
-5. **What-If Planning:** Scenario simulation and impact analysis
-6. **Organizational Management:** People accountability and KPI ownership
+1. **Executive Leadership:** High-level patient access performance overview
+2. **Operations Teams:** Intake efficiency, scheduling optimization
+3. **Front Office:** Lead conversion, appointment management
+4. **Clinical Operations:** Documentation readiness, imaging availability
+5. **Revenue Cycle:** Insurance verification, financial clearance
+6. **Patient Experience:** Service quality monitoring, satisfaction tracking
+
+## 🚨 Critical Areas Requiring Attention
+
+### **🔴 Red Status KPIs (Immediate Action Required):**
+1. **Days to First Appointment** - 5.2 days (Target: 3.0 days)
+   - Impact: Patient dissatisfaction, competitor loss
+   - Action: Implement urgent slot protocol, increase provider capacity
+
+2. **No-Show Rate** - 14.5% (Target: 10%)
+   - Impact: Revenue loss, provider underutilization
+   - Action: Enhanced reminder system, patient engagement
+
+3. **Missing Packet Item Rate** - 8.5% (Target: 2%)
+   - Impact: Verification delays, claim denials
+   - Action: Automated checklist, staff training
+
+4. **Benefit Verification Turnaround** - 2.8 days (Target: 1.5 days)
+   - Impact: Appointment delays, patient frustration
+   - Action: Implement Availity integration, add verification staff
 
 ## 🚀 Deployment to Cloudflare Pages
 
@@ -396,39 +342,20 @@ npm run deploy:prod
 # https://careoptions-kids-dashboard.pages.dev
 ```
 
-### **Configuration:**
-The project is configured in `wrangler.jsonc`:
-```jsonc
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "webapp",
-  "compatibility_date": "2025-11-26",
-  "pages_build_output_dir": "./dist",
-  "compatibility_flags": ["nodejs_compat"]
-}
-```
-
-## ⚠️ Important Notes
-
-- **Data Refresh:** KPI values are static JSON but can be updated via data generation scripts
-- **Browser Support:** Chrome, Firefox, Edge, Safari (latest versions)
-- **Performance:** Optimized for 100+ nodes with efficient D3 rendering
-- **State Sync:** KPIStore maintains state across all five dashboards
-- **Access:** Use trailing slash `/` for root access in development
-
 ## 📝 Recent Updates
 
-### **Version 8.5.0 - Rebuild** (November 26, 2025)
-- ✅ Complete rebuild on modern infrastructure (Hono + Cloudflare Pages)
-- ✅ Migrated from http-server to Hono backend
-- ✅ Updated to Cloudflare Pages deployment model
-- ✅ Added TypeScript support
-- ✅ Configured Vite build system
-- ✅ Set up PM2 for development server management
-- ✅ All 5 dashboards fully functional
-- ✅ All 101 KPIs with complete 10-layer intelligence
-- ✅ Maintained all original features and functionality
-- ✅ Improved deployment workflow
+### **Version 1.0 - NYSS Patient Access & Intake** (November 26, 2025)
+- ✅ Complete replacement of KPI data with NYSS Patient Access & Intake metrics
+- ✅ Generated 14 strategic KPIs across 5 macro processes
+- ✅ Full 10-layer decision intelligence for each KPI
+- ✅ AI-powered root cause analysis and predictive insights
+- ✅ Comprehensive dependency mapping
+- ✅ Detailed people accountability with contact information
+- ✅ Priority-based recommended actions with timelines and ROI
+- ✅ Historical trend data and statistical analysis
+- ✅ All dashboards updated with new data structure
+- ✅ Python data generator script for easy updates
+- ✅ Ready for production deployment
 
 ## 🔗 Related Resources
 
@@ -436,15 +363,15 @@ The project is configured in `wrangler.jsonc`:
 - [Chart.js Documentation](https://www.chartjs.org/)
 - [Hono Framework](https://hono.dev/)
 - [Cloudflare Pages](https://pages.cloudflare.com/)
-- [Healthcare RCM Best Practices](https://www.aapc.com/)
+- [NYSS Operations Manual](https://nyss.com/)
 
 ---
 
-**Version:** 8.5.0-rebuild  
+**Version:** 1.0-nyss-patient-access-intake  
 **Last Updated:** November 26, 2025  
-**Client:** CareOptions for Kids - Pediatric Healthcare Provider  
+**Organization:** New York Spine Specialists (NYSS)  
 **Status:** ✅ Active - All 5 dashboards operational  
-**Dashboards:** Executive Intelligence (AI chatbot), Command Center, Control Center (99 sliders), People Graph, Automation Hub  
-**Total KPIs:** 101 nodes with complete **10-layer decision intelligence**  
+**Dashboards:** Executive Intelligence, Command Center, Control Center, People Graph, Automation Hub  
+**Total KPIs:** 14 strategic metrics with complete **10-layer decision intelligence**  
 **Tech Stack:** Hono + TypeScript + Cloudflare Pages  
 **Deployment:** Production-ready on Cloudflare edge network
