@@ -1,12 +1,13 @@
-# New York Spine Specialists (NYSS) - Patient Access & Intake Dashboard
+# New York Spine Specialists (NYSS) - Complete Operations Dashboard
 
 ## 🏥 Overview
 
-A comprehensive executive intelligence system for **New York Spine Specialists (NYSS)** focusing on Patient Access & Intake operations, featuring **14 strategic KPIs** across 5 macro processes with complete **10-layer decision intelligence** for each metric, including AI-powered root cause analysis, predictive insights, and detailed action plans.
+A comprehensive executive intelligence system for **New York Spine Specialists (NYSS)** featuring **213 strategic KPIs** across 5 operational pillars with complete **10-layer decision intelligence** for each metric, including AI-powered root cause analysis, predictive insights, and detailed action plans.
 
 **Built on:** Hono + TypeScript + Cloudflare Pages  
 **Organization:** New York Spine Specialists (NYSS)  
-**Focus:** Pillar 1 - Patient Access & Intake  
+**Scope:** Complete Operations - All 5 Pillars (213 KPIs)  
+**Version:** 1.0-nyss-complete-all-pillars  
 
 ## 🌐 Live Dashboard
 
@@ -18,7 +19,7 @@ A comprehensive executive intelligence system for **New York Spine Specialists (
 🔗 Access: `/` or `/index.html`
 
 **Features:**
-- Interactive D3.js hierarchical tree with 14 KPI nodes
+- Interactive D3.js hierarchical tree with **213 KPI nodes**
 - **Normal Click:** Expand/collapse nodes to explore tree structure
 - **Shift+Click:** Open complete 10-layer intelligence card
 - Tree expands horizontally (left to right) with +/- indicators
@@ -29,7 +30,7 @@ A comprehensive executive intelligence system for **New York Spine Specialists (
 🔗 Access: `/command-center.html`
 
 **Features:**
-- Complete table view of all 14 KPIs
+- Complete table view of all **213 KPIs**
 - Filter by RAG status (Red/Amber/Green/All)
 - Search functionality across all metrics
 - Sort by any column
@@ -59,99 +60,52 @@ A comprehensive executive intelligence system for **New York Spine Specialists (
 - Real-time workflow execution simulation
 - Financial impact and ROI calculations
 
-## 📊 KPI Structure (14 Strategic KPIs)
+## 📊 KPI Structure (213 Strategic KPIs)
 
-### **Macro Process 1: Patient Acquisition** (2 KPIs)
+### **PILLAR 1: Patient Access & Intake** (42 KPIs)
+- **Macro Process 1.1:** Patient Acquisition (8 KPIs)
+- **Macro Process 1.2:** Scheduling & Appointment Management (10 KPIs)
+- **Macro Process 1.3:** Intake Documentation & Verification (15 KPIs)
+- **Macro Process 1.4:** Clinical Pre-Visit Preparation (5 KPIs)
+- **Macro Process 1.5:** Patient Experience (4 KPIs)
 
-#### Category 1.1 — Lead Intake & Conversion
-1. **New Patient Lead Volume**
-   - Target: 280 patients/month
-   - Current: 245 patients/month
-   - Status: 🟡 Amber
-   - Sub-KPIs: Lead source mix, Conversion by source, Call abandon rate
+### **PILLAR 2: Clinical Operations** (43 KPIs)
+- **Macro Process 2.1:** Provider Documentation & Clinical Quality (13 KPIs)
+- **Macro Process 2.2:** Clinical Workflow Efficiency (7 KPIs)
+- **Macro Process 2.3:** Orders Management & Clinical Accuracy (10 KPIs)
+- **Macro Process 2.4:** Provider Performance & Productivity (8 KPIs)
+- **Macro Process 2.5:** Care Quality & Safety (5 KPIs)
 
-2. **Referral-to-Appointment Conversion**
-   - Target: 85%
-   - Current: 78%
-   - Status: 🟡 Amber
+### **PILLAR 3: Surgical Coordination & OR Management** (38 KPIs)
+- **Macro Process 3.1:** Surgical Candidacy & Assessment (5 KPIs)
+- **Macro Process 3.2:** Pre-Certification & Authorization (10 KPIs)
+- **Macro Process 3.3:** Surgical Scheduling & Coordination (12 KPIs)
+- **Macro Process 3.4:** Post-Op Care & Recovery (6 KPIs)
+- **Macro Process 3.5:** Surgical Billing & Revenue Capture (5 KPIs)
 
-### **Macro Process 2: Scheduling & Appointment Management** (3 KPIs)
+### **PILLAR 4: Revenue Cycle Management** (60 KPIs)
+- **Macro Process 4.1:** Pre-Billing Readiness (7 KPIs)
+- **Macro Process 4.2:** Claim Creation & Submission (13 KPIs)
+- **Macro Process 4.3:** Payer Response Management (12 KPIs)
+- **Macro Process 4.4:** Appeals & Denials Management (6 KPIs)
+- **Macro Process 4.5:** AR Management & Cash Posting (10 KPIs)
+- **Macro Process 4.6:** Financial Performance & Analytics (12 KPIs)
 
-#### Category 2.1 — Access Efficiency
-3. **Days to First Appointment**
-   - Target: 3.0 days
-   - Current: 5.2 days
-   - Status: 🔴 Red
-   - Sub-KPIs: Slot availability, Provider load, Insurance clearance lag
+### **PILLAR 5: Compliance & Risk Management** (30 KPIs)
+- **Macro Process 5.1:** Regulatory Compliance (5 KPIs)
+- **Macro Process 5.2:** Risk Management & Liability (5 KPIs)
+- **Macro Process 5.3:** Quality Assurance & Auditing (5 KPIs)
+- **Macro Process 5.4:** Credentialing & Provider Enrollment (5 KPIs)
+- **Macro Process 5.5:** Audit & Monitoring (5 KPIs)
+- **Macro Process 5.6:** Policy & Documentation (5 KPIs)
 
-4. **Appointment Wait Time (In-clinic)**
-   - Target: 15 minutes
-   - Current: 18 minutes
-   - Status: 🟡 Amber
-
-5. **No-Show Rate**
-   - Target: 10%
-   - Current: 14.5%
-   - Status: 🔴 Red
-
-### **Macro Process 3: Intake Documentation & Verification** (5 KPIs)
-
-#### Category 3.1 — Packet Completeness
-6. **Packet Completeness Rate**
-   - Target: 98%
-   - Current: 92%
-   - Status: 🟡 Amber
-   - Sub-KPIs: Demographics, Insurance card, Claim #, Attorney info, Imaging, Consent forms
-
-7. **Missing Packet Item Rate**
-   - Target: 2%
-   - Current: 8.5%
-   - Status: 🔴 Red
-
-#### Category 3.2 — Insurance Verification
-8. **Eligibility Verification Accuracy**
-   - Target: 98%
-   - Current: 94%
-   - Status: 🟡 Amber
-   - Critical for: PIP/WC/Commercial insurance clearance
-
-9. **Benefit Verification Turnaround**
-   - Target: 1.5 days
-   - Current: 2.8 days
-   - Status: 🔴 Red
-
-#### Category 3.3 — Financial Clearance
-10. **Pre-Visit Financial Clearance Rate**
-    - Target: 95%
-    - Current: 88%
-    - Status: 🟡 Amber
-
-### **Macro Process 4: Clinical Pre-Visit Preparation** (2 KPIs)
-
-#### Category 4.1 — Clinical Records Readiness
-11. **Imaging Availability Before Visit**
-    - Target: 95%
-    - Current: 85%
-    - Status: 🟡 Amber
-    - Types: MRI, X-ray, Radiologist reports
-
-12. **Referral Notes Availability**
-    - Target: 98%
-    - Current: 90%
-    - Status: 🟡 Amber
-
-### **Macro Process 5: Patient Experience** (2 KPIs)
-
-#### Category 5.1 — Service Quality
-13. **New Patient NPS (Net Promoter Score)**
-    - Target: 80
-    - Current: 72
-    - Status: 🟡 Amber
-
-14. **Intake Satisfaction Score**
-    - Target: 4.5/5
-    - Current: 4.2/5
-    - Status: 🟡 Amber
+**Key Sample KPIs:**
+- New Patient Lead Volume: 245/280 target (🟡 Amber)
+- Days to First Appointment: 5.2/3.0 days target (🔴 Red)
+- Clinical Documentation Rate: 91.5%/98% target (🟡 Amber)
+- Surgical Authorization Approval: 88%/95% target (🟡 Amber)
+- Net Collection Rate: 94%/96% target (🟡 Amber)
+- Compliance Audit Score: 92%/98% target (🟡 Amber)
 
 ## 🎯 10-Layer Decision Intelligence
 
