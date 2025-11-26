@@ -1107,7 +1107,6 @@
 
             filteredData.forEach(kpi => {
                 const row = document.createElement('tr');
-                row.onclick = () => showDetailPanel(kpi);
                 
                 // Get current value from KPIStore
                 const currentValue = window.KPIStore.getValue(kpi.id);
@@ -1149,6 +1148,12 @@
                         </div>
                     </td>
                 `;
+                
+                // IMPORTANT: Set onclick AFTER innerHTML to preserve the event listener
+                row.onclick = () => {
+                    console.log('🖱️ Row clicked for KPI:', kpi.name);
+                    showDetailPanel(kpi);
+                };
                 
                 tbody.appendChild(row);
             });
@@ -2040,9 +2045,14 @@
         }
 
         function showDetailPanel(kpi) {
+            console.log('🎯 showDetailPanel called for:', kpi.name);
             const panel = document.getElementById('detailPanel');
             const title = document.getElementById('detailTitle');
             const content = document.getElementById('detailContent');
+            
+            console.log('📋 Panel element:', panel ? 'Found' : 'NOT FOUND');
+            console.log('📋 Title element:', title ? 'Found' : 'NOT FOUND');
+            console.log('📋 Content element:', content ? 'Found' : 'NOT FOUND');
 
             title.textContent = kpi.name;
 
@@ -2074,7 +2084,13 @@
                 <!-- Layer 2: Context & Description -->
                 <div class="kpi-layer-section">
                     <h4><span class="layer-icon">📋</span> Context & Business Impact</h4>
-                    <p style="color: #6B7280; line-height: 1.6;">${kpi.context || kpi.description}</p>
+                    ${typeof kpi.context === 'object' ? `
+                        <div style="color: #6B7280; line-height: 1.6;">
+                            <p><strong>Definition:</strong> ${kpi.context.definition}</p>
+                            <p><strong>Business Impact:</strong> ${kpi.context.business_impact}</p>
+                            <p><strong>Industry Benchmark:</strong> ${kpi.context.industry_benchmark}</p>
+                        </div>
+                    ` : `<p style="color: #6B7280; line-height: 1.6;">${kpi.context || kpi.description || 'No context available'}</p>`}
                 </div>
 
                 <div class="layer-divider"></div>
@@ -2082,7 +2098,19 @@
                 <!-- Layer 3: Current State Analysis -->
                 <div class="kpi-layer-section">
                     <h4><span class="layer-icon">📊</span> Current State Analysis</h4>
-                    <p style="color: #6B7280; line-height: 1.6;">${kpi.current_state}</p>
+                    ${typeof kpi.current_state === 'object' ? `
+                        <div style="color: #6B7280; line-height: 1.6;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                                <div><strong>Current Value:</strong> ${kpi.current_state.value}</div>
+                                <div><strong>Target:</strong> ${kpi.current_state.target}</div>
+                                <div><strong>Gap:</strong> ${kpi.current_state.gap}</div>
+                                <div><strong>Gap %:</strong> ${kpi.current_state.gap_percentage}%</div>
+                            </div>
+                            <div class="financial-impact-box" style="margin-top: 12px; padding: 12px; background: #FEF3C7; border-left: 4px solid #F59E0B; border-radius: 4px;">
+                                <div style="font-weight: 600; color: #92400E;">${kpi.current_state.financial_impact}</div>
+                            </div>
+                        </div>
+                    ` : `<p style="color: #6B7280; line-height: 1.6;">${kpi.current_state || 'No analysis available'}</p>`}
                     ${kpi.financial_impact ? `
                         <div class="financial-impact-box" style="margin-top: 12px; padding: 12px; background: #FEF3C7; border-left: 4px solid #F59E0B; border-radius: 4px;">
                             <div style="font-weight: 600; color: #92400E;">${kpi.financial_impact}</div>
@@ -2347,11 +2375,15 @@
                 }
             }, 100);
 
+            console.log('✅ Adding "open" class to panel');
             panel.classList.add('open');
+            console.log('✅ Panel classes after add:', panel.className);
 
             const store = JSON.parse(localStorage.getItem('KPIStore') || '{}');
             store.selectedKPI = kpi.id;
             localStorage.setItem('KPIStore', JSON.stringify(store));
+            
+            console.log('✅ showDetailPanel completed');
         }
 
         function closeDetailPanel() {
