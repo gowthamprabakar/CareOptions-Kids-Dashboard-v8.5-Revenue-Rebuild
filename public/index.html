@@ -1344,9 +1344,13 @@
                 console.log('✅ Root Name:', kpiData.tree.name);
                 console.log('✅ First Category:', kpiData.tree.children[0].name);
                 
-                // Verify it's Healthcare RCM data
-                if (kpiData.version.includes('healthcare-rcm') || kpiData.tree.name.includes('Revenue Cycle')) {
-                    console.log('✅ CORRECT DATA: Healthcare RCM KPIs loaded!');
+                // Verify it's Healthcare RCM or NYSS data
+                if (kpiData.version.includes('healthcare-rcm') || 
+                    kpiData.version.includes('nyss') || 
+                    kpiData.tree.name.includes('Revenue Cycle') ||
+                    kpiData.tree.name.includes('NYSS') ||
+                    kpiData.organization === 'New York Spine Specialists (NYSS)') {
+                    console.log('✅ CORRECT DATA: Healthcare KPIs loaded!');
                 } else {
                     console.error('❌ WRONG DATA: Old Movement Mortgage data detected!');
                     alert('Warning: Old data loaded. Please clear your browser cache and refresh.');
