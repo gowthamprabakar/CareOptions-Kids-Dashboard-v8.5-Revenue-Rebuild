@@ -2259,12 +2259,14 @@
                                 <canvas id="trend-sparkline-${kpi.id}" style="width: 100%; height: 100%;"></canvas>
                             </div>
                         ` : ''}
-                        ${kpi.trend_analysis.key_insights && kpi.trend_analysis.key_insights.length > 0 ? `
+                        ${kpi.trend_analysis.key_insights ? `
                             <div style="margin-top: 12px;">
                                 <strong style="display: block; margin-bottom: 8px; color: #374151;">Key Insights:</strong>
-                                <ul style="margin: 0; padding-left: 20px; color: #6B7280; font-size: 13px;">
-                                    ${kpi.trend_analysis.key_insights.map(insight => `<li style="margin-bottom: 4px;">${insight}</li>`).join('')}
-                                </ul>
+                                <p style="margin: 0; color: #6B7280; font-size: 13px; line-height: 1.6;">
+                                    ${typeof kpi.trend_analysis.key_insights === 'string' 
+                                        ? kpi.trend_analysis.key_insights 
+                                        : kpi.trend_analysis.key_insights.map(insight => `• ${insight}`).join('<br>')}
+                                </p>
                             </div>
                         ` : ''}
                     </div>
