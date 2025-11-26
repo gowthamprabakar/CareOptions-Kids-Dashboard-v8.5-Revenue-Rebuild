@@ -1186,7 +1186,7 @@
                 <button class="control-btn" onclick="centerGraph()">Center Graph</button>
                 <button class="control-btn" onclick="refreshData()">Refresh Data</button>
                 <span style="margin-left: 20px; font-size: 12px; color: #6B7280;">
-                    💡 <strong>Tip:</strong> Click to expand/collapse | Shift+Click for details
+                    💡 <strong>Tip:</strong> Click Pillar to expand | Click any KPI to view details
                 </span>
             </div>
             <div id="tree-scroll-wrapper">
@@ -1537,16 +1537,16 @@
             console.log('Root hierarchy created with', root.descendants().length, 'total nodes');
 
             root.descendants().forEach(d => {
-                // Start with first 3 levels expanded to show Category nodes
-                // KPI nodes (level 4) are one click away
-                if (d.depth > 2) {
+                // Start with first 2 levels expanded to show Pillar nodes
+                // KPI nodes (level 2) are one click away
+                if (d.depth > 1) {
                     d._children = d.children;
                     d.children = null;
                 }
             });
 
             const expandedNodes = root.descendants().filter(d => d.children !== null);
-            console.log('Expanded nodes (depth <= 2):', expandedNodes.length);
+            console.log('Expanded nodes (depth <= 1):', expandedNodes.length);
 
             treeLayout = d3.tree()
                 .size([height * 1.8, width * 1.5])
@@ -1730,9 +1730,9 @@
                 // Shift+Click: Show detail panel only for KPI nodes (level 4)
                 console.log('👉 This is a SHIFT+CLICK');
                 
-                // Only show KPI cards for actual KPI nodes (level 4)
-                if (d.data.level === 4 && d.data.type === 'kpi') {
-                    console.log('✅ This IS a KPI node (level 4)! Opening card...');
+                // Only show KPI cards for actual KPI nodes (level 2)
+                if (d.data.level === 2 && d.data.type === 'kpi') {
+                    console.log('✅ This IS a KPI node (level 2)! Opening card...');
                     // Find the complete KPI data from the flat nodes array
                     const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
                     
@@ -1785,8 +1785,8 @@
                     console.log('🍃 Leaf node (no children)');
                     
                     // Only show KPI cards for actual KPI nodes
-                    if (d.data.level === 4 && d.data.type === 'kpi') {
-                        console.log('✅ This IS a KPI node (level 4)! Opening card...');
+                    if (d.data.level === 2 && d.data.type === 'kpi') {
+                        console.log('✅ This IS a KPI node (level 2)! Opening card...');
                         const fullKpiData = kpiData.nodes.find(node => node.id === d.data.id);
                         
                         if (fullKpiData) {
