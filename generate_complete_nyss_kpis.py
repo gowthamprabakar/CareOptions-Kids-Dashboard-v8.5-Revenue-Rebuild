@@ -70,11 +70,12 @@ def generate_predictive_insights(current_value, trend_data):
     return {
         "pattern": pattern,
         "confidence": random.randint(75, 90),
-        "scenarios": {
-            "best_case": {"value": round(max(0, min(100, best_case)), 1), "probability": random.randint(20, 30)},
-            "most_likely": {"value": round(max(0, min(100, likely_case)), 1), "probability": random.randint(45, 60)},
-            "worst_case": {"value": round(max(0, min(100, worst_case)), 1), "probability": random.randint(15, 25)}
-        },
+        "timeframe": "Next 30 days",
+        "scenarios": [
+            {"name": "Best Case Scenario", "value": round(max(0, min(100, best_case)), 1), "probability": f"{random.randint(20, 30)}%"},
+            {"name": "Most Likely Scenario", "value": round(max(0, min(100, likely_case)), 1), "probability": f"{random.randint(45, 60)}%"},
+            {"name": "Worst Case Scenario", "value": round(max(0, min(100, worst_case)), 1), "probability": f"{random.randint(15, 25)}%"}
+        ],
         "leading_indicators": random.sample(["System utilization", "Staff availability", "Protocol adherence", "Market conditions", "Technology adoption"], 3)
     }
 

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test KPI Card Opening</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2B5BA6;
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-left: 4px solid #2B5BA6;
+        }
+        .test-button {
+            background: #2B5BA6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 10px 10px 0;
+        }
+        .test-button:hover {
+            background: #1e4380;
+        }
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        #console {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1e1e1e;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            border-radius: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .console-line {
+            margin: 3px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 KPI Card Opening - Diagnostic Test</h1>
+        
+        <div class="test-section">
+            <h2>Test 1: Load KPI Data</h2>
+            <button class="test-button" onclick="testLoadData()">Load KPI Data</button>
+            <div id="status1" class="status" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test 2: Check showDetailPanel Function</h2>
+            <button class="test-button" onclick="testFunctionExists()">Check Functions</button>
+            <div id="status2" class="status" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test 3: Simulate Command Center Row Click</h2>
+            <button class="test-button" onclick="testCommandCenter()">Go to Command Center</button>
+            <div id="status3" class="status" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test 4: Simulate Tree Node Click</h2>
+            <button class="test-button" onclick="testTreeGraph()">Go to Tree Graph</button>
+            <div id="status4" class="status" style="display: none;"></div>
+        </div>
+
+        <h2>Console Output:</h2>
+        <div id="console"></div>
+    </div>
+
+    <script>
+        let kpiData = null;
+        
+        function log(message, type = 'info') {
+            const console = document.getElementById('console');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#ff0000' : type === 'success' ? '#00ff00' : '#00aaff';
+            console.innerHTML += `<div class="console-line" style="color: ${color}">[${timestamp}] ${message}</div>`;
+            console.scrollTop = console.scrollHeight;
+            console.log(message);
+        }
+
+        function showStatus(id, message, type) {
+            const statusEl = document.getElementById(id);
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+        }
+
+        async function testLoadData() {
+            log('Loading KPI data from /kpi_map.json...');
+            try {
+                const response = await fetch('/kpi_map.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                kpiData = await response.json();
+                log(`✓ Data loaded: ${kpiData.total_nodes} total nodes`, 'success');
+                log(`✓ Nodes array: ${kpiData.nodes.length} KPIs`, 'success');
+                log(`✓ First KPI: ${kpiData.nodes[0].name} (${kpiData.nodes[0].id})`, 'success');
+                
+                // Check first KPI has all required fields
+                const kpi = kpiData.nodes[0];
+                const requiredFields = ['context', 'current_state', 'root_causes', 'predictive_insights'];
+                let allPresent = true;
+                for (const field of requiredFields) {
+                    if (!kpi[field]) {
+                        log(`✗ Missing field: ${field}`, 'error');
+                        allPresent = false;
+                    } else {
+                        log(`✓ Has ${field}: ${typeof kpi[field]}`, 'success');
+                    }
+                }
+                
+                if (allPresent) {
+                    showStatus('status1', '✓ KPI data loaded successfully with all required fields!', 'success');
+                } else {
+                    showStatus('status1', '⚠ KPI data loaded but some fields are missing', 'error');
+                }
+            } catch (error) {
+                log(`✗ Error loading data: ${error.message}`, 'error');
+                showStatus('status1', `✗ Failed to load KPI data: ${error.message}`, 'error');
+            }
+        }
+
+        function testFunctionExists() {
+            log('Checking if functions exist in command-center.html...');
+            // We can't directly check the other page's functions, so we'll just confirm the test
+            showStatus('status2', 'ℹ Functions are defined in command-center.html and index.html. Click Test 3 or 4 to verify.', 'info');
+            log('ℹ showDetailPanel and showInfoPanel are defined in their respective pages', 'info');
+        }
+
+        function testCommandCenter() {
+            log('Redirecting to Command Center...');
+            showStatus('status3', 'ℹ Opening Command Center. Check if clicking rows opens KPI cards.', 'info');
+            setTimeout(() => {
+                window.location.href = '/command-center.html';
+            }, 1000);
+        }
+
+        function testTreeGraph() {
+            log('Redirecting to Tree Graph...');
+            showStatus('status4', 'ℹ Opening Tree Graph. Expand to Level 4 KPIs and click them.', 'info');
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        }
+
+        // Auto-run first test on load
+        window.onload = () => {
+            log('=== KPI Card Diagnostic Test Started ===');
+            log('Click buttons above to run tests');
+            testLoadData();
+        };
+    </script>
+</body>
+</html>
