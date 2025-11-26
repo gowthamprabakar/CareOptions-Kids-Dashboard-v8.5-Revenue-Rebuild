@@ -1,684 +1,2135 @@
 {
-  "name": "Movement Mortgage\nAI COE Cockpit",
-  "level": 0,
-  "value": "100%",
-  "status": "neutral",
-  "children": [
+  "version": "1.0-nyss-patient-access-intake",
+  "total_nodes": 14,
+  "organization": "New York Spine Specialists (NYSS)",
+  "pillar": "Patient Access & Intake",
+  "intelligence_layers": [
+    "Context & Business Impact",
+    "Current State Analysis",
+    "Historical Trends (6 months)",
+    "Root Cause Analysis",
+    "Predictive Insights (AI-powered)",
+    "Trend Analysis (Statistical)",
+    "Dependencies (Upstream/Downstream)",
+    "People & Accountability",
+    "Recommended Actions (Detailed)",
+    "Contributing Factors"
+  ],
+  "tree": {
+    "name": "Patient Access & Intake",
+    "id": "nyss_root",
+    "level": 0,
+    "children": [
+      {
+        "name": "Patient Acquisition",
+        "id": "macro_1",
+        "level": 1,
+        "children": [
+          {
+            "name": "Lead Intake & Conversion",
+            "id": "cat_1_1",
+            "level": 2,
+            "children": [
+              {
+                "name": "New Patient Lead Volume",
+                "id": "kpi_new_patient_lead_volume",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "Referral-to-Appointment Conversion",
+                "id": "kpi_referral_conversion",
+                "level": 3,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Scheduling & Appointment Management",
+        "id": "macro_2",
+        "level": 1,
+        "children": [
+          {
+            "name": "Access Efficiency",
+            "id": "cat_2_1",
+            "level": 2,
+            "children": [
+              {
+                "name": "Days to First Appointment",
+                "id": "kpi_days_first_appt",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "Appointment Wait Time (In-clinic)",
+                "id": "kpi_wait_time",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "No-Show Rate",
+                "id": "kpi_no_show",
+                "level": 3,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Intake Documentation & Verification",
+        "id": "macro_3",
+        "level": 1,
+        "children": [
+          {
+            "name": "Packet Completeness",
+            "id": "cat_3_1",
+            "level": 2,
+            "children": [
+              {
+                "name": "Packet Completeness Rate",
+                "id": "kpi_packet_complete",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "Missing Packet Item Rate",
+                "id": "kpi_missing_items",
+                "level": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Insurance Verification",
+            "id": "cat_3_2",
+            "level": 2,
+            "children": [
+              {
+                "name": "Eligibility Verification Accuracy",
+                "id": "kpi_verification_accuracy",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "Benefit Verification Turnaround",
+                "id": "kpi_verification_time",
+                "level": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Financial Clearance",
+            "id": "cat_3_3",
+            "level": 2,
+            "children": [
+              {
+                "name": "Pre-Visit Financial Clearance Rate",
+                "id": "kpi_financial_clearance",
+                "level": 3,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Clinical Pre-Visit Preparation",
+        "id": "macro_4",
+        "level": 1,
+        "children": [
+          {
+            "name": "Clinical Records Readiness",
+            "id": "cat_4_1",
+            "level": 2,
+            "children": [
+              {
+                "name": "Imaging Availability Before Visit",
+                "id": "kpi_imaging_available",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "Referral Notes Availability",
+                "id": "kpi_referral_notes",
+                "level": 3,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Patient Experience",
+        "id": "macro_5",
+        "level": 1,
+        "children": [
+          {
+            "name": "Service Quality",
+            "id": "cat_5_1",
+            "level": 2,
+            "children": [
+              {
+                "name": "New Patient NPS",
+                "id": "kpi_nps",
+                "level": 3,
+                "children": []
+              },
+              {
+                "name": "Intake Satisfaction Score",
+                "id": "kpi_intake_satisfaction",
+                "level": 3,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "nodes": [
     {
-      "name": "L1: Strategic Metrics\nEnterprise Performance",
-      "level": 1,
-      "value": "87%",
-      "status": "warning",
-      "children": [
+      "id": "kpi_new_patient_lead_volume",
+      "name": "New Patient Lead Volume",
+      "value": 245,
+      "target": 280,
+      "unit": "patients",
+      "rag": "amber",
+      "trend": "down",
+      "context": {
+        "definition": "Total inbound new patient appointments from all sources (calls, referrals, online, attorneys)",
+        "business_impact": "Primary driver of surgical pipeline and revenue growth. Critical for maintaining practice volume.",
+        "industry_benchmark": "250-300 new leads per month for multi-specialty spine practices"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 245,
+        "target": 280,
+        "gap": 35,
+        "gap_percentage": 12.5,
+        "financial_impact": "$175K potential monthly revenue at risk"
+      },
+      "trend_data": [
+        90.4,
+        94.6,
+        96.6,
+        94.2,
+        96.1,
+        97.4
+      ],
+      "root_causes": [
         {
-          "name": "Cost per Loan\n$11,600 (Target: $8,000)",
-          "level": 2,
-          "value": "$11,600",
-          "status": "bad",
-          "children": [
-            {
-              "name": "Underwriting Cost\n$3,200 per loan",
-              "level": 3,
-              "value": "$3,200",
-              "status": "bad",
-              "children": [
-                {
-                  "name": "Manual Review Time\n6.2 hrs avg",
-                  "level": 4,
-                  "value": "6.2 hrs",
-                  "status": "bad",
-                  "children": [
-                    {
-                      "name": "Document Validation\n2.8 hrs",
-                      "level": 5,
-                      "value": "2.8 hrs",
-                      "status": "bad",
-                      "children": [
-                        {
-                          "name": "Income Verification\n45 min",
-                          "level": 6,
-                          "value": "45m",
-                          "status": "bad"
-                        },
-                        {
-                          "name": "Asset Verification\n38 min",
-                          "level": 6,
-                          "value": "38m",
-                          "status": "bad"
-                        },
-                        {
-                          "name": "Employment Check\n32 min",
-                          "level": 6,
-                          "value": "32m",
-                          "status": "warning"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "Credit Analysis\n1.2 hrs",
-                      "level": 5,
-                      "value": "1.2 hrs",
-                      "status": "warning",
-                      "children": [
-                        {
-                          "name": "Credit Report Pull\n15 min",
-                          "level": 6,
-                          "value": "15m",
-                          "status": "good"
-                        },
-                        {
-                          "name": "DTI Calculation\n25 min",
-                          "level": 6,
-                          "value": "25m",
-                          "status": "warning"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "Underwriter Touches\n4.3 per file",
-                  "level": 4,
-                  "value": "4.3",
-                  "status": "bad",
-                  "children": [
-                    {
-                      "name": "Initial Review\n1.8 hrs",
-                      "level": 5,
-                      "value": "1.8 hrs",
-                      "status": "bad"
-                    },
-                    {
-                      "name": "Conditions Review\n1.4 hrs",
-                      "level": 5,
-                      "value": "1.4 hrs",
-                      "status": "warning"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "Processing Cost\n$2,400 per loan",
-              "level": 3,
-              "value": "$2,400",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Document Collection\n48 hrs avg",
-                  "level": 4,
-                  "value": "48 hrs",
-                  "status": "bad",
-                  "children": [
-                    {
-                      "name": "Borrower Follow-up\n12 calls avg",
-                      "level": 5,
-                      "value": "12 calls",
-                      "status": "bad"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "cause": "Decreased attorney referral volume (-18% MoM)",
+          "confidence": 92,
+          "impact": "High",
+          "data_points": 1240
         },
         {
-          "name": "Critical Defect Rate\n1.58% (Target: <1.0%)",
-          "level": 2,
-          "value": "1.58%",
-          "status": "bad",
-          "children": [
-            {
-              "name": "Documentation Defects\n0.68% rate",
-              "level": 3,
-              "value": "0.68%",
-              "status": "bad",
-              "children": [
-                {
-                  "name": "Missing Documents\n0.42%",
-                  "level": 4,
-                  "value": "0.42%",
-                  "status": "bad"
-                },
-                {
-                  "name": "Incomplete Docs\n0.26%",
-                  "level": 4,
-                  "value": "0.26%",
-                  "status": "bad"
-                }
-              ]
-            },
-            {
-              "name": "Compliance Defects\n0.52% rate",
-              "level": 3,
-              "value": "0.52%",
-              "status": "bad",
-              "children": [
-                {
-                  "name": "Disclosure Errors\n0.31%",
-                  "level": 4,
-                  "value": "0.31%",
-                  "status": "bad"
-                },
-                {
-                  "name": "TRID Violations\n0.21%",
-                  "level": 4,
-                  "value": "0.21%",
-                  "status": "bad"
-                }
-              ]
-            },
-            {
-              "name": "Underwriting Defects\n0.38% rate",
-              "level": 3,
-              "value": "0.38%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Income Calculation\n0.23%",
-                  "level": 4,
-                  "value": "0.23%",
-                  "status": "warning"
-                }
-              ]
-            }
-          ]
+          "cause": "Google Ads campaign budget reduction",
+          "confidence": 88,
+          "impact": "High",
+          "data_points": 850
         },
         {
-          "name": "Net Profitability\nGain-on-Sale: 1.82%",
-          "level": 2,
-          "value": "1.82%",
-          "status": "good",
-          "children": [
-            {
-              "name": "Margin Management\n258 bps avg",
-              "level": 3,
-              "value": "258 bps",
-              "status": "good",
-              "children": [
-                {
-                  "name": "Rate Sheet Efficiency\n94%",
-                  "level": 4,
-                  "value": "94%",
-                  "status": "good"
-                },
-                {
-                  "name": "Lock Desk Performance\n88%",
-                  "level": 4,
-                  "value": "88%",
-                  "status": "good"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Overall Cycle Time\n12.4 days (Target: 8)",
-          "level": 2,
-          "value": "12.4d",
-          "status": "bad",
-          "children": [
-            {
-              "name": "Time to Underwriting\n3.2 days",
-              "level": 3,
-              "value": "3.2d",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Initial Processing\n2.1 days",
-                  "level": 4,
-                  "value": "2.1d",
-                  "status": "warning",
-                  "children": [
-                    {
-                      "name": "App Submission to Review\n18 hrs",
-                      "level": 5,
-                      "value": "18h",
-                      "status": "warning"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "Time in Underwriting\n4.8 days",
-              "level": 3,
-              "value": "4.8d",
-              "status": "bad",
-              "children": [
-                {
-                  "name": "Initial Decision\n2.4 days",
-                  "level": 4,
-                  "value": "2.4d",
-                  "status": "bad",
-                  "children": [
-                    {
-                      "name": "Queue Time\n1.2 days",
-                      "level": 5,
-                      "value": "1.2d",
-                      "status": "bad"
-                    },
-                    {
-                      "name": "Review Time\n1.2 days",
-                      "level": 5,
-                      "value": "1.2d",
-                      "status": "warning"
-                    }
-                  ]
-                },
-                {
-                  "name": "Conditions Clear\n2.4 days",
-                  "level": 4,
-                  "value": "2.4d",
-                  "status": "bad"
-                }
-              ]
-            },
-            {
-              "name": "Time to Close\n4.4 days",
-              "level": 3,
-              "value": "4.4d",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Clear to Close to Docs\n2.8 days",
-                  "level": 4,
-                  "value": "2.8d",
-                  "status": "warning"
-                },
-                {
-                  "name": "Docs to Funding\n1.6 days",
-                  "level": 4,
-                  "value": "1.6d",
-                  "status": "good"
-                }
-              ]
-            }
-          ]
+          "cause": "Intake call abandon rate increased to 22%",
+          "confidence": 85,
+          "impact": "Medium",
+          "data_points": 560
         }
-      ]
+      ],
+      "predictive_insights": {
+        "pattern": "Deteriorating",
+        "confidence": 82,
+        "scenarios": {
+          "best_case": {
+            "value": 268,
+            "probability": 25
+          },
+          "most_likely": {
+            "value": 235,
+            "probability": 55
+          },
+          "worst_case": {
+            "value": 210,
+            "probability": 20
+          }
+        },
+        "leading_indicators": [
+          "Marketing spend",
+          "Call center capacity",
+          "Attorney relationship health"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Declining",
+        "trend_strength": "Moderate",
+        "volatility": "Low",
+        "key_insights": "Consistent downward trajectory over past 3 months requires immediate attention"
+      },
+      "dependencies": {
+        "upstream": [
+          "Marketing campaign effectiveness",
+          "Attorney referral network",
+          "Online presence"
+        ],
+        "downstream": [
+          "Appointment scheduling volume",
+          "Surgical pipeline",
+          "Revenue projection"
+        ],
+        "peer_metrics": [
+          "Referral-to-Appointment Conversion",
+          "Days to First Appointment"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Jennifer Martinez",
+          "title": "Director of Patient Access",
+          "department": "Front Office Operations",
+          "email": "jmartinez@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#4A90E2"
+        },
+        {
+          "name": "Robert Chen",
+          "title": "Marketing Manager",
+          "department": "Marketing",
+          "email": "rchen@nyss.com",
+          "role": "Contributor",
+          "avatar_color": "#7B68EE"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "Critical",
+          "action": "Re-engage attorney referral partners with quarterly outreach program",
+          "timeline": "2 weeks",
+          "owner": "Director of Patient Access",
+          "expected_impact": "$120K-$180K monthly revenue recovery",
+          "resources": "Attorney liaison, relationship management database",
+          "success_metrics": "Attorney referrals increase by 25%"
+        },
+        {
+          "priority": "High",
+          "action": "Increase Google Ads budget by 30% targeting injury-specific keywords",
+          "timeline": "1 week",
+          "owner": "Marketing Manager",
+          "expected_impact": "40-60 additional leads per month",
+          "resources": "$8K additional monthly ad spend",
+          "success_metrics": "Online lead conversion >15%"
+        },
+        {
+          "priority": "High",
+          "action": "Implement call center training to reduce abandon rate below 15%",
+          "timeline": "2 weeks",
+          "owner": "Front Desk Supervisor",
+          "expected_impact": "15-20 additional conversions per month",
+          "resources": "Training program, call monitoring",
+          "success_metrics": "Call abandon rate <15%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Call center staffing levels",
+            "impact": "High"
+          },
+          {
+            "factor": "Intake process efficiency",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Brand reputation",
+            "impact": "Medium"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Legal market conditions",
+            "impact": "High"
+          },
+          {
+            "factor": "Competitor marketing activity",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Seasonal injury patterns",
+            "impact": "Low"
+          }
+        ]
+      }
     },
     {
-      "name": "L2: Operational Efficiency\nProcess Performance",
-      "level": 1,
-      "value": "78%",
-      "status": "warning",
-      "children": [
+      "id": "kpi_referral_conversion",
+      "name": "Referral-to-Appointment Conversion",
+      "value": 78,
+      "target": 85,
+      "unit": "%",
+      "rag": "amber",
+      "trend": "down",
+      "context": {
+        "definition": "Referral-to-Appointment Conversion measures the performance of referral-to-appointment conversion in patient access operations",
+        "business_impact": "Critical metric for referral-to-appointment conversion affecting overall patient flow and revenue",
+        "industry_benchmark": "85 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 78,
+        "target": 85,
+        "gap": 7,
+        "gap_percentage": 8.2,
+        "financial_impact": "$7,420 impact per month"
+      },
+      "trend_data": [
+        94.2,
+        97.7,
+        97.5,
+        96.8,
+        95.2,
+        100
+      ],
+      "root_causes": [
         {
-          "name": "Pull-Through Rate\n72.8% (Target: 75.3%)",
-          "level": 2,
-          "value": "72.8%",
-          "status": "warning",
-          "children": [
-            {
-              "name": "App to Submitted\n88.4%",
-              "level": 3,
-              "value": "88.4%",
-              "status": "good",
-              "children": [
-                {
-                  "name": "Initial Qualification\n94.2%",
-                  "level": 4,
-                  "value": "94.2%",
-                  "status": "good"
-                }
-              ]
-            },
-            {
-              "name": "Submitted to Approved\n82.3%",
-              "level": 3,
-              "value": "82.3%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Appraisal Completion\n89.6%",
-                  "level": 4,
-                  "value": "89.6%",
-                  "status": "good"
-                },
-                {
-                  "name": "UW Approval Rate\n91.8%",
-                  "level": 4,
-                  "value": "91.8%",
-                  "status": "good"
-                }
-              ]
-            }
-          ]
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 72,
+          "impact": "Medium",
+          "data_points": 541
         },
         {
-          "name": "IDP Automation\n69% (Target: 87%)",
-          "level": 2,
-          "value": "69%",
-          "status": "bad",
-          "children": [
-            {
-              "name": "Document Classification\n84%",
-              "level": 3,
-              "value": "84%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Auto-Classification Rate\n84%",
-                  "level": 4,
-                  "value": "84%",
-                  "status": "warning"
-                }
-              ]
-            },
-            {
-              "name": "Data Extraction\n72%",
-              "level": 3,
-              "value": "72%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Extraction Accuracy\n87%",
-                  "level": 4,
-                  "value": "87%",
-                  "status": "good",
-                  "children": [
-                    {
-                      "name": "W2 Extraction\n92%",
-                      "level": 5,
-                      "value": "92%",
-                      "status": "good"
-                    },
-                    {
-                      "name": "Paystub Extraction\n89%",
-                      "level": 5,
-                      "value": "89%",
-                      "status": "good"
-                    },
-                    {
-                      "name": "Bank Statement Extract\n78%",
-                      "level": 5,
-                      "value": "78%",
-                      "status": "warning"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "Validation Automation\n54%",
-              "level": 3,
-              "value": "54%",
-              "status": "bad",
-              "children": [
-                {
-                  "name": "Income Validation\n62%",
-                  "level": 4,
-                  "value": "62%",
-                  "status": "bad"
-                },
-                {
-                  "name": "Asset Validation\n48%",
-                  "level": 4,
-                  "value": "48%",
-                  "status": "bad"
-                }
-              ]
-            }
-          ]
+          "cause": "Insurance verification delays",
+          "confidence": 87,
+          "impact": "Medium",
+          "data_points": 987
         },
         {
-          "name": "Lead Conversion\n3.8% (Target: 8-12%)",
-          "level": 2,
-          "value": "3.8%",
-          "status": "bad",
-          "children": [
-            {
-              "name": "Lead to Application\n18.2%",
-              "level": 3,
-              "value": "18.2%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Lead Response Time\n8.2 hrs avg",
-                  "level": 4,
-                  "value": "8.2h",
-                  "status": "bad",
-                  "children": [
-                    {
-                      "name": "First Contact Time\n6.4 hrs",
-                      "level": 5,
-                      "value": "6.4h",
-                      "status": "bad"
-                    }
-                  ]
-                },
-                {
-                  "name": "Lead Quality Score\n6.2/10",
-                  "level": 4,
-                  "value": "6.2/10",
-                  "status": "warning"
-                }
-              ]
-            },
-            {
-              "name": "Application to Submit\n21.4%",
-              "level": 3,
-              "value": "21.4%",
-              "status": "bad",
-              "children": [
-                {
-                  "name": "LO Follow-up Rate\n68%",
-                  "level": 4,
-                  "value": "68%",
-                  "status": "bad"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "VOI/E Automation\n76% (Target: 95%)",
-          "level": 2,
-          "value": "76%",
-          "status": "warning",
-          "children": [
-            {
-              "name": "Instant VOE\n82%",
-              "level": 3,
-              "value": "82%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Truv Success Rate\n82%",
-                  "level": 4,
-                  "value": "82%",
-                  "status": "warning"
-                }
-              ]
-            },
-            {
-              "name": "Instant VOI\n71%",
-              "level": 3,
-              "value": "71%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Direct Source Coverage\n71%",
-                  "level": 4,
-                  "value": "71%",
-                  "status": "warning"
-                }
-              ]
-            }
-          ]
+          "cause": "Incomplete intake documentation process",
+          "confidence": 86,
+          "impact": "High",
+          "data_points": 1491
         }
-      ]
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 82,
+        "scenarios": {
+          "best_case": {
+            "value": 82.6,
+            "probability": 23
+          },
+          "most_likely": {
+            "value": 79.7,
+            "probability": 59
+          },
+          "worst_case": {
+            "value": 76.7,
+            "probability": 17
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Weak",
+        "volatility": "Medium",
+        "key_insights": "Referral-to-Appointment Conversion shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Jennifer Martinez",
+          "title": "Director",
+          "department": "RCM",
+          "email": "jmartinez@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#7B68EE"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "High"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Medium"
+          }
+        ]
+      }
     },
     {
-      "name": "L3: Quality & Compliance\nRisk Management",
-      "level": 1,
-      "value": "84%",
-      "status": "warning",
-      "children": [
+      "id": "kpi_days_first_appt",
+      "name": "Days to First Appointment",
+      "value": 5.2,
+      "target": 3.0,
+      "unit": "days",
+      "rag": "green",
+      "trend": "down",
+      "context": {
+        "definition": "Days to First Appointment measures the performance of days to first appointment in patient access operations",
+        "business_impact": "Critical metric for days to first appointment affecting overall patient flow and revenue",
+        "industry_benchmark": "3.0 days is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "green",
+        "value": 5.2,
+        "target": 3.0,
+        "gap": -2.2,
+        "gap_percentage": -73.3,
+        "financial_impact": "$1,751.2 impact per month"
+      },
+      "trend_data": [
+        70.9,
+        69.0,
+        72.1,
+        71.2,
+        71.8,
+        72.8
+      ],
+      "root_causes": [
         {
-          "name": "QC Score\n94.2% (Target: 99.0%)",
-          "level": 2,
-          "value": "94.2%",
-          "status": "warning",
-          "children": [
-            {
-              "name": "Pre-Funding QC\n96.8%",
-              "level": 3,
-              "value": "96.8%",
-              "status": "good",
-              "children": [
-                {
-                  "name": "QC Coverage\n10% sample",
-                  "level": 4,
-                  "value": "10%",
-                  "status": "bad"
-                }
-              ]
-            },
-            {
-              "name": "Post-Closing QC\n91.4%",
-              "level": 3,
-              "value": "91.4%",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Post-Close Defects\n8.6%",
-                  "level": 4,
-                  "value": "8.6%",
-                  "status": "bad"
-                }
-              ]
-            }
-          ]
+          "cause": "Incomplete intake documentation process",
+          "confidence": 89,
+          "impact": "High",
+          "data_points": 1136
         },
         {
-          "name": "Fraud Detection\n98.2% caught",
-          "level": 2,
-          "value": "98.2%",
-          "status": "good",
-          "children": [
-            {
-              "name": "Income Fraud Detection\n97.8%",
-              "level": 3,
-              "value": "97.8%",
-              "status": "good"
-            },
-            {
-              "name": "Identity Fraud Detection\n99.1%",
-              "level": 3,
-              "value": "99.1%",
-              "status": "good"
-            }
-          ]
+          "cause": "Insurance verification delays",
+          "confidence": 79,
+          "impact": "Medium",
+          "data_points": 596
         },
         {
-          "name": "Appraisal Turn Time\n8.2 days (Target: 7)",
-          "level": 2,
-          "value": "8.2d",
-          "status": "warning",
-          "children": [
-            {
-              "name": "Order to Assignment\n1.8 days",
-              "level": 3,
-              "value": "1.8d",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "AMC Assignment Time\n1.4 days",
-                  "level": 4,
-                  "value": "1.4d",
-                  "status": "warning"
-                }
-              ]
-            },
-            {
-              "name": "Assignment to Complete\n6.4 days",
-              "level": 3,
-              "value": "6.4d",
-              "status": "warning",
-              "children": [
-                {
-                  "name": "Inspection Time\n3.2 days",
-                  "level": 4,
-                  "value": "3.2d",
-                  "status": "good"
-                },
-                {
-                  "name": "Report Writing\n3.2 days",
-                  "level": 4,
-                  "value": "3.2d",
-                  "status": "warning"
-                }
-              ]
-            }
-          ]
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 77,
+          "impact": "Medium",
+          "data_points": 457
         }
-      ]
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 86,
+        "scenarios": {
+          "best_case": {
+            "value": 13.1,
+            "probability": 29
+          },
+          "most_likely": {
+            "value": 6.7,
+            "probability": 45
+          },
+          "worst_case": {
+            "value": 3.4,
+            "probability": 25
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Moderate",
+        "volatility": "Low",
+        "key_insights": "Days to First Appointment shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Jennifer Martinez",
+          "title": "Manager",
+          "department": "RCM",
+          "email": "rchen@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#50C878"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "Medium",
+          "action": "Maintain current processes and monitor KPI trends",
+          "timeline": "Ongoing",
+          "owner": "Operations Manager",
+          "expected_impact": "Sustained performance",
+          "resources": "Regular monitoring",
+          "success_metrics": "Maintain green status"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Low"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "High"
+          }
+        ]
+      }
     },
     {
-      "name": "L4: Technology Stack\nPlatform Performance",
-      "level": 1,
-      "value": "91%",
-      "status": "good",
-      "children": [
+      "id": "kpi_wait_time",
+      "name": "Appointment Wait Time (In-clinic)",
+      "value": 18,
+      "target": 15,
+      "unit": "minutes",
+      "rag": "green",
+      "trend": "down",
+      "context": {
+        "definition": "Appointment Wait Time (In-clinic) measures the performance of appointment wait time (in-clinic) in patient access operations",
+        "business_impact": "Critical metric for appointment wait time (in-clinic) affecting overall patient flow and revenue",
+        "industry_benchmark": "15 minutes is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "green",
+        "value": 18,
+        "target": 15,
+        "gap": -3,
+        "gap_percentage": -20.0,
+        "financial_impact": "$3,690 impact per month"
+      },
+      "trend_data": [
+        84.7,
+        81.1,
+        77.2,
+        81.1,
+        84.1,
+        80.5
+      ],
+      "root_causes": [
         {
-          "name": "Blue Sage LOS\n96% uptime",
-          "level": 2,
-          "value": "96%",
-          "status": "good",
-          "children": [
-            {
-              "name": "API Performance\n180ms avg",
-              "level": 3,
-              "value": "180ms",
-              "status": "good",
-              "children": [
-                {
-                  "name": "LoanFile API\n165ms",
-                  "level": 4,
-                  "value": "165ms",
-                  "status": "good"
-                },
-                {
-                  "name": "Document API\n195ms",
-                  "level": 4,
-                  "value": "195ms",
-                  "status": "good"
-                }
-              ]
-            }
-          ]
+          "cause": "Incomplete intake documentation process",
+          "confidence": 91,
+          "impact": "High",
+          "data_points": 1149
         },
         {
-          "name": "Salesforce FSC\n99.2% uptime",
-          "level": 2,
-          "value": "99.2%",
-          "status": "good",
-          "children": [
-            {
-              "name": "Lead Management\n94% efficiency",
-              "level": 3,
-              "value": "94%",
-              "status": "good"
-            }
-          ]
+          "cause": "Insurance verification delays",
+          "confidence": 75,
+          "impact": "Medium",
+          "data_points": 612
         },
         {
-          "name": "Polly PPE\n97% uptime",
-          "level": 2,
-          "value": "97%",
-          "status": "good",
-          "children": [
-            {
-              "name": "Pricing Accuracy\n99.4%",
-              "level": 3,
-              "value": "99.4%",
-              "status": "good"
-            }
-          ]
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 85,
+          "impact": "Medium",
+          "data_points": 413
         }
-      ]
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 85,
+        "scenarios": {
+          "best_case": {
+            "value": 25.0,
+            "probability": 23
+          },
+          "most_likely": {
+            "value": 21.6,
+            "probability": 51
+          },
+          "worst_case": {
+            "value": 17.4,
+            "probability": 17
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Moderate",
+        "volatility": "Medium",
+        "key_insights": "Appointment Wait Time (In-clinic) shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Michael Brown",
+          "title": "Director",
+          "department": "Patient Access",
+          "email": "sjohnson@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#FF6B6B"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "Medium",
+          "action": "Maintain current processes and monitor KPI trends",
+          "timeline": "Ongoing",
+          "owner": "Operations Manager",
+          "expected_impact": "Sustained performance",
+          "resources": "Regular monitoring",
+          "success_metrics": "Maintain green status"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Low"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Low"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_no_show",
+      "name": "No-Show Rate",
+      "value": 14.5,
+      "target": 10.0,
+      "unit": "%",
+      "rag": "green",
+      "trend": "down",
+      "context": {
+        "definition": "No-Show Rate measures the performance of no-show rate in patient access operations",
+        "business_impact": "Critical metric for no-show rate affecting overall patient flow and revenue",
+        "industry_benchmark": "10.0 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "green",
+        "value": 14.5,
+        "target": 10.0,
+        "gap": -4.5,
+        "gap_percentage": -45.0,
+        "financial_impact": "$7,078.5 impact per month"
+      },
+      "trend_data": [
+        81.4,
+        77.7,
+        74.4,
+        79.4,
+        82.2,
+        86.3
+      ],
+      "root_causes": [
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 86,
+          "impact": "High",
+          "data_points": 1161
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 78,
+          "impact": "Medium",
+          "data_points": 807
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 79,
+          "impact": "Medium",
+          "data_points": 389
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 79,
+        "scenarios": {
+          "best_case": {
+            "value": 19.9,
+            "probability": 23
+          },
+          "most_likely": {
+            "value": 17.3,
+            "probability": 51
+          },
+          "worst_case": {
+            "value": 13.2,
+            "probability": 19
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Weak",
+        "volatility": "Medium",
+        "key_insights": "No-Show Rate shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Robert Chen",
+          "title": "Coordinator",
+          "department": "RCM",
+          "email": "sjohnson@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#50C878"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "Medium",
+          "action": "Maintain current processes and monitor KPI trends",
+          "timeline": "Ongoing",
+          "owner": "Operations Manager",
+          "expected_impact": "Sustained performance",
+          "resources": "Regular monitoring",
+          "success_metrics": "Maintain green status"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "High"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_packet_complete",
+      "name": "Packet Completeness Rate",
+      "value": 92,
+      "target": 98,
+      "unit": "%",
+      "rag": "amber",
+      "trend": "up",
+      "context": {
+        "definition": "Packet Completeness Rate measures the performance of packet completeness rate in patient access operations",
+        "business_impact": "Critical metric for packet completeness rate affecting overall patient flow and revenue",
+        "industry_benchmark": "98 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 92,
+        "target": 98,
+        "gap": 6,
+        "gap_percentage": 6.1,
+        "financial_impact": "$7,998 impact per month"
+      },
+      "trend_data": [
+        83.8,
+        80.7,
+        77.9,
+        82.2,
+        85.8,
+        85.5
+      ],
+      "root_causes": [
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 87,
+          "impact": "Medium",
+          "data_points": 707
+        },
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 88,
+          "impact": "High",
+          "data_points": 1057
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 72,
+          "impact": "Medium",
+          "data_points": 411
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Deteriorating",
+        "confidence": 76,
+        "scenarios": {
+          "best_case": {
+            "value": 93.3,
+            "probability": 30
+          },
+          "most_likely": {
+            "value": 89.7,
+            "probability": 45
+          },
+          "worst_case": {
+            "value": 84.5,
+            "probability": 20
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Up",
+        "trend_strength": "Weak",
+        "volatility": "High",
+        "key_insights": "Packet Completeness Rate shows up trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Michael Brown",
+          "title": "Supervisor",
+          "department": "Clinical Operations",
+          "email": "sjohnson@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#4A90E2"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_missing_items",
+      "name": "Missing Packet Item Rate",
+      "value": 8.5,
+      "target": 2.0,
+      "unit": "%",
+      "rag": "green",
+      "trend": "down",
+      "context": {
+        "definition": "Missing Packet Item Rate measures the performance of missing packet item rate in patient access operations",
+        "business_impact": "Critical metric for missing packet item rate affecting overall patient flow and revenue",
+        "industry_benchmark": "2.0 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "green",
+        "value": 8.5,
+        "target": 2.0,
+        "gap": -6.5,
+        "gap_percentage": -325.0,
+        "financial_impact": "$5,453.5 impact per month"
+      },
+      "trend_data": [
+        81.8,
+        78.6,
+        74.8,
+        70.8,
+        75.6,
+        77.3
+      ],
+      "root_causes": [
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 85,
+          "impact": "High",
+          "data_points": 1023
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 77,
+          "impact": "Medium",
+          "data_points": 940
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 82,
+          "impact": "Medium",
+          "data_points": 399
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 86,
+        "scenarios": {
+          "best_case": {
+            "value": 15.6,
+            "probability": 23
+          },
+          "most_likely": {
+            "value": 12.3,
+            "probability": 55
+          },
+          "worst_case": {
+            "value": 7.8,
+            "probability": 16
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Strong",
+        "volatility": "Low",
+        "key_insights": "Missing Packet Item Rate shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Robert Chen",
+          "title": "Manager",
+          "department": "Scheduling",
+          "email": "mbrown@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#FF6B6B"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "Medium",
+          "action": "Maintain current processes and monitor KPI trends",
+          "timeline": "Ongoing",
+          "owner": "Operations Manager",
+          "expected_impact": "Sustained performance",
+          "resources": "Regular monitoring",
+          "success_metrics": "Maintain green status"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Low"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_verification_accuracy",
+      "name": "Eligibility Verification Accuracy",
+      "value": 94,
+      "target": 98,
+      "unit": "%",
+      "rag": "amber",
+      "trend": "up",
+      "context": {
+        "definition": "Eligibility Verification Accuracy measures the performance of eligibility verification accuracy in patient access operations",
+        "business_impact": "Critical metric for eligibility verification accuracy affecting overall patient flow and revenue",
+        "industry_benchmark": "98 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 94,
+        "target": 98,
+        "gap": 4,
+        "gap_percentage": 4.1,
+        "financial_impact": "$3,956 impact per month"
+      },
+      "trend_data": [
+        83.1,
+        85.6,
+        81.0,
+        82.5,
+        83.9,
+        87.3
+      ],
+      "root_causes": [
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 95,
+          "impact": "High",
+          "data_points": 955
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 81,
+          "impact": "Medium",
+          "data_points": 720
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 81,
+          "impact": "Medium",
+          "data_points": 619
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Deteriorating",
+        "confidence": 90,
+        "scenarios": {
+          "best_case": {
+            "value": 96.6,
+            "probability": 20
+          },
+          "most_likely": {
+            "value": 91.1,
+            "probability": 52
+          },
+          "worst_case": {
+            "value": 88.1,
+            "probability": 19
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Up",
+        "trend_strength": "Strong",
+        "volatility": "High",
+        "key_insights": "Eligibility Verification Accuracy shows up trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Michael Brown",
+          "title": "Director",
+          "department": "Scheduling",
+          "email": "sjohnson@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#7B68EE"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "High"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "Low"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "High"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_verification_time",
+      "name": "Benefit Verification Turnaround",
+      "value": 2.8,
+      "target": 1.5,
+      "unit": "days",
+      "rag": "green",
+      "trend": "down",
+      "context": {
+        "definition": "Benefit Verification Turnaround measures the performance of benefit verification turnaround in patient access operations",
+        "business_impact": "Critical metric for benefit verification turnaround affecting overall patient flow and revenue",
+        "industry_benchmark": "1.5 days is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "green",
+        "value": 2.8,
+        "target": 1.5,
+        "gap": -1.2999999999999998,
+        "gap_percentage": -86.7,
+        "financial_impact": "$1,212.8999999999999 impact per month"
+      },
+      "trend_data": [
+        92.8,
+        93.8,
+        94.0,
+        95.9,
+        92.6,
+        96.8
+      ],
+      "root_causes": [
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 91,
+          "impact": "High",
+          "data_points": 1342
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 83,
+          "impact": "Medium",
+          "data_points": 736
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 83,
+          "impact": "Medium",
+          "data_points": 343
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 88,
+        "scenarios": {
+          "best_case": {
+            "value": 9.4,
+            "probability": 22
+          },
+          "most_likely": {
+            "value": 6.7,
+            "probability": 53
+          },
+          "worst_case": {
+            "value": 1.1,
+            "probability": 22
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Strong",
+        "volatility": "High",
+        "key_insights": "Benefit Verification Turnaround shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Sarah Johnson",
+          "title": "Manager",
+          "department": "Clinical Operations",
+          "email": "mbrown@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#50C878"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "Medium",
+          "action": "Maintain current processes and monitor KPI trends",
+          "timeline": "Ongoing",
+          "owner": "Operations Manager",
+          "expected_impact": "Sustained performance",
+          "resources": "Regular monitoring",
+          "success_metrics": "Maintain green status"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Low"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "Low"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "High"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "High"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_financial_clearance",
+      "name": "Pre-Visit Financial Clearance Rate",
+      "value": 88,
+      "target": 95,
+      "unit": "%",
+      "rag": "amber",
+      "trend": "down",
+      "context": {
+        "definition": "Pre-Visit Financial Clearance Rate measures the performance of pre-visit financial clearance rate in patient access operations",
+        "business_impact": "Critical metric for pre-visit financial clearance rate affecting overall patient flow and revenue",
+        "industry_benchmark": "95 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 88,
+        "target": 95,
+        "gap": 7,
+        "gap_percentage": 7.4,
+        "financial_impact": "$9,086 impact per month"
+      },
+      "trend_data": [
+        92.1,
+        96.6,
+        97.4,
+        99.2,
+        95.2,
+        93.4
+      ],
+      "root_causes": [
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 85,
+          "impact": "Medium",
+          "data_points": 810
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 79,
+          "impact": "Medium",
+          "data_points": 358
+        },
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 93,
+          "impact": "High",
+          "data_points": 1471
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 78,
+        "scenarios": {
+          "best_case": {
+            "value": 91.4,
+            "probability": 25
+          },
+          "most_likely": {
+            "value": 91.3,
+            "probability": 52
+          },
+          "worst_case": {
+            "value": 87.9,
+            "probability": 18
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Weak",
+        "volatility": "High",
+        "key_insights": "Pre-Visit Financial Clearance Rate shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Robert Chen",
+          "title": "Supervisor",
+          "department": "Scheduling",
+          "email": "jmartinez@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#FF6B6B"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Low"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "Low"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Low"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Low"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_imaging_available",
+      "name": "Imaging Availability Before Visit",
+      "value": 85,
+      "target": 95,
+      "unit": "%",
+      "rag": "amber",
+      "trend": "up",
+      "context": {
+        "definition": "Imaging Availability Before Visit measures the performance of imaging availability before visit in patient access operations",
+        "business_impact": "Critical metric for imaging availability before visit affecting overall patient flow and revenue",
+        "industry_benchmark": "95 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 85,
+        "target": 95,
+        "gap": 10,
+        "gap_percentage": 10.5,
+        "financial_impact": "$14,200 impact per month"
+      },
+      "trend_data": [
+        75.1,
+        77.9,
+        79.3,
+        79.6,
+        81.5,
+        83.1
+      ],
+      "root_causes": [
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 71,
+          "impact": "Medium",
+          "data_points": 505
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 83,
+          "impact": "Medium",
+          "data_points": 854
+        },
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 91,
+          "impact": "High",
+          "data_points": 1022
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Deteriorating",
+        "confidence": 75,
+        "scenarios": {
+          "best_case": {
+            "value": 85.8,
+            "probability": 29
+          },
+          "most_likely": {
+            "value": 83.1,
+            "probability": 60
+          },
+          "worst_case": {
+            "value": 80.1,
+            "probability": 21
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Up",
+        "trend_strength": "Weak",
+        "volatility": "Medium",
+        "key_insights": "Imaging Availability Before Visit shows up trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Robert Chen",
+          "title": "Supervisor",
+          "department": "RCM",
+          "email": "jmartinez@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#50C878"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Low"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "High"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Low"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "High"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_referral_notes",
+      "name": "Referral Notes Availability",
+      "value": 90,
+      "target": 98,
+      "unit": "%",
+      "rag": "amber",
+      "trend": "up",
+      "context": {
+        "definition": "Referral Notes Availability measures the performance of referral notes availability in patient access operations",
+        "business_impact": "Critical metric for referral notes availability affecting overall patient flow and revenue",
+        "industry_benchmark": "98 % is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 90,
+        "target": 98,
+        "gap": 8,
+        "gap_percentage": 8.2,
+        "financial_impact": "$15,880 impact per month"
+      },
+      "trend_data": [
+        80.2,
+        79.9,
+        76.5,
+        77.5,
+        73.7,
+        76.4
+      ],
+      "root_causes": [
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 71,
+          "impact": "Medium",
+          "data_points": 687
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 79,
+          "impact": "Medium",
+          "data_points": 851
+        },
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 90,
+          "impact": "High",
+          "data_points": 1187
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Deteriorating",
+        "confidence": 85,
+        "scenarios": {
+          "best_case": {
+            "value": 90.2,
+            "probability": 25
+          },
+          "most_likely": {
+            "value": 88.6,
+            "probability": 55
+          },
+          "worst_case": {
+            "value": 83.2,
+            "probability": 18
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Up",
+        "trend_strength": "Weak",
+        "volatility": "High",
+        "key_insights": "Referral Notes Availability shows up trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Sarah Johnson",
+          "title": "Director",
+          "department": "RCM",
+          "email": "sjohnson@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#FF6B6B"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "High"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "Medium"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "High"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Medium"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_nps",
+      "name": "New Patient NPS",
+      "value": 72,
+      "target": 80,
+      "unit": "score",
+      "rag": "amber",
+      "trend": "down",
+      "context": {
+        "definition": "New Patient NPS measures the performance of new patient nps in patient access operations",
+        "business_impact": "Critical metric for new patient nps affecting overall patient flow and revenue",
+        "industry_benchmark": "80 score is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 72,
+        "target": 80,
+        "gap": 8,
+        "gap_percentage": 10.0,
+        "financial_impact": "$8,256 impact per month"
+      },
+      "trend_data": [
+        73.4,
+        74.4,
+        74.7,
+        73.3,
+        75.0,
+        76.1
+      ],
+      "root_causes": [
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 77,
+          "impact": "Medium",
+          "data_points": 637
+        },
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 90,
+          "impact": "High",
+          "data_points": 911
+        },
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 78,
+          "impact": "Medium",
+          "data_points": 565
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 90,
+        "scenarios": {
+          "best_case": {
+            "value": 79.2,
+            "probability": 21
+          },
+          "most_likely": {
+            "value": 73.9,
+            "probability": 56
+          },
+          "worst_case": {
+            "value": 71.1,
+            "probability": 24
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Weak",
+        "volatility": "High",
+        "key_insights": "New Patient NPS shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Jennifer Martinez",
+          "title": "Manager",
+          "department": "RCM",
+          "email": "sjohnson@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#7B68EE"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "High"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "Low"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "Medium"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "Medium"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kpi_intake_satisfaction",
+      "name": "Intake Satisfaction Score",
+      "value": 4.2,
+      "target": 4.5,
+      "unit": "rating",
+      "rag": "amber",
+      "trend": "down",
+      "context": {
+        "definition": "Intake Satisfaction Score measures the performance of intake satisfaction score in patient access operations",
+        "business_impact": "Critical metric for intake satisfaction score affecting overall patient flow and revenue",
+        "industry_benchmark": "4.5 rating is the target benchmark for this KPI"
+      },
+      "current_state": {
+        "status": "amber",
+        "value": 4.2,
+        "target": 4.5,
+        "gap": 0.2999999999999998,
+        "gap_percentage": 6.7,
+        "financial_impact": "$337.1999999999998 impact per month"
+      },
+      "trend_data": [
+        86.5,
+        82.9,
+        78.1,
+        77.6,
+        81.6,
+        78.8
+      ],
+      "root_causes": [
+        {
+          "cause": "Insurance verification delays",
+          "confidence": 75,
+          "impact": "Medium",
+          "data_points": 759
+        },
+        {
+          "cause": "Staff training gaps on new protocols",
+          "confidence": 79,
+          "impact": "Medium",
+          "data_points": 630
+        },
+        {
+          "cause": "Incomplete intake documentation process",
+          "confidence": 88,
+          "impact": "High",
+          "data_points": 878
+        }
+      ],
+      "predictive_insights": {
+        "pattern": "Improving",
+        "confidence": 90,
+        "scenarios": {
+          "best_case": {
+            "value": 12.0,
+            "probability": 27
+          },
+          "most_likely": {
+            "value": 7.9,
+            "probability": 48
+          },
+          "worst_case": {
+            "value": 3.6,
+            "probability": 15
+          }
+        },
+        "leading_indicators": [
+          "System utilization",
+          "Staff availability",
+          "Protocol adherence"
+        ]
+      },
+      "trend_analysis": {
+        "current_trend": "Down",
+        "trend_strength": "Strong",
+        "volatility": "Low",
+        "key_insights": "Intake Satisfaction Score shows down trajectory requiring monitoring"
+      },
+      "dependencies": {
+        "upstream": [
+          "Upstream dependency 1",
+          "Upstream dependency 2"
+        ],
+        "downstream": [
+          "Downstream dependency 1",
+          "Downstream dependency 2"
+        ],
+        "peer_metrics": [
+          "Related metric 1",
+          "Related metric 2"
+        ]
+      },
+      "people_accountable": [
+        {
+          "name": "Robert Chen",
+          "title": "Coordinator",
+          "department": "Clinical Operations",
+          "email": "rchen@nyss.com",
+          "role": "Primary Owner",
+          "avatar_color": "#50C878"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "High",
+          "action": "Enhance staff training on documentation protocols",
+          "timeline": "2 weeks",
+          "owner": "Training Manager",
+          "expected_impact": "15-20% accuracy improvement",
+          "resources": "Training materials, 20 hrs/week",
+          "success_metrics": "Staff certification >95%"
+        }
+      ],
+      "contributing_factors": {
+        "internal": [
+          {
+            "factor": "Process efficiency",
+            "impact": "Low"
+          },
+          {
+            "factor": "Staff training",
+            "impact": "Medium"
+          }
+        ],
+        "external": [
+          {
+            "factor": "Market conditions",
+            "impact": "High"
+          },
+          {
+            "factor": "Regulatory environment",
+            "impact": "High"
+          }
+        ]
+      }
     }
   ]
 }
